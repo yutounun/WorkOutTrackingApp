@@ -1,0 +1,65 @@
+name: Frontend adhoc deploy develop
+# フロントエンドの開発環境への任意のコミットのビルド・デプロイ
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref: # コミットハッシュ値を指定
+        description: "ref"
+        required: true
+
+env:
+  AWS_IAM_ROLE_ARN:
+  AWS_CF_DISTRIBUTION:
+  AWS_S3_BUCKET:
+
+jobs:
+  ci:
+    name: Node.js ${{ matrix.node }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      matrix:
+        node: [16]
+        os: [ubuntu-latest]
+
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+      - name: Checkout 🔔
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # <= https://github.com/actions/checkout/issues/265
+
+      - run: git checkout ${{ github.event.inputs.ref }}
+        if: ${{ github.event.inputs.ref != '' }}
+
+      - name: Setup node env 🔧
+        uses: actions/setup-node@v2.1.2
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: Install dependencies 🧹
+        run: |
+          cd frontend
+          npm ci
+
+      - name: Generate dist 🔨
+        run: |
+          cd frontend
+          npm run build:dev
+
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: ${{ env.AWS_IAM_ROLE_ARN }}
+          role-session-name: github-actions-${{ github.run_id }}
+          aws-region: ap-northeast-1
+
+      - name: S3 Sync 🧺
+        working-directory: frontend/dist
+        run: aws s3 sync . s3://${{ env.AWS_S3_BUCKET}} --delete
+
+      - name: Invalidate CloudFront 🔥
+        run: aws cloudfront create-invalidation --distribution-id ${{ env.AWS_CF_DISTRIBUTION }} --path '/*'
