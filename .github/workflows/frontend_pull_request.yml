@@ -1,4 +1,4 @@
-name: frontend pull request workflow
+name: pull request workflow
 
 on:
   push:
