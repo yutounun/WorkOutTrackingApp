@@ -1,7 +1,12 @@
-<script setup lang="ts">
-// import TheWelcome from "../components/TheWelcome.vue";
+<script async setup lang="ts">
+import sample from "../components/samples/FirebaseSample.vue";
 </script>
 
 <template>
-  <main class="text-red-500 btn">aaa</main>
+  <Suspense>
+    <template #default>
+      <sample />
+    </template>
+    <template #fallback> loading... </template>
+  </Suspense>
 </template>
