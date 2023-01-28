@@ -86,6 +86,27 @@ npm run test:e2e -- --debug
 
 Use Atomic design which helps developers to read code easily and also not to lose where to create component files and direcories.
 
+#### Atoms
+
+Represent the basic building blocks of a design system. An example is a button or a text style.
+
+#### Molecules
+
+A group of atoms working together as a unit. Molecules are tangible UI elements. For example, a button and text field can be grouped to create a search form.
+
+##### Organisms
+
+Atoms and molecules working together in a complex structure. A search field grouped with a navigation bar forms a header organism on a website.
+Only this component can inherit from a same level of a organism component.
+
+##### Templates
+
+Page-level objects placing components into a layout that defines the content structure. For example, taking a header organism and placing it on a homepage template.
+
+##### Pages
+
+Instances of templates that represent the final product.
+
 ## Deploy
 
 Run by [GitHub Actions](https://github.com/staqct/ssap-partner-portal-fo-frontend/actions)
