@@ -1,7 +1,7 @@
 <script async setup lang="ts">
 import { collection, doc, setDoc, getDoc } from "firebase/firestore";
 import { ref } from "vue";
-import db from "../../firebase/init";
+import db from "@/firebase/init";
 
 // get a collection Reference
 const foodsRef = collection(db, "foods");
