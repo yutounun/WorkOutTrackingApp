@@ -1,37 +1,37 @@
 # WorkoutTrackingApp
 
-This template should help get you started developing with Vue 3 in Vite.
+This app helps trainees to track exercises and meals they do.
 
-## Recommended IDE Setup
+## Design
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
-
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
-
-1. Disable the built-in TypeScript Extension
-    1) Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2) Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+https://www.figma.com/file/7vvfcNq19fBDlVO3i7IVnv/WorkoutApp?node-id=7%3A604&t=3VBsrBVIwm4r6Wpi-1
+![Figma](./public/temp-pix/figma.png)
 
 ## Project Setup
 
 ```sh
-npm install
+git clone https://github.com/team-agile-div/toyota-wg3trip.git
+npm ci
 ```
 
-### Compile and Hot-Reload for Development
+### Compile and Hot-Reload for Local Enviroment
 
 ```sh
-npm run dev
+npm run local
 ```
+
+Also, you can do it by running a build task with `cmd + shift + b`
+
+### Confirm on a mobile
+
+Make sure to utilize the same Wifi as PC does
+
+```sh
+npm run local
+```
+
+1. Take a note the url coming after `Network: ...`
+2. type the url including a port number on the address bar.
 
 ### Type-Check, Compile and Minify for Production
 
@@ -64,8 +64,16 @@ npm run test:e2e -- tests/example.spec.ts
 npm run test:e2e -- --debug
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+## Coding guide
 
-```sh
-npm run lint
-```
+### direcotry structure
+
+Use Atomic design which helps developers to read code easily and also not to lose where to create component files and direcories.
+
+## Deploy
+
+Run by [GitHub Actions](https://github.com/staqct/ssap-partner-portal-fo-frontend/actions)
+
+## Style check and Build check
+
+Run by [GitHub Actions](https://github.com/staqct/ssap-partner-portal-fo-frontend/actions)
