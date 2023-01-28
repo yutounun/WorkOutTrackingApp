@@ -7,9 +7,6 @@ jobs:
   lint:
     name: Node.js ${{ matrix.node }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
-    defaults:
-      run:
-        working-directory: ./frontend
     timeout-minutes: 15
     strategy:
       matrix:
