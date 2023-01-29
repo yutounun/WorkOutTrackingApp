@@ -16,7 +16,18 @@ This app helps trainees to track exercises and meals they do.
 - ✅Daisy UI
 - ✅production and local envs
 - TDD
+- Use StoryBook
+- Swagger with spotlight
+- draw.io
 - Dev-container
+
+## Check the latest development
+
+https://workout-app-5e81f.web.app/
+
+### sample components
+
+https://workout-app-5e81f.web.app/samples
 
 ## Design
 

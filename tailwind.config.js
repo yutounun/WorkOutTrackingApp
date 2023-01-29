@@ -1,9 +1,33 @@
 /* eslint-env node */
-/** @type {import('tailwindcss').Config} */
+// Nodeで実行されるためNodeルールを適用
 
 module.exports = {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx,vue}"],
+  // ビルド時にhtmlやJavaScriptで使っているcssを抽出し、必要のないcssを削除
+  content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
+    extend: {
+      colors: {
+        primary: "#001449",
+        secondary: "#7D78D2",
+        "gray-1": "#F5F5F5",
+        "gray-2": "#DEDEDE",
+        "gray-3": "#7F7F7F",
+      },
+      fontSize: {
+        xxs: "0.5rem",
+      },
+      height: {
+        screen: ["100vh", "100dvh"],
+      },
+      minHeight: {
+        screen: ["100vh", "100dvh"],
+      },
+      maxHeight: {
+        screen: ["100vh", "100dvh"],
+      },
+    },
+  },
+  variants: {
     extend: {},
   },
   plugins: [require("daisyui")],

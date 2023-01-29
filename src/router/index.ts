@@ -2,11 +2,11 @@ import { createRouter, createWebHistory } from "vue-router";
 
 const routes = [
   {
-    path: "/",
-    name: "home",
-    component: () => import("@/pages/HomeView.vue"),
+    path: "/sample",
+    name: "sample",
+    component: () => import("@/pages/Sample.vue"),
     meta: {
-      title: "HOME画面",
+      title: "sample画面",
     },
   },
 ];
