@@ -35,7 +35,7 @@ const transitionToLoginPage = () => {
 </script>
 
 <template>
-  <div class="fixed top-0 z-40 bg-white w-full">
+  <div class="fixed top-0 z-40 w-full">
     <header
       class="h-16 flex items-center"
       :class="{

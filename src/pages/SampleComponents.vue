@@ -29,8 +29,8 @@ const onClickFirstMenu = (status: any) => {
           @isFirstMenuClicked="onClickFirstMenu"
         />
         <img :src="video" alt="" />
-        <RoundedInput placeholder="test" />
-        <SelectBox placeholder="test" :options="options" />
+        <RoundedInput placeholder="test" class="w-full" />
+        <SelectBox placeholder="test" :options="options" class="h-5/6" />
         <Button word="Submit" />
         <img :src="smallProfile" alt="" />
         <Card

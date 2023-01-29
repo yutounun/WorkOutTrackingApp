@@ -11,7 +11,7 @@ const props = defineProps({
     <figure>
       <img :src="url" alt="Shoes" />
     </figure>
-    <div class="p-5 bg-white">
+    <div class="p-5">
       <h2 class="card-title pb-2">
         {{ props.title }}
       </h2>
