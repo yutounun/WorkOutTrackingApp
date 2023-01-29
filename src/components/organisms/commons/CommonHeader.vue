@@ -6,7 +6,7 @@ const props = defineProps({
 
 <template>
   <div
-    class="bg-primary w-screen h-16 text-white text-2xl font-bold items-center flex justify-center fixed"
+    class="bg-primary z-30 w-screen h-16 text-white text-2xl font-bold items-center flex justify-center fixed"
   >
     {{ props.title }}
   </div>

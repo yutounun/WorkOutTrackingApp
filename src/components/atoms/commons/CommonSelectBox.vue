@@ -9,8 +9,10 @@ const smallAdd = "/icons/SmallAdd.svg";
 
 <template>
   <div class="flex items-center bg-white">
-    <select class="select select-bordered w-5/6">
-      <option disabled selected>{{ props.placeholder }}</option>
+    <select class="select select-bordered w-5/6 bg-white text-gray-3">
+      <option disabled selected class="text-gray-2">
+        {{ props.placeholder }}
+      </option>
       <template v-for="option in options" :key="option">
         <option>{{ option }}</option>
       </template>
