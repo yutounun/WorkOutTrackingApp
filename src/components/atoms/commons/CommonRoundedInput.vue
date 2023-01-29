@@ -8,7 +8,7 @@ const props = defineProps({
   <div>
     <input
       type="text"
-      class="input input-bordered w-full"
+      class="bg-white input input-bordered w-full"
       :placeholder="props.placeholder"
     />
   </div>

@@ -49,7 +49,7 @@ const transition = (to: RouteLocationRaw) => {
     <img
       src="/icons/LargeAddBtn.svg"
       alt=""
-      class="w-1/5 absolute bottom-5 left-40"
+      class="w-1/5 absolute bottom-5 left-32"
     />
 
     <div class="w-1/5 text-center">
