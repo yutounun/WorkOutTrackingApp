@@ -2,15 +2,17 @@
 const props = defineProps({
   placeholder: String,
 });
+const emits = defineEmits(["inputContent"]);
+
+const emitContent = (event: any) => {
+  emits("inputContent", event.target.value);
+};
 </script>
 
 <template>
-  <div>
-    <input
-      type="text"
-      :class="$attrs"
-      class="input input-bordered w-80"
-      :placeholder="props.placeholder"
-    />
-  </div>
+  <input
+    class="input input-bordered w-80"
+    :placeholder="props.placeholder"
+    @blur="emitContent($event)"
+  />
 </template>

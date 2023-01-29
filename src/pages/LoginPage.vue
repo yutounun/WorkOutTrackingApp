@@ -1,79 +1,79 @@
 <script setup>
 import { ref } from "vue";
-import Bu
-// import { useRouter } from "vue-router";
+import Button from "@/components/atoms/commons/CommonButton.vue";
+import RoundedInput from "@/components/atoms/commons/CommonRoundedInput.vue";
+import { useRouter } from "vue-router";
 // import api from "@/http-common";
 
-// const router = useRouter();
+const router = useRouter();
 
 const userId = ref("");
 const password = ref("");
 
-/** ログイン後トップページに遷移 */
-// const onClickLogin = () => {
-//   const params = {
-//     user_id: userId.value,
-//     password: password.value,
-//   };
-
-//   // login API
-//   api
-//     .post("/login", params)
-//     .then((response) => {
-//       // session_idをsessionStorageに保存し、リロードしても読み込めるようにする
-//       sessionStorage.setItem(
-//         "session-id",
-//         JSON.stringify(response.data.session_id)
-//       );
-
-//       // トップ画面に遷移
-//       router.push("/");
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//       // パスワードをクリア
-//       password.value = "";
-//     });
-// };
+/** Go to Home page after login */
+const onClickLogin = () => {
+  if (userId.value === "yuto" && password.value === "yuto") {
+    router.push("/");
+  }
+  // const params = {
+  //   user_id: userId.value,
+  //   password: password.value,
+  // };
+  // login API
+  // api
+  //   .post("/login", params)
+  //   .then((response) => {
+  //     // session_idをsessionStorageに保存し、リロードしても読み込めるようにする
+  //     sessionStorage.setItem(
+  //       "session-id",
+  //       JSON.stringify(response.data.session_id)
+  //     );
+  //     // トップ画面に遷移
+  //     router.push("/");
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  //     // パスワードをクリア
+  //     password.value = "";
+  //   });
+};
+const inputUserId = (e) => {
+  console.log("e :", e);
+  userId.value = e;
+};
+const inputPass = (e) => {
+  console.log("e :", e);
+  password.value = e;
+};
 </script>
 
 <template>
-  <EntryLayout>
-    <main class="px-6 font-sans h-screen">
-      <div class="text-center">
-        <h1 class="text-xl pt-12 pb-12 font-black">ログイン</h1>
-        <div>
-          <p class="text-xs font-bold text-left mb-2">ユーザーID</p>
-          <input
-            type="text"
-            class="h-12 w-full mb-8 common-input"
-            v-model="userId"
-          />
-        </div>
+  <main class="px-6 font-sans h-screen">
+    <div class="text-center mx-3">
+      <h1 class="text-2xl pt-12 pb-12 font-black mt-10">Login</h1>
 
-        <div>
-          <p class="text-xs font-bold text-left mb-2">パスワード</p>
-          <input
-            type="password"
-            class="h-12 w-full mb-8 common-input"
-            v-model="password"
-          />
-        </div>
+      <p class="text-xs font-bold text-left mb-2 mt-20">User ID</p>
+      <RoundedInput
+        placeholder="Enter user id"
+        class="w-full mb-5"
+        @inputContent="inputUserId"
+      />
 
-        <button
-          class="h-12 w-64 mb-8 text-base bg-primary common-btn"
-          @click="onClickLogin"
-        >
-          ログイン
-        </button>
+      <p class="text-xs font-bold text-left mb-2">Password</p>
+      <RoundedInput
+        placeholder="Enter password"
+        type="password"
+        class="w-full mb-20"
+        @inputContent="inputPass"
+      />
 
-        <button
-          class="h-12 w-64 mb-5 text-base border-gray-3 bg-gray-2 common-btn text-black"
-          @click="onClickLogin"
-        >
-          戻る
-        </button>
-      </div>
-    </main>
-  </EntryLayout>
+      <Button
+        label="Login"
+        class="text-white bg-primary mb-4"
+        @click="onClickLogin"
+      />
+
+      <Button label="Cancel" class="text-gray-3 border-0 bg-gray-2" />
+    </div>
+  </main>
 </template>

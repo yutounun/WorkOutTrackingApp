@@ -5,9 +5,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="flex justify-center">
-    <button class="btn bg-primary w-48 text-white">
-      {{ props.label }}
-    </button>
-  </div>
+  <button class="btn w-48 text-center" :class="$attrs.class">
+    {{ props.label }}
+  </button>
 </template>
