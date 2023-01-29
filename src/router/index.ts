@@ -17,6 +17,14 @@ const routes = [
       title: "Login",
     },
   },
+  {
+    path: "/",
+    name: "home",
+    component: () => import("@/pages/SampleComponents.vue"),
+    meta: {
+      title: "Home",
+    },
+  },
 ];
 
 const router = createRouter({
