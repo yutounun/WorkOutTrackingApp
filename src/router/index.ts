@@ -4,7 +4,7 @@ const routes = [
   {
     path: "/sample",
     name: "sample",
-    component: () => import("@/pages/Sample.vue"),
+    component: () => import("@/pages/SampleComponents.vue"),
     meta: {
       title: "sample画面",
     },

@@ -1,10 +1,4 @@
-<script setup lang="ts">
-const props = defineProps({
-  url: String,
-  title: String,
-  text: String,
-});
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="card mb-5 bg-base-100 shadow-xl" :class="$attrs">
