@@ -42,7 +42,7 @@ const inputPass = (e) => {
       <h1 class="text-2xl pt-12 pb-12 font-black mt-10">Login</h1>
 
       <!-- Email -->
-      <p class="text-xs font-bold text-left mb-2 mt-20">User ID</p>
+      <p class="text-xs font-bold text-left mb-2 mt-10">Email</p>
       <RoundedInput
         placeholder="Enter user id"
         class="w-full mb-5"
@@ -66,6 +66,11 @@ const inputPass = (e) => {
 
       <!-- Cancel Button -->
       <Button label="Cancel" class="text-gray-3 border-0 bg-gray-2" />
+
+      <!-- Go to create account page -->
+      <a class="block mt-5" @click="$router.push('/create-account')">
+        Have you not created your account yet??
+      </a>
     </div>
   </main>
 </template>
