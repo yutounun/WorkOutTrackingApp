@@ -49,7 +49,7 @@ const inputPass = (e) => {
 
 <template>
   <main class="px-6 font-sans h-screen">
-    <div class="text-center mx-3">
+    <div class="text-center">
       <h1 class="text-2xl pt-12 pb-12 font-black mt-10">Login</h1>
 
       <p class="text-xs font-bold text-left mb-2 mt-20">User ID</p>
