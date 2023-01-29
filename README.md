@@ -9,7 +9,7 @@ This app helps trainees to track exercises and meals they do.
   - Define component name as well on figma
 - ✅CI/CD for testing and deployment
 - ✅Connection to Firebase for hosting and DB
-- Firebase for Auth
+- ✅Firebase for Auth
 - Unit test using vitest and testing-library
 - ✅tailwind-css
   - https://qiita.com/taai/items/32a4cdf15a49b63d8a6f
@@ -90,6 +90,10 @@ npm run test:e2e -- tests/example.spec.ts
 # Runs the tests in debug mode
 npm run test:e2e -- --debug
 ```
+
+## API docs
+
+The path is `/src/api/docs/openapi.yaml`
 
 ## Coding guide
 

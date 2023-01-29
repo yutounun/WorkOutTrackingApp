@@ -8,6 +8,7 @@
     "austenc.tailwind-docs",
     "Vue.volar",
     "dariofuzinato.vue-peek",
-    "Vue.vscode-typescript-vue-plugin"
+    "Vue.vscode-typescript-vue-plugin",
+    "Arjun.swagger-viewer"
   ]
 }

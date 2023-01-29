@@ -1,0 +1,116 @@
+openapi: "3.0.3"
+x-stoplight:
+  id: vcgndepiycclh
+info:
+  title: WorkOut App API
+  version: "1.0"
+  description: This API is used to login
+  contact:
+    name: API support
+    url: http://www.example.com/support
+    email: support@example.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+servers:
+  - url: "http://localhost:3000"
+paths:
+  /login:
+    post:
+      summary: Login
+      operationId: post-login
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  registered:
+                    type: boolean
+                  refreshToken:
+                    type: string
+                  localId:
+                    type: string
+                  kind:
+                    type: string
+                  idToken:
+                    type: string
+                  expiresIn:
+                    type: string
+                  email:
+                    type: string
+                  displayName:
+                    type: string
+              examples:
+                Example 1:
+                  value:
+                    displayName: ""
+                    email: yutounwasese@gmail.com
+                    expiresIn: "3600"
+                    idToken: eyJhbGciOiJSUzI1NiIsImtpZCI6ImQwNWI0MDljNmYyMmM0MDNlMWY5MWY5ODY3YWM0OTJhOTA2MTk1NTgiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vd29ya291dC1hcHAtNWU4MWYiLCJhdWQiOiJ3b3Jrb3V0LWFwcC01ZTgxZiIsImF1dGhfdGltZSI6MTY3NTAzMTQzOCwidXNlcl9pZCI6IldHWTFoaW9zbW9RdnA0dVFJVWJxM2xVOVVsTDIiLCJzdWIiOiJXR1kxaGlvc21vUXZwNHVRSVVicTNsVTlVbEwyIiwiaWF0IjoxNjc1MDMxNDM4LCJleHAiOjE2NzUwMzUwMzgsImVtYWlsIjoieXV0b3Vud2FzZXNlQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ5dXRvdW53YXNlc2VAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.T6w5D56FrwpV-Nt1Gi1jm0L2LXqPxAAjnWJCXvZhd6WskZMlf2489vpdi6mZQdcXwYV4lhaBmXBaAmtQvgf2XfFNe-eTY6KNhezvxyX2PBkZ520qc-SMqJZEGOKWF77ujG8oXYDGMH8XGI5eVSKUwLqDq8ORnr_p_2Igalip1aBOXuMNAi1u6V_yqvRc6eTWiaWJPzgevBV2bbLtUoPSDg02dawCkU-0CPcfJn3FrU6PzgrgSUjkMSwnjNbojww-CkiQlRmIUJ3f1R2bTveplcYq1wGSyG5cfuMHm_hIgOVxg8Z40B43MYMksVb0DgONnohEaHGLp3HGKBRPyLk3Bg
+                    kind: identitytoolkit#VerifyPasswordResponse
+                    localId: WGY1hiosmoQvp4uQIUbq3lU9UlL2
+                    refreshToken: APJWN8c1G13SROZhHHCsQjwTKok5JSjmG8t6hy5V13MsBGjPNRLa_MUJDccjS0frnlbmx7cCcC3koCOiYJBbK0ig9-RLBUA_7Yb6jFXbPoVDMk8TEx5IrJu9CQUpZ-an-SVa0jzRhhZcXIsAolqf5WvEimLpkTUCYtv_6EA2MCvOF0Bmb1WfZcu7IGmEd5yEAdvhTv36j3kuucxZRWDwWAgUO2qhcuRyXw
+                    registered: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+        description: ""
+      description: This API is used to login
+  /create-account:
+    post:
+      summary: Create an account
+      operationId: pre-logins
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  refreshToken:
+                    type: string
+                  localId:
+                    type: string
+                  kind:
+                    type: string
+                  idToken:
+                    type: string
+                  expiresIn:
+                    type: string
+                  email:
+                    type: string
+              examples:
+                Example 1:
+                  value:
+                    displayName: ""
+                    email: yutounwasese@gmail.com
+                    expiresIn: "3600"
+                    idToken: eyJhbGciOiJSUzI1NiIsImtpZCI6ImQwNWI0MDljNmYyMmM0MDNlMWY5MWY5ODY3YWM0OTJhOTA2MTk1NTgiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vd29ya291dC1hcHAtNWU4MWYiLCJhdWQiOiJ3b3Jrb3V0LWFwcC01ZTgxZiIsImF1dGhfdGltZSI6MTY3NTAzMTQzOCwidXNlcl9pZCI6IldHWTFoaW9zbW9RdnA0dVFJVWJxM2xVOVVsTDIiLCJzdWIiOiJXR1kxaGlvc21vUXZwNHVRSVVicTNsVTlVbEwyIiwiaWF0IjoxNjc1MDMxNDM4LCJleHAiOjE2NzUwMzUwMzgsImVtYWlsIjoieXV0b3Vud2FzZXNlQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ5dXRvdW53YXNlc2VAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.T6w5D56FrwpV-Nt1Gi1jm0L2LXqPxAAjnWJCXvZhd6WskZMlf2489vpdi6mZQdcXwYV4lhaBmXBaAmtQvgf2XfFNe-eTY6KNhezvxyX2PBkZ520qc-SMqJZEGOKWF77ujG8oXYDGMH8XGI5eVSKUwLqDq8ORnr_p_2Igalip1aBOXuMNAi1u6V_yqvRc6eTWiaWJPzgevBV2bbLtUoPSDg02dawCkU-0CPcfJn3FrU6PzgrgSUjkMSwnjNbojww-CkiQlRmIUJ3f1R2bTveplcYq1wGSyG5cfuMHm_hIgOVxg8Z40B43MYMksVb0DgONnohEaHGLp3HGKBRPyLk3Bg
+                    kind: identitytoolkit#VerifyPasswordResponse
+                    localId: WGY1hiosmoQvp4uQIUbq3lU9UlL2
+                    refreshToken: APJWN8c1G13SROZhHHCsQjwTKok5JSjmG8t6hy5V13MsBGjPNRLa_MUJDccjS0frnlbmx7cCcC3koCOiYJBbK0ig9-RLBUA_7Yb6jFXbPoVDMk8TEx5IrJu9CQUpZ-an-SVa0jzRhhZcXIsAolqf5WvEimLpkTUCYtv_6EA2MCvOF0Bmb1WfZcu7IGmEd5yEAdvhTv36j3kuucxZRWDwWAgUO2qhcuRyXw
+                    registered: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+        description: ""
+      description: This API is used to create a user account
+    parameters: []

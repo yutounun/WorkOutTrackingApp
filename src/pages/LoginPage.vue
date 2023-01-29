@@ -28,10 +28,10 @@ const signIn = () => {
 const onClickLogin = () => {
   signIn();
 };
-const inputEmail = (e) => {
+const inputEmail = (e: string) => {
   email.value = e;
 };
-const inputPass = (e) => {
+const inputPass = (e: string) => {
   password.value = e;
 };
 </script>
