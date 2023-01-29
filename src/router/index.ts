@@ -9,6 +9,14 @@ const routes = [
       title: "sample画面",
     },
   },
+  {
+    path: "/login",
+    name: "login",
+    component: () => import("@/pages/LoginPage.vue"),
+    meta: {
+      title: "Login",
+    },
+  },
 ];
 
 const router = createRouter({

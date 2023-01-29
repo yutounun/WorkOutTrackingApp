@@ -1,13 +1,13 @@
 <script setup lang="ts">
 const props = defineProps({
-  word: String,
+  label: String,
 });
 </script>
 
 <template>
   <div class="flex justify-center">
     <button class="btn bg-primary w-48 text-white">
-      {{ props.word }}
+      {{ props.label }}
     </button>
   </div>
 </template>
