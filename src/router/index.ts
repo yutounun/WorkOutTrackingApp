@@ -10,6 +10,14 @@ const routes = [
     },
   },
   {
+    path: "/create-account",
+    name: "CreateAccount",
+    component: () => import("@/pages/CreateAccountPage.vue"),
+    meta: {
+      title: "CreateAccount",
+    },
+  },
+  {
     path: "/login",
     name: "login",
     component: () => import("@/pages/LoginPage.vue"),
