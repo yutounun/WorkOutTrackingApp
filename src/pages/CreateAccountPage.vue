@@ -3,8 +3,7 @@ import { ref } from "vue";
 import Button from "@/components/atoms/commons/CommonButton.vue";
 import RoundedInput from "@/components/atoms/commons/CommonRoundedInput.vue";
 import { useRouter } from "vue-router";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/firebase/init";
+import { signUp } from "@/apis/signUp";
 
 const router = useRouter();
 const email = ref("");
@@ -12,15 +11,11 @@ const password = ref("");
 
 /** Go to Login page after create an account */
 const onClickCreate = () => {
-  createUserWithEmailAndPassword(auth, email.value, password.value)
-    .then(() => {
-      console.log("Successfully registered!");
-      router.push("/login");
-    })
-    .catch((error) => {
-      console.log(error.code);
-      alert(error.message);
-    });
+  try {
+    signUp(email.value, password.value);
+  } finally {
+    router.push("/");
+  }
 };
 /** Set email in variable */
 const inputEmail = (e: string) => {

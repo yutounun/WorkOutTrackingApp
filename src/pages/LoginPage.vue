@@ -3,30 +3,19 @@ import { ref } from "vue";
 import Button from "@/components/atoms/commons/CommonButton.vue";
 import RoundedInput from "@/components/atoms/commons/CommonRoundedInput.vue";
 import { useRouter } from "vue-router";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/firebase/init";
+import { signIn } from "@/apis/signIn";
 
 const router = useRouter();
 const email = ref("");
 const password = ref("");
 
-/** Sign in with Firebase */
-const signIn = () => {
-  signInWithEmailAndPassword(auth, email.value, password.value)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      console.log("user :", user);
-      router.push("/");
-    })
-    .catch((error) => {
-      console.log(error.code);
-      alert(error.message);
-    });
-};
-
 /** Go to Home page after login */
 const onClickLogin = () => {
-  signIn();
+  try {
+    signIn(email.value, password.value);
+  } finally {
+    router.push("/");
+  }
 };
 const inputEmail = (e: string) => {
   email.value = e;
