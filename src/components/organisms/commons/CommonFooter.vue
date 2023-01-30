@@ -48,6 +48,7 @@ const transition = (to: RouteLocationRaw) => {
     <!-- + icon -->
     <img
       src="/icons/LargeAddBtn.svg"
+      @click="router.push('/register')"
       alt=""
       class="w-1/5 absolute bottom-5 left-[135px]"
     />
