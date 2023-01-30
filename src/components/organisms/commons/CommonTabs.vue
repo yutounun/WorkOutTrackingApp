@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref } from "vue";
 
 const props = defineProps({
   firstItem: String,
@@ -8,19 +8,20 @@ const props = defineProps({
 const emits = defineEmits(["isFirstMenuClicked"]);
 
 /** return true if the first item is clicked */
-const isFirstMenuClicked = ref(false);
+const isFirstMenuClicked = ref(true);
 
-/** Topページから遷移した場合などは右側のタブが活性化された初期状態 */
-// if (props.isFirstItem) {
-//   isFirstMenuClicked.value = true;
-// }
-// もしisFirstMenuClickedが変更されたらisFirstMenuClickedの状態をemitする
-watch(isFirstMenuClicked, () => {
-  emits("isFirstMenuClicked", isFirstMenuClicked);
-});
+const onClickFirstTab = () => {
+  emits("isFirstMenuClicked", true);
+  isFirstMenuClicked.value = true;
+};
+const onClickSecondTab = () => {
+  emits("isFirstMenuClicked", false);
+  isFirstMenuClicked.value = false;
+};
 </script>
+
 <template>
-  <div class="flex h-12 mb-4 items-center justify-center">
+  <div class="flex h-12 mb-4 items-center justify-center" :class="$attrs">
     <span
       :class="{
         'w-1/2 h-full font-bold text-xs border-b-2 border-primary border-bold flex items-center justify-center':
@@ -28,7 +29,7 @@ watch(isFirstMenuClicked, () => {
         'w-1/2 h-full font-bold text-xs bg-gray-2 text-gray-3 flex items-center justify-center':
           !isFirstMenuClicked,
       }"
-      @click="isFirstMenuClicked = true"
+      @click="onClickFirstTab"
     >
       {{ props.firstItem }}
     </span>
@@ -39,7 +40,7 @@ watch(isFirstMenuClicked, () => {
         'w-1/2 h-full font-bold text-xs border-b-2 border-primary border-bold flex items-center justify-center':
           !isFirstMenuClicked,
       }"
-      @click="isFirstMenuClicked = false"
+      @click="onClickSecondTab"
     >
       {{ props.secondItem }}
     </span>

@@ -9,7 +9,7 @@ const smallAdd = "/icons/SmallAdd.svg";
 
 <template>
   <div class="flex items-center">
-    <select class="select select-bordered w-5/6 text-gray-3">
+    <select class="select select-bordered w-5/6 text-gray-3" :class="$attrs">
       <option disabled selected class="text-gray-2">
         {{ props.placeholder }}
       </option>

@@ -11,7 +11,8 @@ const emitContent = (event: any) => {
 
 <template>
   <input
-    class="input input-bordered w-80"
+    class="input input-bordered w-80 rounded-full"
+    :class="$attrs"
     :placeholder="props.placeholder"
     @blur="emitContent($event)"
   />
