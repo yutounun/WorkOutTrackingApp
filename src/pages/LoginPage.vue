@@ -47,16 +47,17 @@ const inputPass = (e: string) => {
       />
 
       <!-- Login Button -->
-      <Button
-        label="Login"
-        class="text-white bg-primary hover:bg-primary mb-4"
-        @click="onClickLogin"
-      />
+      <div class="flex justify-center">
+        <Button
+          label="Login"
+          class="text-white bg-primary hover:bg-primary mb-4"
+          @click="onClickLogin"
+        />
+      </div>
 
       <!-- Go to create account page -->
-      <a class="block mt-5" @click="$router.push('/create-account')">
-        Have you not created your account yet??
-      </a>
+      <span>Don't have an account?? </span>
+      <a class="mt-5" @click="$router.push('/login')"> Create one here. </a>
     </div>
   </main>
 </template>
