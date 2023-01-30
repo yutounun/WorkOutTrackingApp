@@ -37,7 +37,7 @@ const routes = [
   {
     path: "/",
     name: "home",
-    component: () => import("@/pages/SampleComponents.vue"),
+    component: () => import("@/pages/HomePage.vue"),
     meta: {
       title: "Home",
     },

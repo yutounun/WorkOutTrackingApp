@@ -19,15 +19,11 @@ const transition = (to: RouteLocationRaw) => {
   <footer
     class="mx-4 h-20 flex items-center rounded-xl mb-5 flex-wrap flex-row bg-white fixed inset-x-0 bottom-0 drop-shadow-lg border border-gray-2"
   >
-    <div
-      v-if="props.home"
-      class="w-1/5 text-center"
-      @click="transition('/home')"
-    >
+    <div v-if="props.home" class="w-1/5 text-center" @click="transition('/')">
       <img src="/icons/SelectedHome.svg" class="m-auto" alt="" />
       <span class="text-xxs text-black block mb-1 font-bold"> HOME </span>
     </div>
-    <div v-else class="w-1/5 text-center" @click="transition('/home')">
+    <div v-else class="w-1/5 text-center" @click="transition('/')">
       <img src="/icons/Home.svg" class="m-auto" alt="" />
       <span class="text-xxs text-black block mb-1 font-bold"> HOME </span>
     </div>

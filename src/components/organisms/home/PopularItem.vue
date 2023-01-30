@@ -7,7 +7,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="card bg-base-100 shadow-xl" :class="$attrs">
+  <div class="bg-base-100 card shadow-xl" :class="$attrs">
     <figure>
       <img :src="url" alt="Shoes" />
     </figure>
