@@ -42,6 +42,14 @@ const routes = [
       title: "Home",
     },
   },
+  {
+    path: "/register",
+    name: "Register",
+    component: () => import("@/pages/Register.vue"),
+    meta: {
+      title: "Register",
+    },
+  },
 ];
 
 const router = createRouter({

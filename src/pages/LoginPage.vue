@@ -14,7 +14,7 @@ const onClickLogin = () => {
   try {
     signIn(email.value, password.value);
   } finally {
-    router.push("/");
+    router.push("/register");
   }
 };
 const inputEmail = (e: string) => {
