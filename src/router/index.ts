@@ -9,6 +9,15 @@ const routes = [
       title: "sample画面",
     },
   },
+
+  {
+    path: "/welcome",
+    name: "Welcome",
+    component: () => import("@/pages/WelcomePage.vue"),
+    meta: {
+      title: "Welcome",
+    },
+  },
   {
     path: "/create-account",
     name: "CreateAccount",

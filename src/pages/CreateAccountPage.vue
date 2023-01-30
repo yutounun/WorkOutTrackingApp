@@ -30,7 +30,7 @@ const inputPass = (e: string) => {
 <template>
   <main class="px-6 font-sans h-screen">
     <div class="text-center">
-      <h1 class="text-2xl pt-12 pb-12 font-bold mt-10">Create an account</h1>
+      <h1 class="text-2xl pt-12 font-bold mt-5">Create an account</h1>
 
       <!-- Email -->
       <p class="text-xs font-bold text-left mb-2 mt-16">Email</p>
@@ -52,7 +52,7 @@ const inputPass = (e: string) => {
       <!-- Create Button -->
       <Button
         label="Create"
-        class="text-white bg-primary mb-4"
+        class="text-white bg-primary mb-4 hover:bg-primary"
         @click="onClickCreate"
       />
 
