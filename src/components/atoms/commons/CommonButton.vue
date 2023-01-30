@@ -5,7 +5,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <button class="btn w-48 text-center" :class="$attrs.class">
+  <button class="btn w-48 text-center" :class="$attrs">
     {{ props.label }}
   </button>
 </template>

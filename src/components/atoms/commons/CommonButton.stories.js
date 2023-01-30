@@ -6,7 +6,6 @@ export default {
   component: CommonButton,
   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
   argTypes: {
-    backgroundColor: { control: "color" },
     onClick: {},
     size: {
       control: { type: "select" },
@@ -27,9 +26,11 @@ const Template = (args) => ({
   template: '<CommonButton v-bind="args"/>',
 });
 
+// define props
 export const Primary = Template.bind({});
 // More on args: https://storybook.js.org/docs/vue/writing-stories/args
+// Set data you want to prop to child component
 Primary.args = {
-  backgroundColor: "red",
-  label: "CommonButtons",
+  class: "bg-primary h-12",
+  label: "Submit",
 };

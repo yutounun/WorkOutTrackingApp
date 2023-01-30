@@ -31,7 +31,7 @@ const onClickFirstMenu = (status: any) => {
         <img :src="video" alt="" />
         <RoundedInput placeholder="test" class="w-full" />
         <SelectBox placeholder="test" :options="options" class="h-5/6" />
-        <Button label="Submit" />
+        <Button label="Submit" class="bg-primary h-40" />
         <img :src="smallProfile" alt="" />
         <Card
           class="h-44 w-44"

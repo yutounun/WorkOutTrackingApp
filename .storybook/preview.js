@@ -1,5 +1,5 @@
-import "!style-loader!css-loader!postcss-loader!@/src/assets/main.css";
-import "!style-loader!css-loader!postcss-loader!@/src/assets/base.css";
+// Without the following code, you cannot use tailwind with storybook
+import "tailwindcss/tailwind.css";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
