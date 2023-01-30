@@ -28,10 +28,10 @@ const inputPass = (e: string) => {
 <template>
   <main class="px-6 font-sans h-screen">
     <div class="text-center">
-      <h1 class="text-2xl pt-12 pb-12 font-black mt-10">Login</h1>
+      <h1 class="text-2xl pt-12 pb-12 font-bold mt-10">Login</h1>
 
       <!-- Email -->
-      <p class="text-xs font-bold text-left mb-2 mt-10">Email</p>
+      <p class="text-xs font-bold text-left mb-2 mt-16">Email</p>
       <RoundedInput
         placeholder="Enter user id"
         class="w-full mb-5"
@@ -52,9 +52,6 @@ const inputPass = (e: string) => {
         class="text-white bg-primary mb-4"
         @click="onClickLogin"
       />
-
-      <!-- Cancel Button -->
-      <Button label="Cancel" class="text-gray-3 border-0 bg-gray-2" />
 
       <!-- Go to create account page -->
       <a class="block mt-5" @click="$router.push('/create-account')">
