@@ -9,5 +9,6 @@
     "extensions": [".js", ".vue"]
   },
   "eslint.validate": ["javascript", "vue"],
-  "extensions.ignoreRecommendations": false
+  "extensions.ignoreRecommendations": false,
+  "cSpell.words": ["daisyui", "pinia"]
 }
