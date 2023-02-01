@@ -18,7 +18,9 @@ const Workout = "/icons/Workout.svg";
     <img :src="BackgroundRound" alt="" class="absolute bottom-10 -right-20" />
 
     <!-- Title -->
-    <div class="pt-20 mb-10 pl-4 font-bold text-white text-2xl">Kia Ora!!</div>
+    <div class="pt-20 mb-10 pl-4 font-bold text-white text-2xl kia-ora">
+      Kia Ora!!
+    </div>
 
     <!-- Drawing -->
     <div class="flex justify-center">
