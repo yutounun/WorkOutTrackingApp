@@ -11,4 +11,28 @@ describe("CommonFooter", () => {
     expect(wrapper.html()).toContain("MENU");
     expect(wrapper.html()).toContain("PROFILE");
   });
+  it("has home icon having thick color when opening related page", () => {
+    const wrapper = mount(CommonFooter, {
+      props: { home: true },
+    });
+    expect(wrapper.html()).toContain("/icons/SelectedHome.svg");
+  });
+  it("has food icon having thick color when opening related page", () => {
+    const wrapper = mount(CommonFooter, {
+      props: { food: true },
+    });
+    expect(wrapper.html()).toContain("/icons/SelectedFood.svg");
+  });
+  it("has menu icon having thick color when opening related page", () => {
+    const wrapper = mount(CommonFooter, {
+      props: { menu: true },
+    });
+    expect(wrapper.html()).toContain("/icons/SelectedMenu.svg");
+  });
+  it("has profile icon having thick color when opening related page", () => {
+    const wrapper = mount(CommonFooter, {
+      props: { profile: true },
+    });
+    expect(wrapper.html()).toContain("/icons/SelectedProfile.svg");
+  });
 });
