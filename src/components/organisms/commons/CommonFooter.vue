@@ -56,12 +56,12 @@ const transition = (to: RouteLocationRaw) => {
     <div
       v-if="props.menu"
       class="w-1/5 text-center"
-      @click="transition('/workout')"
+      @click="transition('/workout/list')"
     >
       <img src="/icons/SelectedMenu.svg" class="m-auto" alt="" />
       <span class="text-xxs text-black block mb-1 font-bold"> MENU </span>
     </div>
-    <div v-else class="w-1/5 text-center" @click="transition('/workout')">
+    <div v-else class="w-1/5 text-center" @click="transition('/workout/list')">
       <img src="/icons/Menu.svg" class="m-auto" alt="" />
       <span class="text-xxs text-black block mb-1 font-bold"> MENU </span>
     </div>

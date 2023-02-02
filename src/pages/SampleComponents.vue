@@ -3,7 +3,7 @@ import Firebase from "@/components/samples/FirebaseSample.vue";
 import Button from "@/components/atoms/commons/CommonButton.vue";
 import SelectBox from "@/components/atoms/commons/CommonSelectBox.vue";
 import RoundedInput from "@/components/atoms/commons/CommonRoundedInput.vue";
-import Card from "@/components/organisms/commons/CommonCard.vue";
+import Card from "@/components/organisms/food/FoodCard.vue";
 import PopularItem from "@/components/organisms/home/PopularItem.vue";
 import Header from "@/components/organisms/commons/CommonHeader.vue";
 import Tabs from "@/components/organisms/commons/CommonTabs.vue";

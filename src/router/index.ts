@@ -58,6 +58,14 @@ const routes = [
       title: "Food List",
     },
   },
+  {
+    path: "/workout/list",
+    name: "WorkoutList",
+    component: () => import("@/pages/WorkoutListPage.vue"),
+    meta: {
+      title: "Workout List",
+    },
+  },
 ];
 
 const router = createRouter({
