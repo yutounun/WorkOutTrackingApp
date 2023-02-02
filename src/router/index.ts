@@ -50,6 +50,14 @@ const routes = [
       title: "Register",
     },
   },
+  {
+    path: "/food/list",
+    name: "foodList",
+    component: () => import("@/pages/FoodsListPage.vue"),
+    meta: {
+      title: "Food List",
+    },
+  },
 ];
 
 const router = createRouter({
