@@ -4,6 +4,7 @@ import Footer from "@/components/organisms/commons/CommonFooter.vue";
 import { useRouter } from "vue-router";
 
 const video = "/temp-pix/video.svg";
+const runnerVideo = "/temp-pix/runnerVideo.svg";
 const smallProfile = "/icons/SmallProfile.svg";
 const router = useRouter();
 </script>
@@ -32,17 +33,15 @@ const router = useRouter();
 
     <h1 class="font-semibold text-xl mt-8 mb-4">Videos For Runners</h1>
     <div class="flex items-center overflow-x-scroll">
-      <img :src="video" alt="" />
-      <img :src="video" alt="" />
-      <img :src="video" alt="" />
-      <img :src="video" alt="" />
-      <img :src="video" alt="" />
-      <img :src="video" alt="" />
-      <img :src="video" alt="" />
-      <img :src="video" alt="" />
-      <img :src="video" alt="" />
-      <img :src="video" alt="" />
-      <img :src="video" alt="" />
+      <img :src="runnerVideo" alt="" class="mr-3" />
+      <img :src="runnerVideo" alt="" class="mr-3" />
+      <img :src="runnerVideo" alt="" class="mr-3" />
+      <img :src="runnerVideo" alt="" class="mr-3" />
+      <img :src="runnerVideo" alt="" class="mr-3" />
+      <img :src="runnerVideo" alt="" class="mr-3" />
+      <img :src="runnerVideo" alt="" class="mr-3" />
+      <img :src="runnerVideo" alt="" class="mr-3" />
+      <img :src="runnerVideo" alt="" class="mr-3" />
     </div>
 
     <h1 class="font-semibold text-xl mt-8 mb-4">Recommended Items For You</h1>
