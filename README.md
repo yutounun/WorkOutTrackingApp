@@ -21,7 +21,7 @@ This app helps trainees to track exercises and meals they do.
 - draw.io
 - Dev-container
 
-## Check the latest development
+## See the latest DEV environment
 
 https://workout-app-5e81f.web.app/
 
