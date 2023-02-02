@@ -16,7 +16,7 @@ const router = useRouter();
     <img :src="smallProfile" alt="" @click="router.push('/profile')" />
   </div>
   <main class="px-6 pt-20 font-sans h-screen">
-    <h1 class="font-semibold text-xl mt-8 mb-4">Videos for trainees</h1>
+    <h1 class="font-semibold text-xl mt-8 mb-4">Videos For Trainees</h1>
     <div class="flex items-center overflow-x-scroll">
       <img :src="video" alt="" />
       <img :src="video" alt="" />
@@ -30,7 +30,7 @@ const router = useRouter();
       <img :src="video" alt="" />
     </div>
 
-    <h1 class="font-semibold text-xl mt-8 mb-4">Videos for trainees</h1>
+    <h1 class="font-semibold text-xl mt-8 mb-4">Videos For Runners</h1>
     <div class="flex items-center overflow-x-scroll">
       <img :src="video" alt="" />
       <img :src="video" alt="" />
