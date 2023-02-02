@@ -59,7 +59,7 @@ const workoutList = [
     <!-- today + icon -->
     <div class="flex items-center mt-20 justify-between">
       <h1 class="font-semibold text-xl text-primary">TODAY</h1>
-      <img :src="smallProfile" alt="" />
+      <img :src="smallProfile" alt="profile" />
     </div>
     <div v-for="menu in workoutList" :key="menu.id">
       <FoodCard

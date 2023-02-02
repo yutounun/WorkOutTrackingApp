@@ -24,7 +24,7 @@ const Workout = "/icons/Workout.svg";
 
     <!-- Drawing -->
     <div class="flex justify-center">
-      <img :src="Workout" alt="" />
+      <img :src="Workout" alt="workout" />
     </div>
 
     <!-- Create your account -->
