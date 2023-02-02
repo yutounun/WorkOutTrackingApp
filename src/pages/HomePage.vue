@@ -12,11 +12,11 @@ const router = useRouter();
   <div
     class="bg-primary z-30 w-screen h-16 text-white text-2xl font-bold items-center flex justify-center fixed"
   >
-    <h1 class="font-bold text-xl mr-5">Welcome Jesica!!</h1>
+    <h1 class="font-semibold text-xl mr-5">Welcome Jesica!!</h1>
     <img :src="smallProfile" alt="" @click="router.push('/profile')" />
   </div>
   <main class="px-6 pt-20 font-sans h-screen">
-    <h1 class="font-bold text-xl mt-8 mb-4">Videos for trainees</h1>
+    <h1 class="font-semibold text-xl mt-8 mb-4">Videos for trainees</h1>
     <div class="flex items-center overflow-x-scroll">
       <img :src="video" alt="" />
       <img :src="video" alt="" />
@@ -30,7 +30,7 @@ const router = useRouter();
       <img :src="video" alt="" />
     </div>
 
-    <h1 class="font-bold text-xl mt-8 mb-4">Videos for trainees</h1>
+    <h1 class="font-semibold text-xl mt-8 mb-4">Videos for trainees</h1>
     <div class="flex items-center overflow-x-scroll">
       <img :src="video" alt="" />
       <img :src="video" alt="" />
@@ -45,37 +45,32 @@ const router = useRouter();
       <img :src="video" alt="" />
     </div>
 
-    <h1 class="font-bold text-xl mt-8 mb-4">Recommended Items For You</h1>
-    <div class="carousel pb-44">
+    <h1 class="font-semibold text-xl mt-8 mb-4">Recommended Items For You</h1>
+    <div class="flex overflow-x-scroll w-full pb-44">
       <PopularItem
         url="/temp-pix/nikeShoes.png"
         text="This is wonderful shoes like Jackey Chen"
         title="Nike Airmax 999"
-        class="w-40 h-88 mr-4"
       />
       <PopularItem
         url="/temp-pix/nikeShoes.png"
         text="This is wonderful shoes like Jackey Chen"
         title="Nike Airmax 999"
-        class="w-40 h-88 mr-4"
       />
       <PopularItem
         url="/temp-pix/nikeShoes.png"
         text="This is wonderful shoes like Jackey Chen"
         title="Nike Airmax 999"
-        class="w-40 h-88 mr-4"
       />
       <PopularItem
         url="/temp-pix/nikeShoes.png"
         text="This is wonderful shoes like Jackey Chen"
         title="Nike Airmax 999"
-        class="w-40 h-88 mr-4"
       />
       <PopularItem
         url="/temp-pix/nikeShoes.png"
         text="This is wonderful shoes like Jackey Chen"
         title="Nike Airmax 999"
-        class="w-40 h-88 mr-4"
       />
     </div>
   </main>

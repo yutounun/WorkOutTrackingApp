@@ -14,6 +14,11 @@ module.exports = {
         "gray-2": "#DEDEDE",
         "gray-3": "#7F7F7F",
       },
+      minWidth: {
+        "1/2": "50%",
+        "1/3": "33%",
+        "3/5": "60%",
+      },
       fontSize: {
         xxs: "0.5rem",
       },
