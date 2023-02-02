@@ -25,10 +25,6 @@ This app helps trainees to track exercises and meals they do.
 
 https://workout-app-5e81f.web.app/
 
-### sample components
-
-https://workout-app-5e81f.web.app/samples
-
 ## Design
 
 https://www.figma.com/file/7vvfcNq19fBDlVO3i7IVnv/WorkoutApp?node-id=7%3A604&t=3VBsrBVIwm4r6Wpi-1
