@@ -27,30 +27,37 @@ const inputPass = (e: string) => {
 
 <template>
   <main class="px-6 font-sans h-screen">
-    <div class="text-center">
+    <div class="flex justify-center items-center flex-col">
       <h1 class="text-2xl pt-12 font-bold mt-5">Login</h1>
 
       <!-- Email -->
-      <label for="email" class="text-xs font-bold text-left mb-2 mt-16">
-        Email
-      </label>
-      <RoundedInput
-        id="email"
-        placeholder="Enter user id"
-        class="w-full mb-5"
-        @inputContent="inputEmail"
-      />
+      <div>
+        <label for="email" class="text-xs font-bold text-left block mb-2 mt-16">
+          Email
+        </label>
+        <RoundedInput
+          id="email"
+          placeholder="Enter Your Email"
+          class="w-full mb-5"
+          @inputContent="inputEmail"
+        />
+      </div>
 
-      <label for="password" class="text-xs font-bold text-left mb-2">
-        Password
-      </label>
-      <RoundedInput
-        id="password"
-        placeholder="Enter password"
-        type="password"
-        class="w-full mb-20"
-        @inputContent="inputPass"
-      />
+      <div>
+        <label
+          for="password"
+          class="text-xs font-bold text-left block mb-2 mt-5"
+        >
+          Password
+        </label>
+        <RoundedInput
+          id="password"
+          placeholder="Enter Password"
+          type="password"
+          class="w-full mb-20"
+          @inputContent="inputPass"
+        />
+      </div>
 
       <!-- Login Button -->
       <div class="flex justify-center">
@@ -62,8 +69,10 @@ const inputPass = (e: string) => {
       </div>
 
       <!-- Go to create account page -->
-      <span>Don't have an account?? </span>
-      <a class="mt-5" @click="$router.push('/login')"> Create one here. </a>
+      <div>
+        <span>Don't have an account?? </span>
+        <a class="mt-5" @click="$router.push('/login')"> Create one here. </a>
+      </div>
     </div>
   </main>
 </template>
