@@ -1,4 +1,12 @@
 {
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    // ↓追加する
+    "node_modules/vite-plugin-pwa/client.d.ts"
+  ],
   "files": [],
   "references": [
     {
