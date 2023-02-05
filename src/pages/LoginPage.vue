@@ -31,15 +31,21 @@ const inputPass = (e: string) => {
       <h1 class="text-2xl pt-12 font-bold mt-5">Login</h1>
 
       <!-- Email -->
-      <p class="text-xs font-bold text-left mb-2 mt-16">Email</p>
+      <label for="email" class="text-xs font-bold text-left mb-2 mt-16">
+        Email
+      </label>
       <RoundedInput
+        id="email"
         placeholder="Enter user id"
         class="w-full mb-5"
         @inputContent="inputEmail"
       />
 
-      <p class="text-xs font-bold text-left mb-2">Password</p>
+      <label for="password" class="text-xs font-bold text-left mb-2">
+        Password
+      </label>
       <RoundedInput
+        id="password"
         placeholder="Enter password"
         type="password"
         class="w-full mb-20"
