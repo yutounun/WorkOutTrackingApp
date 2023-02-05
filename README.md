@@ -14,6 +14,7 @@ This app helps trainees to track exercises and meals they do.
 - ✅tailwind-css
   - https://qiita.com/taai/items/32a4cdf15a49b63d8a6f
 - ✅Daisy UI
+- UX. Especially describe how to let users know what this app is for.
 - ✅production and local envs
 - TDD
 - Use StoryBook

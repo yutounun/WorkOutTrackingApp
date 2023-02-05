@@ -6,4 +6,5 @@ export const registerData = async (collectionLabel: string, obj: object) => {
 
   const sentData = addDoc(collectionRef, obj);
   console.log("sentData :", sentData);
+  return sentData;
 };

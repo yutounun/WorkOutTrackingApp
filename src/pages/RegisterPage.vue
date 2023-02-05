@@ -16,6 +16,8 @@ const GirlHavingCookie = "/icons/GirlHavingCookie.svg";
 /** status true means you clicked WORKOUT tab */
 const isFirstTabClicked = ref(true);
 
+const showsSuccessAlert = ref(false);
+
 const onClickFirstMenu = (status: any) => {
   isFirstTabClicked.value = status;
 };
@@ -31,7 +33,9 @@ const workoutMenus = ref({
 
 /** Register formed workout menu on firebase */
 const registerWorkout = async () => {
-  await registerData("workout", workoutMenus.value);
+  const registeredData = await registerData("workout", workoutMenus.value);
+
+  // Clear up all the forms
   Object.assign(workoutMenus.value, {
     icon: "/icons/barbel.svg",
     title: "",
@@ -39,10 +43,19 @@ const registerWorkout = async () => {
     reps: "",
     time: "",
   });
+
+  // In case when data is registered successfully
+  if (registeredData) {
+    showsSuccessAlert.value = true;
+
+    // Keeps showing a bar for 2 secs
+    setTimeout(() => {
+      showsSuccessAlert.value = false;
+    }, 2000);
+  }
 };
 
 const inputTitle = (title: string) => {
-  console.log("title :", title);
   workoutMenus.value.title = title;
 };
 
@@ -157,6 +170,25 @@ const inputTime = (time: number) => {
         />
       </div>
     </main>
+  </div>
+
+  <div class="alert shadow-lg fixed top-20" v-if="showsSuccessAlert">
+    <div>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        class="stroke-info flex-shrink-0 w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+        ></path>
+      </svg>
+      <span>Congrats!! Succeeded to register workout data.</span>
+    </div>
   </div>
   <Footer />
 </template>

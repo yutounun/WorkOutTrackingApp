@@ -6,12 +6,11 @@ import Header from "@/components/organisms/commons/CommonHeader.vue";
 import { ref } from "vue";
 
 const smallProfile = "/icons/SmallProfile.svg";
-
 const workoutList = ref([]);
 
 const getWorkoutList = async () => {
   const list = await getData("workout");
-  console.log("list:", list);
+
   list.forEach((doc) => {
     workoutList.value.push(doc);
   });
