@@ -20,8 +20,8 @@ const props = defineProps({
       <div class="flex gap-2">
         <span class="text-gray-3"> ${{ props.cost }} </span>
         <span class="text-gray-3"> P: {{ props.protein }} </span>
-        <span class="text-gray-3"> P: {{ props.fat }} </span>
-        <span class="text-gray-3"> P: {{ props.carbo }} </span>
+        <span class="text-gray-3"> F: {{ props.fat }} </span>
+        <span class="text-gray-3"> C: {{ props.carbo }} </span>
       </div>
     </div>
   </div>
