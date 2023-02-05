@@ -20,6 +20,8 @@ This app helps trainees to track exercises and meals they do.
 - Swagger with spotlight
 - draw.io
 - Dev-container
+- ✅PWA
+- Get a domain
 
 ## See the latest DEV environment
 
