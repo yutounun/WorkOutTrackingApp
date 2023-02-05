@@ -22,15 +22,23 @@ const onClickFirstMenu = (status: any) => {
 
 /** Data that will be registered on workout doc on Firebase Store */
 const workoutMenus = ref({
+  icon: "/icons/barbel.svg",
   machine: "",
-  weight: 0,
-  reps: 0,
-  time: 0,
+  weight: "",
+  reps: "",
+  time: "",
 });
 
 /** Register formed workout menu on firebase */
-const registerWorkout = () => {
-  registerData("workout", workoutMenus.value);
+const registerWorkout = async () => {
+  await registerData("workout", workoutMenus.value);
+  Object.assign(workoutMenus.value, {
+    icon: "/icons/barbel.svg",
+    machine: "",
+    weight: "",
+    reps: "",
+    time: "",
+  });
 };
 
 const inputMachine = (machine: string) => {
@@ -75,6 +83,7 @@ const inputTime = (time: number) => {
           placeholder="Enter the machine"
           class="my-2"
           @inputContent="inputMachine"
+          :value="workoutMenus.machine"
         />
 
         <span class="block font-bold my-3">OR</span>
@@ -91,6 +100,7 @@ const inputTime = (time: number) => {
           placeholder="Enter the weight"
           class="my-2"
           @inputContent="inputWeight"
+          :value="workoutMenus.weight"
         />
 
         <!-- reps -->
@@ -98,6 +108,7 @@ const inputTime = (time: number) => {
           placeholder="Enter the reps"
           class="my-2"
           @inputContent="inputReps"
+          :value="workoutMenus.reps"
         />
 
         <!-- time -->
@@ -105,6 +116,7 @@ const inputTime = (time: number) => {
           placeholder="Enter how long it takes"
           class="my-2"
           @inputContent="inputTime"
+          :value="workoutMenus.time"
         />
         <Button
           class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full"
