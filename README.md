@@ -17,7 +17,7 @@ This app helps trainees to track exercises and meals they do.
 - ✅production and local envs
 - TDD
 - Use StoryBook
-- Swagger with spotlight
+- ✅Swagger with spotlight
 - draw.io
 - Dev-container
 - ✅PWA
