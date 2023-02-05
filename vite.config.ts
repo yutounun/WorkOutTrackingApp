@@ -21,10 +21,10 @@ export default defineConfig({
     VitePWA({
       includeAssets: [
         // "offline.html",
-        // "favicon.svg",
+        "favicon.svg",
         "favicon.ico",
-        // "robots.txt",
-        // "apple-touch-icon.png",
+        "robots.txt",
+        "apple-touch-icon.png",
       ],
       manifest: {
         theme_color: "#001449",
