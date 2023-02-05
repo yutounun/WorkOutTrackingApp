@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const props = defineProps({
   placeholder: String,
+  value: String,
 });
 const emits = defineEmits(["inputContent"]);
 
@@ -16,5 +17,6 @@ const emitContent = (event: any) => {
     :class="$attrs.class"
     :placeholder="props.placeholder"
     @blur="emitContent($event)"
+    :value="value"
   />
 </template>

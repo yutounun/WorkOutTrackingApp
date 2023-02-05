@@ -23,7 +23,7 @@ const onClickFirstMenu = (status: any) => {
 /** Data that will be registered on workout doc on Firebase Store */
 const workoutMenus = ref({
   icon: "/icons/barbel.svg",
-  machine: "",
+  title: "",
   weight: "",
   reps: "",
   time: "",
@@ -34,16 +34,16 @@ const registerWorkout = async () => {
   await registerData("workout", workoutMenus.value);
   Object.assign(workoutMenus.value, {
     icon: "/icons/barbel.svg",
-    machine: "",
+    title: "",
     weight: "",
     reps: "",
     time: "",
   });
 };
 
-const inputMachine = (machine: string) => {
-  console.log("machine :", machine);
-  workoutMenus.value.machine = machine;
+const inputTitle = (title: string) => {
+  console.log("title :", title);
+  workoutMenus.value.title = title;
 };
 
 const inputWeight = (weight: number) => {
@@ -78,19 +78,19 @@ const inputTime = (time: number) => {
     <!-- When Workout tab is selected -->
     <main class="px-6 font-sans mt-3 pb-32">
       <div class="text-center">
-        <!-- machine -->
+        <!-- title -->
         <RoundedInput
-          placeholder="Enter the machine"
+          placeholder="Enter the title"
           class="my-2"
-          @inputContent="inputMachine"
-          :value="workoutMenus.machine"
+          @inputContent="inputTitle"
+          :value="workoutMenus.title"
         />
 
         <span class="block font-bold my-3">OR</span>
 
         <!-- templates -->
         <SelectBox
-          placeholder="Choose your machine"
+          placeholder="Choose your title"
           :options="['Push up bar', 'Tread mill', 'Aero bike']"
           class="h-5/6 mb-3"
         />

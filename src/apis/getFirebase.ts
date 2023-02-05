@@ -1,16 +1,19 @@
-import { doc, getDoc } from "firebase/firestore";
+import {
+  collection,
+  query,
+  getDocs,
+  type DocumentData,
+} from "firebase/firestore";
 import { db } from "@/firebase/init";
+export const getData = async (collectionLabel: string) => {
+  const q = query(collection(db, collectionLabel));
+  const querySnapshot = await getDocs(q);
+  const rtnArr: DocumentData[] = [];
 
-export const getData = async (collection: string, document: string) => {
-  // Get data of a specified document
-  const docRef = doc(db, collection, document);
-  const docSnap = await getDoc(docRef);
+  querySnapshot.forEach((doc) => {
+    rtnArr.push(doc.data());
+  });
+  console.log("getData :", rtnArr);
 
-  if (docSnap.exists()) {
-    console.log("Document data:", docSnap.data());
-    return docSnap.data();
-  } else {
-    // doc.data() will be undefined in this case
-    console.log("No such document!");
-  }
+  return rtnArr;
 };

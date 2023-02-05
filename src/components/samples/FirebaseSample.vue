@@ -12,7 +12,7 @@ const retrieveFromFirebase = () => {
 
 // Keep data to register on firebase store
 const registerOnFirebase = () => {
-  registerData("foods", "foods");
+  registerData("workout");
 };
 </script>
 

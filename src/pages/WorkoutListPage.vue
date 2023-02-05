@@ -1,83 +1,24 @@
 <script setup lang="ts">
+import { getData } from "@/apis/getFirebase";
 import WorkoutCard from "@/components/organisms/workout/WorkoutCard.vue";
 import Footer from "@/components/organisms/commons/CommonFooter.vue";
 import Header from "@/components/organisms/commons/CommonHeader.vue";
+import { ref } from "vue";
 
 const smallProfile = "/icons/SmallProfile.svg";
-const workoutList = [
-  {
-    id: "1",
-    date: "2nd October",
-    icon: "/icons/barbel.svg",
-    title: "Bench Press",
-    weight: 100,
-    reps: 12,
-  },
-  {
-    id: "1",
-    date: "2nd October",
-    icon: "/icons/barbel.svg",
-    title: "Bench Press",
-    weight: 100,
-    reps: 12,
-  },
-  {
-    id: "1",
-    date: "2nd October",
-    icon: "/icons/barbel.svg",
-    title: "Bench Press",
-    weight: 100,
-    reps: 12,
-  },
-  {
-    id: "1",
-    date: "2nd October",
-    icon: "/icons/barbel.svg",
-    title: "Bench Press",
-    weight: 100,
-    reps: 12,
-  },
-  {
-    id: "1",
-    date: "2nd October",
-    icon: "/icons/barbel.svg",
-    title: "Bench Press",
-    weight: 100,
-    reps: 12,
-  },
-  {
-    id: "1",
-    date: "2nd October",
-    icon: "/icons/barbel.svg",
-    title: "Bench Press",
-    weight: 100,
-    reps: 12,
-  },
-  {
-    id: "1",
-    date: "2nd October",
-    icon: "/icons/barbel.svg",
-    title: "Bench Press",
-    weight: 100,
-    reps: 12,
-  },
-  {
-    id: "1",
-    date: "2nd October",
-    icon: "/icons/barbel.svg",
-    title: "Bench Press",
-    weight: 100,
-    reps: 12,
-  },
-  {
-    id: "1",
-    date: "2nd October",
-    icon: "/icons/barbel.svg",
-    title: "Bench Press",
-    weight: 100,
-    reps: 12,
-  },
-];
+
+const workoutList = ref([]);
+
+const getWorkoutList = async () => {
+  const list = await getData("workout");
+  console.log("list:", list);
+  list.forEach((doc) => {
+    workoutList.value.push(doc);
+  });
+};
+
+/** Created */
+getWorkoutList();
 </script>
 
 <template>
