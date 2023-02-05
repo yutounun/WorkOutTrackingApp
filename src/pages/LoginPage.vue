@@ -54,7 +54,7 @@ const inputPass = (e: string) => {
           id="password"
           placeholder="Enter Password"
           type="password"
-          class="w-full mb-20"
+          class="w-full mb-16"
           @inputContent="inputPass"
         />
       </div>
@@ -63,15 +63,20 @@ const inputPass = (e: string) => {
       <div class="flex justify-center">
         <Button
           label="Login"
-          class="text-white bg-primary hover:bg-primary mb-4"
+          class="text-white bg-primary hover:bg-primary mb-8"
           @click="onClickLogin"
         />
       </div>
 
       <!-- Go to create account page -->
-      <div>
+      <div class="text-accent">
         <span>Don't have an account?? </span>
-        <a class="mt-5" @click="$router.push('/login')"> Create one here. </a>
+        <a
+          class="mt-5 font-semibold text-accent"
+          @click="$router.push('/create-account')"
+        >
+          Create one here.
+        </a>
       </div>
     </div>
   </main>

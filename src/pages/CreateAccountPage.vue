@@ -29,38 +29,46 @@ const inputPass = (e: string) => {
 
 <template>
   <main class="px-6 font-sans h-screen">
-    <div class="text-center">
-      <h1 class="text-2xl pt-12 font-bold mt-5">Create an account</h1>
+    <div class="flex justify-center items-center flex-col">
+      <h1 class="text-2xl pt-12 font-bold mt-5">Create your account</h1>
 
       <!-- Email -->
-      <p class="text-xs font-bold text-left mb-2 mt-16">Email</p>
-      <RoundedInput
-        placeholder="Enter email"
-        class="w-full mb-5"
-        @inputContent="inputEmail"
-      />
+      <div>
+        <p class="text-xs font-bold text-left mb-2 mt-16">Email</p>
+        <RoundedInput
+          placeholder="Enter email"
+          class="w-full mb-5"
+          @inputContent="inputEmail"
+        />
+      </div>
 
       <!-- Password -->
-      <p class="text-xs font-bold text-left mb-2">Password</p>
-      <RoundedInput
-        placeholder="Enter password"
-        type="password"
-        class="w-full mb-20"
-        @inputContent="inputPass"
-      />
+      <div>
+        <p class="text-xs font-bold text-left mb-2 mt-5">Password</p>
+        <RoundedInput
+          placeholder="Enter password"
+          type="password"
+          class="w-full mb-16"
+          @inputContent="inputPass"
+        />
+      </div>
 
       <!-- Create Button -->
       <div class="flex justify-center">
         <Button
           label="Create"
-          class="text-white block bg-primary mb-4 hover:bg-primary"
+          class="text-white block bg-primary mb-8 hover:bg-primary"
           @click="onClickCreate"
         />
       </div>
 
       <!-- Go to login page -->
-      <span>Have an account?? </span>
-      <a class="mt-5" @click="$router.push('/login')"> Sign up here. </a>
+      <div class="flex items-center">
+        <span class="text-accent">Have an account?? </span>
+        <a class="text-accent font-semibold" @click="$router.push('/login')">
+          Sign up here.
+        </a>
+      </div>
     </div>
   </main>
 </template>
