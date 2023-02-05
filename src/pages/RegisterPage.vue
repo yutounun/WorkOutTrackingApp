@@ -202,120 +202,119 @@ const inputCost = (cost: number) => {
     @isFirstMenuClicked="onClickFirstMenu"
   />
 
-  <!-- Workout Tab -->
-  <div v-if="isFirstTabClicked === true">
-    <div class="mt-5 flex items-center mx-8">
-      <p>Let’s see how hard you had workout today</p>
-      <img :src="SittingDownGirl" alt="" />
+  <div class="mt-32">
+    <!-- Workout Tab -->
+    <div v-if="isFirstTabClicked === true">
+      <div class="mt-5 flex items-center mx-8">
+        <p>Let’s see how hard you had workout today</p>
+        <img :src="SittingDownGirl" alt="" />
+      </div>
+
+      <!-- When Workout tab is selected -->
+      <main class="px-6 font-sans mt-3 pb-32">
+        <div class="text-center">
+          <!-- templates -->
+          <SelectBox
+            placeholder="Select from the history"
+            :options="workoutOptions"
+            class="h-5/6 mb-3"
+            @input="onSelectWorkoutTemplate($event.target.value)"
+          />
+          <!-- title -->
+          <RoundedInput
+            placeholder="Enter the title"
+            class="my-2"
+            @inputContent="inputTitle"
+            :value="workoutMenus.title"
+          />
+
+          <!-- weight -->
+          <RoundedInput
+            placeholder="Enter the weight"
+            class="my-2"
+            @inputContent="inputWeight"
+            :value="workoutMenus.weight"
+          />
+
+          <!-- reps -->
+          <RoundedInput
+            placeholder="Enter the reps"
+            class="my-2"
+            @inputContent="inputReps"
+            :value="workoutMenus.reps"
+          />
+
+          <!-- time -->
+          <RoundedInput
+            placeholder="Enter how long it takes"
+            class="my-2"
+            @inputContent="inputTime"
+            :value="workoutMenus.time"
+          />
+          <Button
+            class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full"
+            label="Done"
+            @click="registerWorkout"
+          />
+        </div>
+      </main>
     </div>
 
-    <!-- When Workout tab is selected -->
-    <main class="px-6 font-sans mt-3 pb-32">
-      <div class="text-center">
-        <!-- title -->
-        <RoundedInput
-          placeholder="Enter the title"
-          class="my-2"
-          @inputContent="inputTitle"
-          :value="workoutMenus.title"
-        />
-
-        <span class="block font-bold my-3">OR</span>
-
-        <!-- templates -->
-        <SelectBox
-          placeholder="Select from the history"
-          :options="workoutOptions"
-          class="h-5/6 mb-3"
-          @input="onSelectWorkoutTemplate($event.target.value)"
-        />
-
-        <!-- weight -->
-        <RoundedInput
-          placeholder="Enter the weight"
-          class="my-2"
-          @inputContent="inputWeight"
-          :value="workoutMenus.weight"
-        />
-
-        <!-- reps -->
-        <RoundedInput
-          placeholder="Enter the reps"
-          class="my-2"
-          @inputContent="inputReps"
-          :value="workoutMenus.reps"
-        />
-
-        <!-- time -->
-        <RoundedInput
-          placeholder="Enter how long it takes"
-          class="my-2"
-          @inputContent="inputTime"
-          :value="workoutMenus.time"
-        />
-        <Button
-          class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full"
-          label="Done"
-          @click="registerWorkout"
-        />
+    <!-- Foods Tab -->
+    <div v-if="isFirstTabClicked === false">
+      <div class="mt-5 flex items-center mx-8">
+        <p>Let’s see the things giving you fat :(</p>
+        <img :src="GirlHavingCookie" alt="" />
       </div>
-    </main>
-  </div>
 
-  <!-- Foods Tab -->
-  <div v-if="isFirstTabClicked === false">
-    <div class="mt-5 flex items-center mx-8">
-      <p>Let’s see the things giving you fat :(</p>
-      <img :src="GirlHavingCookie" alt="" />
+      <!-- When Foods tab is selected -->
+      <main class="px-6 font-sans mt-3 pb-32">
+        <div class="text-center">
+          <SelectBox
+            placeholder="Select from the history"
+            :options="foodOptions"
+            class="h-5/6 my-3"
+            @input="onSelectFoodTemplate($event.target.value)"
+          />
+          <RoundedInput
+            placeholder="Enter the name of a food"
+            class="my-2"
+            :value="foodMenus.title"
+            @inputContent="inputFoodTitle"
+          />
+          <RoundedInput
+            placeholder="Enter the amount of protein"
+            class="my-2"
+            :value="foodMenus.protein"
+            @inputContent="inputProtein"
+          />
+          <RoundedInput
+            placeholder="Enter the amount of fat"
+            class="my-2"
+            :value="foodMenus.fat"
+            @inputContent="inputFat"
+          />
+          <RoundedInput
+            placeholder="Enter the amount of carbohydrate"
+            class="my-2"
+            :value="foodMenus.carbo"
+            @inputContent="inputCarbo"
+          />
+          <RoundedInput
+            placeholder="Enter the cost"
+            class="my-2"
+            type="number"
+            :value="foodMenus.cost"
+            @inputContent="inputCost"
+          />
+          <Button
+            class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full"
+            label="Done"
+            @click="registerFoods"
+          />
+        </div>
+      </main>
     </div>
-
-    <!-- When Foods tab is selected -->
-    <main class="px-6 font-sans mt-3 pb-32">
-      <div class="text-center">
-        <SelectBox
-          placeholder="Select from the history"
-          :options="foodOptions"
-          class="h-5/6 my-3"
-          @input="onSelectFoodTemplate($event.target.value)"
-        />
-        <RoundedInput
-          placeholder="Enter the name of a food"
-          class="my-2"
-          :value="foodMenus.title"
-          @inputContent="inputFoodTitle"
-        />
-        <RoundedInput
-          placeholder="Enter the amount of protein"
-          class="my-2"
-          :value="foodMenus.protein"
-          @inputContent="inputProtein"
-        />
-        <RoundedInput
-          placeholder="Enter the amount of fat"
-          class="my-2"
-          :value="foodMenus.fat"
-          @inputContent="inputFat"
-        />
-        <RoundedInput
-          placeholder="Enter the amount of carbohydrate"
-          class="my-2"
-          :value="foodMenus.carbo"
-          @inputContent="inputCarbo"
-        />
-        <RoundedInput
-          placeholder="Enter the cost"
-          class="my-2"
-          type="number"
-          :value="foodMenus.cost"
-          @inputContent="inputCost"
-        />
-        <Button
-          class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full"
-          label="Done"
-          @click="registerFoods"
-        />
-      </div>
-    </main>
   </div>
 
   <div class="alert shadow-lg fixed top-20" v-if="showsSuccessAlert">

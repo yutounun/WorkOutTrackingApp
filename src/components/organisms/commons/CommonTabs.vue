@@ -21,7 +21,10 @@ const onClickSecondTab = () => {
 </script>
 
 <template>
-  <div class="flex h-12 mb-4 items-center justify-center" :class="$attrs">
+  <div
+    class="flex h-12 mb-4 items-center justify-center fixed top-0 w-full z-40"
+    :class="$attrs"
+  >
     <span
       id="firstTab"
       :class="{
@@ -36,6 +39,7 @@ const onClickSecondTab = () => {
     </span>
     <span
       id="secondTab"
+      class="bg-white"
       :class="{
         'w-1/2 h-full font-bold text-xs bg-gray-2 text-gray-3 flex items-center justify-center':
           isFirstMenuClicked,

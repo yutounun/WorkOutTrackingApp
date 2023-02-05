@@ -3,13 +3,11 @@ const props = defineProps({
   placeholder: String,
   options: Array,
 });
-console.log(props.options);
-const smallAdd = "/icons/SmallAdd.svg";
 </script>
 
 <template>
-  <div class="flex items-center">
-    <select class="select select-bordered w-5/6 text-gray-3" :class="$attrs">
+  <div class="flex items-center justify-center">
+    <select class="select select-bordered w-80 text-gray-3" :class="$attrs">
       <option disabled selected class="text-gray-2">
         {{ props.placeholder }}
       </option>
@@ -17,6 +15,5 @@ const smallAdd = "/icons/SmallAdd.svg";
         <option>{{ option }}</option>
       </template>
     </select>
-    <img :src="smallAdd" alt="" class="ml-5" />
   </div>
 </template>
