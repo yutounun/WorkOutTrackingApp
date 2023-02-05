@@ -25,10 +25,10 @@ const onClickFirstMenu = (status: any) => {
 /** Data that will be registered on workout doc on Firebase Store */
 const workoutMenus = ref({
   icon: "/icons/barbel.svg",
-  title: "",
-  weight: "",
-  reps: "",
-  time: "",
+  title: null,
+  weight: null,
+  reps: null,
+  time: null,
 });
 
 /** Register formed workout menu on firebase */
@@ -38,10 +38,10 @@ const registerWorkout = async () => {
   // Clear up all the forms
   Object.assign(workoutMenus.value, {
     icon: "/icons/barbel.svg",
-    title: "",
-    weight: "",
-    reps: "",
-    time: "",
+    title: null,
+    weight: null,
+    reps: null,
+    time: null,
   });
 
   // In case when data is registered successfully
