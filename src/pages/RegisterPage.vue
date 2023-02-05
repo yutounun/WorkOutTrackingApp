@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { reactive, ref } from "vue";
+import { registerData } from "@/apis/postFirebase";
 import Tabs from "@/components/organisms/commons/CommonTabs.vue";
 import Button from "@/components/atoms/commons/CommonButton.vue";
 import Header from "@/components/organisms/commons/CommonHeader.vue";
@@ -18,6 +19,36 @@ const isFirstTabClicked = ref(true);
 const onClickFirstMenu = (status: any) => {
   isFirstTabClicked.value = status;
 };
+
+/** Data that will be registered on workout doc on Firebase Store */
+const workoutMenus = ref({
+  machine: "",
+  weight: 0,
+  reps: 0,
+  time: 0,
+});
+
+/** Register formed workout menu on firebase */
+const registerWorkout = () => {
+  registerData("workout", workoutMenus.value);
+};
+
+const inputMachine = (machine: string) => {
+  console.log("machine :", machine);
+  workoutMenus.value.machine = machine;
+};
+
+const inputWeight = (weight: number) => {
+  workoutMenus.value.weight = weight;
+};
+
+const inputReps = (reps: number) => {
+  workoutMenus.value.reps = reps;
+};
+
+const inputTime = (time: number) => {
+  workoutMenus.value.time = time;
+};
 </script>
 
 <template>
@@ -28,6 +59,8 @@ const onClickFirstMenu = (status: any) => {
     second-item="FOODS"
     @isFirstMenuClicked="onClickFirstMenu"
   />
+
+  <!-- Workout Tab -->
   <div v-if="isFirstTabClicked === true">
     <div class="mt-5 flex items-center mx-8">
       <p>Let’s see how hard you had workout today</p>
@@ -37,25 +70,52 @@ const onClickFirstMenu = (status: any) => {
     <!-- When Workout tab is selected -->
     <main class="px-6 font-sans mt-3 pb-32">
       <div class="text-center">
-        <RoundedInput placeholder="Enter the machine" class="my-2" />
+        <!-- machine -->
+        <RoundedInput
+          placeholder="Enter the machine"
+          class="my-2"
+          @inputContent="inputMachine"
+        />
+
         <span class="block font-bold my-3">OR</span>
+
+        <!-- templates -->
         <SelectBox
           placeholder="Choose your machine"
           :options="['Push up bar', 'Tread mill', 'Aero bike']"
           class="h-5/6 mb-3"
         />
-        <RoundedInput placeholder="Enter the weight" class="my-2" />
-        <RoundedInput placeholder="Enter the reps" class="my-2" />
-        <RoundedInput placeholder="Enter how long it takes" class="my-2" />
+
+        <!-- weight -->
+        <RoundedInput
+          placeholder="Enter the weight"
+          class="my-2"
+          @inputContent="inputWeight"
+        />
+
+        <!-- reps -->
+        <RoundedInput
+          placeholder="Enter the reps"
+          class="my-2"
+          @inputContent="inputReps"
+        />
+
+        <!-- time -->
+        <RoundedInput
+          placeholder="Enter how long it takes"
+          class="my-2"
+          @inputContent="inputTime"
+        />
         <Button
           class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full"
           label="Done"
-          @click="router.push('/login')"
+          @click="registerWorkout"
         />
       </div>
     </main>
   </div>
 
+  <!-- Foods Tab -->
   <div v-if="isFirstTabClicked === false">
     <div class="mt-5 flex items-center mx-8">
       <p>Let’s see the things giving you fat :(</p>
