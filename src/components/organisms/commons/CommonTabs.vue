@@ -22,7 +22,7 @@ const onClickSecondTab = () => {
 
 <template>
   <div
-    class="flex h-12 mb-4 items-center justify-center fixed top-0 w-full z-40"
+    class="flex h-12 mb-4 items-center justify-center fixed top-0 w-full z-10"
     :class="$attrs"
   >
     <span

@@ -317,7 +317,7 @@ const inputCost = (cost: number) => {
     </div>
   </div>
 
-  <div class="alert shadow-lg fixed top-20" v-if="showsSuccessAlert">
+  <div class="alert shadow-lg fixed top-20 z-20" v-if="showsSuccessAlert">
     <div>
       <svg
         xmlns="http://www.w3.org/2000/svg"
