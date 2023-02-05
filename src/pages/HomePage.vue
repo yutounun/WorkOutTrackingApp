@@ -14,7 +14,7 @@ const router = useRouter();
     class="bg-primary z-30 w-screen h-16 text-white text-2xl font-bold items-center flex justify-center fixed"
   >
     <h1 class="font-semibold text-xl mr-5">Welcome Jesica!!</h1>
-    <img :src="smallProfile" alt="" @click="router.push('/profile')" />
+    <img :src="smallProfile" alt="" @click="router.push('/welcome')" />
   </div>
   <main class="px-6 pt-20 font-sans h-screen">
     <h1 class="font-semibold text-xl mt-8 mb-4">Videos For Trainees</h1>
