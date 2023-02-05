@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { reactive, ref } from "vue";
+import { getData } from "@/apis/getFirebase";
 import { registerData } from "@/apis/postFirebase";
 import Tabs from "@/components/organisms/commons/CommonTabs.vue";
 import Button from "@/components/atoms/commons/CommonButton.vue";
@@ -22,6 +23,16 @@ const onClickFirstMenu = (status: any) => {
   isFirstTabClicked.value = status;
 };
 
+/** Shows an alert showing you succeeded to register */
+const successfulAlertEvent = () => {
+  showsSuccessAlert.value = true;
+
+  // Keeps showing a bar for 2 secs
+  setTimeout(() => {
+    showsSuccessAlert.value = false;
+  }, 2000);
+};
+
 /** Data that will be registered on workout doc on Firebase Store */
 const workoutMenus = ref({
   icon: "/icons/barbel.svg",
@@ -31,6 +42,7 @@ const workoutMenus = ref({
   time: null,
 });
 
+////////// Workout ////////////
 /** Register formed workout menu on firebase */
 const registerWorkout = async () => {
   const registeredData = await registerData("workout", workoutMenus.value);
@@ -46,14 +58,11 @@ const registerWorkout = async () => {
 
   // In case when data is registered successfully
   if (registeredData) {
-    showsSuccessAlert.value = true;
-
-    // Keeps showing a bar for 2 secs
-    setTimeout(() => {
-      showsSuccessAlert.value = false;
-    }, 2000);
+    successfulAlertEvent();
   }
 };
+
+// input event for workout
 
 const inputTitle = (title: string) => {
   workoutMenus.value.title = title;
@@ -69,6 +78,89 @@ const inputReps = (reps: number) => {
 
 const inputTime = (time: number) => {
   workoutMenus.value.time = time;
+};
+
+////////////// Food ///////////////
+
+/** Data that will be registered on foods doc on Firebase Store */
+const foodMenus = ref({
+  date: null,
+  title: null,
+  carbo: null,
+  protein: null,
+  fat: null,
+  cost: null,
+});
+
+// Options displayed on food select box
+const foodOptions = [];
+
+/** All foods stored on firebase foods collection */
+const foodList = ref([]);
+
+/** get all foods on firebase that will be used on a template box */
+const getFoodsList = async () => {
+  const list = await getData("foods");
+
+  list.forEach((doc) => {
+    foodList.value.push(doc);
+    foodOptions.push(doc.title);
+  });
+};
+
+/** Created */
+getFoodsList();
+
+/** Fired when food template is selected */
+const onSelectFoodTemplate = (selectedTitle: string) => {
+  foodList.value.forEach((doc) => {
+    // Set data from firebase which matches the template user selected
+    if (doc.title === selectedTitle) {
+      Object.assign(foodMenus.value, doc);
+    }
+  });
+};
+
+/** Register formed foods menu on firebase */
+const registerFoods = async () => {
+  const registeredData = await registerData("foods", foodMenus.value);
+
+  // Clear up all the forms
+  Object.assign(foodMenus.value, {
+    date: null,
+    title: null,
+    carbo: null,
+    protein: null,
+    fat: null,
+    cost: null,
+  });
+
+  // In case when data is registered successfully
+  if (registeredData) {
+    successfulAlertEvent();
+  }
+};
+
+// input event for foods
+
+const inputFoodTitle = (title: string) => {
+  foodMenus.value.title = title;
+};
+
+const inputProtein = (protein: number) => {
+  foodMenus.value.protein = protein;
+};
+
+const inputCarbo = (carbo: number) => {
+  foodMenus.value.carbo = carbo;
+};
+
+const inputFat = (fat: number) => {
+  foodMenus.value.fat = fat;
+};
+
+const inputCost = (cost: number) => {
+  foodMenus.value.cost = cost;
 };
 </script>
 
@@ -152,21 +244,45 @@ const inputTime = (time: number) => {
       <div class="text-center">
         <SelectBox
           placeholder="Select from templates"
-          :options="['Push up bar', 'Tread mill', 'Aero bike']"
+          :options="foodOptions"
           class="h-5/6 my-3"
+          @input="onSelectFoodTemplate($event.target.value)"
         />
-        <RoundedInput placeholder="Enter the menu" class="my-2" />
-        <RoundedInput placeholder="Enter the amount of protein" class="my-2" />
-        <RoundedInput placeholder="Enter the amount of fat" class="my-2" />
+        <RoundedInput
+          placeholder="Enter the name of a food"
+          class="my-2"
+          :value="foodMenus.title"
+          @inputContent="inputFoodTitle"
+        />
+        <RoundedInput
+          placeholder="Enter the amount of protein"
+          class="my-2"
+          :value="foodMenus.protein"
+          @inputContent="inputProtein"
+        />
+        <RoundedInput
+          placeholder="Enter the amount of fat"
+          class="my-2"
+          :value="foodMenus.fat"
+          @inputContent="inputFat"
+        />
         <RoundedInput
           placeholder="Enter the amount of carbohydrate"
           class="my-2"
+          :value="foodMenus.carbo"
+          @inputContent="inputCarbo"
         />
-        <RoundedInput placeholder="Enter the cost" class="my-2" type="number" />
+        <RoundedInput
+          placeholder="Enter the cost"
+          class="my-2"
+          type="number"
+          :value="foodMenus.cost"
+          @inputContent="inputCost"
+        />
         <Button
           class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full"
           label="Done"
-          @click="router.push('/login')"
+          @click="registerFoods"
         />
       </div>
     </main>
