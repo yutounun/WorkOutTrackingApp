@@ -33,6 +33,8 @@ const successfulAlertEvent = () => {
   }, 2000);
 };
 
+////////// Workout ////////////
+
 /** Data that will be registered on workout doc on Firebase Store */
 const workoutMenus = ref({
   icon: "/icons/barbel.svg",
@@ -42,7 +44,34 @@ const workoutMenus = ref({
   time: null,
 });
 
-////////// Workout ////////////
+const workoutOptions = ref([]);
+
+const workoutList = ref([]);
+
+const getWorkoutList = async () => {
+  const list = await getData("workout");
+  console.log("🚀 ~ file: RegisterPage.vue:53 ~ getWorkoutList ~ const", list);
+
+  list.forEach((doc) => {
+    workoutList.value.push(doc);
+    workoutOptions.value.push(doc.title);
+    console.log("workoutOptions :", workoutOptions);
+  });
+};
+
+/** Created */
+getWorkoutList();
+
+/** Fired when food template is selected */
+const onSelectWorkoutTemplate = (selectedTitle: string) => {
+  workoutList.value.forEach((doc) => {
+    // Set data from firebase which matches the template user selected
+    if (doc.title === selectedTitle) {
+      Object.assign(workoutMenus.value, doc);
+    }
+  });
+};
+
 /** Register formed workout menu on firebase */
 const registerWorkout = async () => {
   const registeredData = await registerData("workout", workoutMenus.value);
@@ -195,9 +224,10 @@ const inputCost = (cost: number) => {
 
         <!-- templates -->
         <SelectBox
-          placeholder="Choose your title"
-          :options="['Push up bar', 'Tread mill', 'Aero bike']"
+          placeholder="Select from the history"
+          :options="workoutOptions"
           class="h-5/6 mb-3"
+          @input="onSelectWorkoutTemplate($event.target.value)"
         />
 
         <!-- weight -->
@@ -243,7 +273,7 @@ const inputCost = (cost: number) => {
     <main class="px-6 font-sans mt-3 pb-32">
       <div class="text-center">
         <SelectBox
-          placeholder="Select from templates"
+          placeholder="Select from the history"
           :options="foodOptions"
           class="h-5/6 my-3"
           @input="onSelectFoodTemplate($event.target.value)"
