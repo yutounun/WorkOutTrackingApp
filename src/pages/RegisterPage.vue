@@ -41,7 +41,7 @@ const workoutMenus = ref({
   title: null,
   weight: null,
   reps: null,
-  time: null,
+  sets: null,
 });
 
 const workoutOptions = ref([]);
@@ -50,7 +50,6 @@ const workoutList = ref([]);
 
 const getWorkoutList = async () => {
   const list = await getData("workout");
-  console.log("🚀 ~ file: RegisterPage.vue:53 ~ getWorkoutList ~ const", list);
 
   list.forEach((doc) => {
     workoutList.value.push(doc);
@@ -62,8 +61,8 @@ const getWorkoutList = async () => {
 /** Created */
 getWorkoutList();
 
-/** Fired when food template is selected */
-const onSelectWorkoutTemplate = (selectedTitle: string) => {
+/** Fired when workout history is selected */
+const onSelectWorkoutHistory = (selectedTitle: string) => {
   workoutList.value.forEach((doc) => {
     // Set data from firebase which matches the template user selected
     if (doc.title === selectedTitle) {
@@ -82,7 +81,7 @@ const registerWorkout = async () => {
     title: null,
     weight: null,
     reps: null,
-    time: null,
+    sets: null,
   });
 
   // In case when data is registered successfully
@@ -105,8 +104,8 @@ const inputReps = (reps: number) => {
   workoutMenus.value.reps = reps;
 };
 
-const inputTime = (time: number) => {
-  workoutMenus.value.time = time;
+const inputSets = (sets: number) => {
+  workoutMenus.value.sets = sets;
 };
 
 ////////////// Food ///////////////
@@ -127,7 +126,7 @@ const foodOptions = [];
 /** All foods stored on firebase foods collection */
 const foodList = ref([]);
 
-/** get all foods on firebase that will be used on a template box */
+/** get all foods on firebase that will be used on a history box */
 const getFoodsList = async () => {
   const list = await getData("foods");
 
@@ -140,8 +139,8 @@ const getFoodsList = async () => {
 /** Created */
 getFoodsList();
 
-/** Fired when food template is selected */
-const onSelectFoodTemplate = (selectedTitle: string) => {
+/** Fired when food history is selected */
+const onSelectFoodHistory = (selectedTitle: string) => {
   foodList.value.forEach((doc) => {
     // Set data from firebase which matches the template user selected
     if (doc.title === selectedTitle) {
@@ -213,12 +212,12 @@ const inputCost = (cost: number) => {
       <!-- When Workout tab is selected -->
       <main class="px-6 font-sans mt-3 pb-32">
         <div class="text-center">
-          <!-- templates -->
+          <!-- history -->
           <SelectBox
             placeholder="Select from the history"
             :options="workoutOptions"
             class="h-5/6 mb-3"
-            @input="onSelectWorkoutTemplate($event.target.value)"
+            @input="onSelectWorkoutHistory($event.target.value)"
           />
           <!-- title -->
           <RoundedInput
@@ -233,6 +232,8 @@ const inputCost = (cost: number) => {
             placeholder="Enter the weight"
             class="my-2"
             @inputContent="inputWeight"
+            type="text"
+            pattern="\d*"
             :value="workoutMenus.weight"
           />
 
@@ -240,16 +241,20 @@ const inputCost = (cost: number) => {
           <RoundedInput
             placeholder="Enter the reps"
             class="my-2"
+            type="text"
+            pattern="\d*"
             @inputContent="inputReps"
             :value="workoutMenus.reps"
           />
 
-          <!-- time -->
+          <!-- sets -->
           <RoundedInput
-            placeholder="Enter how long it takes"
+            placeholder="Enter the number of sets"
             class="my-2"
-            @inputContent="inputTime"
-            :value="workoutMenus.time"
+            type="text"
+            pattern="\d*"
+            @inputContent="inputSets"
+            :value="workoutMenus.sets"
           />
           <Button
             class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full"
@@ -274,7 +279,7 @@ const inputCost = (cost: number) => {
             placeholder="Select from the history"
             :options="foodOptions"
             class="h-5/6 my-3"
-            @input="onSelectFoodTemplate($event.target.value)"
+            @input="onSelectFoodHistory($event.target.value)"
           />
           <RoundedInput
             placeholder="Enter the name of a food"
@@ -286,24 +291,31 @@ const inputCost = (cost: number) => {
             placeholder="Enter the amount of protein"
             class="my-2"
             :value="foodMenus.protein"
+            type="text"
+            pattern="\d*"
             @inputContent="inputProtein"
           />
           <RoundedInput
             placeholder="Enter the amount of fat"
             class="my-2"
+            type="text"
+            pattern="\d*"
             :value="foodMenus.fat"
             @inputContent="inputFat"
           />
           <RoundedInput
             placeholder="Enter the amount of carbohydrate"
             class="my-2"
+            type="text"
+            pattern="\d*"
             :value="foodMenus.carbo"
             @inputContent="inputCarbo"
           />
           <RoundedInput
             placeholder="Enter the cost"
             class="my-2"
-            type="number"
+            type="text"
+            pattern="\d*"
             :value="foodMenus.cost"
             @inputContent="inputCost"
           />
@@ -317,6 +329,7 @@ const inputCost = (cost: number) => {
     </div>
   </div>
 
+  <!-- Successful Alert -->
   <div class="alert shadow-lg fixed top-20 z-20" v-if="showsSuccessAlert">
     <div>
       <svg

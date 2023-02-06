@@ -34,7 +34,9 @@ getWorkoutList();
           <img :src="menu.icon" alt="" />
         </template>
         <template #title>{{ menu.title }}</template>
-        <template #bottom>{{ menu.weight }}kg × {{ menu.reps }}</template>
+        <template #bottom
+          >{{ menu.weight }}kg × {{ menu.reps }}reps × {{ menu.sets }}</template
+        >
       </WorkoutCard>
     </div>
   </main>
