@@ -5,6 +5,7 @@ const props = defineProps({
   protein: Number,
   fat: Number,
   cost: Number,
+  date: String,
 });
 </script>
 

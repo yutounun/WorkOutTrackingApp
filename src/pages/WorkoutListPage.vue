@@ -22,13 +22,11 @@ getWorkoutList();
 
 <template>
   <Header title="Workout List" />
-  <main class="px-6 font-sans mt-3 pb-32">
-    <!-- today + icon -->
-    <div class="flex items-center mt-20 justify-between">
-      <h1 class="font-semibold text-xl text-primary">TODAY</h1>
-      <img :src="smallProfile" alt="profile" />
-    </div>
-    <div v-for="menu in workoutList" :key="menu.id">
+  <main class="px-6 font-sans pb-32 mt-20">
+    <div v-for="(menu, index) in workoutList" :key="menu.title">
+      <div v-if="index === 0 || workoutList[index - 1].date !== menu.date">
+        <span class="font-semibold text-lg text-primary">{{ menu.date }}</span>
+      </div>
       <WorkoutCard class="mt-5">
         <template #icon>
           <img :src="menu.icon" alt="" />

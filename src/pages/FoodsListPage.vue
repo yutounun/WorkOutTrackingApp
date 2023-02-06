@@ -5,7 +5,6 @@ import Header from "@/components/organisms/commons/CommonHeader.vue";
 import { getData } from "@/apis/getFirebase";
 import { ref } from "vue";
 
-const smallProfile = "/icons/SmallProfile.svg";
 const foodList = ref([]);
 
 const getFoodsList = async () => {
@@ -22,15 +21,14 @@ getFoodsList();
 
 <template>
   <Header title="Food List" />
-  <main class="px-6 font-sans mt-3 pb-32">
-    <!-- today + icon -->
-    <div class="flex items-center mt-20 justify-between">
-      <h1 class="font-semibold text-xl text-primary">TODAY</h1>
-      <img :src="smallProfile" alt="profile" />
-    </div>
-    <div v-for="menu in foodList" :key="menu.title">
+  <main class="px-6 font-sans mt-20 pb-32">
+    <div v-for="(menu, index) in foodList" :key="menu.title">
+      <div v-if="index === 0 || foodList[index - 1].date !== menu.date">
+        <span class="font-semibold text-lg text-primary">{{ menu.date }}</span>
+      </div>
       <FoodCard
         class="mt-5"
+        :date="menu.date"
         :title="menu.title"
         :carbo="menu.carbo"
         :protein="menu.protein"

@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { reactive, ref } from "vue";
+import { ref } from "vue";
+import { format } from "date-fns";
+
 import { getData } from "@/apis/getFirebase";
 import { registerData } from "@/apis/postFirebase";
 import Tabs from "@/components/organisms/commons/CommonTabs.vue";
@@ -33,10 +35,15 @@ const successfulAlertEvent = () => {
   }, 2000);
 };
 
+const initialDate = () => {
+  return format(new Date(), "yyyy-MM-dd");
+};
+
 ////////// Workout ////////////
 
 /** Data that will be registered on workout doc on Firebase Store */
 const workoutMenus = ref({
+  date: initialDate(),
   icon: "/icons/barbel.svg",
   title: null,
   weight: null,
@@ -77,6 +84,7 @@ const registerWorkout = async () => {
 
   // Clear up all the forms
   Object.assign(workoutMenus.value, {
+    date: initialDate(),
     icon: "/icons/barbel.svg",
     title: null,
     weight: null,
@@ -108,11 +116,15 @@ const inputSets = (sets: number) => {
   workoutMenus.value.sets = sets;
 };
 
+const onSelectWorkoutDate = (date: any) => {
+  workoutMenus.value.date = date;
+};
+
 ////////////// Food ///////////////
 
 /** Data that will be registered on foods doc on Firebase Store */
 const foodMenus = ref({
-  date: null,
+  date: initialDate(),
   title: null,
   carbo: null,
   protein: null,
@@ -155,7 +167,7 @@ const registerFoods = async () => {
 
   // Clear up all the forms
   Object.assign(foodMenus.value, {
-    date: null,
+    date: initialDate(),
     title: null,
     carbo: null,
     protein: null,
@@ -190,6 +202,10 @@ const inputFat = (fat: number) => {
 const inputCost = (cost: number) => {
   foodMenus.value.cost = cost;
 };
+
+const onSelectFoodDate = (date: any) => {
+  foodMenus.value.date = date;
+};
 </script>
 
 <template>
@@ -212,6 +228,13 @@ const inputCost = (cost: number) => {
       <!-- When Workout tab is selected -->
       <main class="px-6 font-sans mt-3 pb-32">
         <div class="text-center">
+          <!-- calendar -->
+          <RoundedInput
+            type="date"
+            class="h-10 mb-5 rounded-lg"
+            :value="initialDate()"
+            @input="onSelectWorkoutDate($event.target.value)"
+          />
           <!-- history -->
           <SelectBox
             placeholder="Select from the history"
@@ -275,6 +298,12 @@ const inputCost = (cost: number) => {
       <!-- When Foods tab is selected -->
       <main class="px-6 font-sans mt-3 pb-32">
         <div class="text-center">
+          <RoundedInput
+            type="date"
+            class="h-10 mb-2 rounded-lg"
+            :value="initialDate()"
+            @inputContent="onSelectFoodDate"
+          />
           <SelectBox
             placeholder="Select from the history"
             :options="foodOptions"

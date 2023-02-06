@@ -5,6 +5,9 @@
     class="card py-3 mb-5 border border-gray-3 flex flex-row"
     :class="$attrs"
   >
+    <span class="font-semibold text-lg text-primary">
+      <slot name="date" />
+    </span>
     <div class="w-1/5 flex justify-center items-center">
       <slot name="icon" />
     </div>

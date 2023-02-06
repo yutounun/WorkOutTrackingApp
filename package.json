@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "daisyui": "^2.49.0",
+    "date-fns": "^2.29.3",
     "firebase": "^9.16.0",
     "pinia": "^2.0.28",
     "vue": "^3.2.45",
