@@ -5,18 +5,17 @@ import { useRouter } from "vue-router";
 
 const video = "/temp-pix/video.svg";
 const runnerVideo = "/temp-pix/runnerVideo.svg";
-const smallProfile = "/icons/SmallProfile.svg";
-const router = useRouter();
 </script>
 
 <template>
   <div
-    class="bg-primary z-30 w-screen h-16 text-white text-2xl font-bold items-center flex justify-center fixed"
+    class="z-30 w-screen h-16 mt-4 text-primary text-2xl font-bold items-center flex justify-start"
   >
-    <h1 class="font-semibold text-xl mr-5">Welcome Jesica!!</h1>
-    <img :src="smallProfile" alt="" @click="router.push('/welcome')" />
+    <h1 class="font-semibold text-xl ml-7 border-primary border-b">
+      Welcome!!
+    </h1>
   </div>
-  <main class="px-6 pt-20 font-sans h-screen">
+  <main class="px-6 font-sans h-screen">
     <h1 class="font-semibold text-xl mt-8 mb-4">Videos For Trainees</h1>
     <div class="flex items-center overflow-x-scroll">
       <img :src="video" alt="" />
