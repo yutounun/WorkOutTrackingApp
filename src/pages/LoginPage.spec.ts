@@ -24,4 +24,8 @@ describe("Login page", () => {
     const passwordForm = screen.getByLabelText("Password");
     expect(passwordForm.type).toBe("password");
   });
+  it("matches an old snapshot", () => {
+    const Logins = render(Login);
+    expect(Logins).toMatchSnapshot();
+  });
 });
