@@ -7,7 +7,7 @@ const props = defineProps({
   home: Boolean,
   food: Boolean,
   menu: Boolean,
-  profile: Boolean,
+  chart: Boolean,
 });
 
 const transition = (to: RouteLocationRaw) => {
@@ -67,16 +67,16 @@ const transition = (to: RouteLocationRaw) => {
     </div>
 
     <div
-      v-if="props.profile"
+      v-if="props.chart"
       class="w-1/5 text-center"
-      @click="transition('/profile')"
+      @click="transition('/chart')"
     >
-      <img src="/icons/SelectedProfile.svg" class="m-auto" alt="" />
-      <span class="text-xxs text-black block mb-1 font-bold"> PROFILE </span>
+      <img src="/icons/SelectedChart.svg" class="m-auto mt-1" alt="" />
+      <span class="text-xxs text-black block mb-1 mt-1 font-bold"> Chart </span>
     </div>
-    <div v-else class="w-1/5 text-center" @click="transition('/profile')">
-      <img src="/icons/Profile.svg" class="m-auto" alt="" />
-      <span class="text-xxs text-black block mb-1 font-bold"> PROFILE </span>
+    <div v-else class="w-1/5 text-center" @click="transition('/chart')">
+      <img src="/icons/Chart.svg" class="m-auto mt-1" alt="" />
+      <span class="text-xxs text-black block mb-1 mt-1 font-bold"> Chart </span>
     </div>
   </footer>
 </template>

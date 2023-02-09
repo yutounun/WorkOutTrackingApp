@@ -24,11 +24,13 @@
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "chart.js": "^4.2.0",
     "daisyui": "^2.49.0",
     "date-fns": "^2.29.3",
     "firebase": "^9.16.0",
     "pinia": "^2.0.28",
     "vue": "^3.2.45",
+    "vue-chartjs": "^5.2.0",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
