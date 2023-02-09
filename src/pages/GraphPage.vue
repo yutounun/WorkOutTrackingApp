@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import CommonGraph from "@/components/organisms/commons/CommonGraph.vue";
-import Goal from "@/components/organisms/activity/ActivityGoal.vue";
+import Goal from "@/components/organisms/chart/ActivityGoals.vue";
 import Header from "@/components/organisms/commons/CommonHeader.vue";
 import Footer from "@/components/organisms/commons/CommonFooter.vue";
 

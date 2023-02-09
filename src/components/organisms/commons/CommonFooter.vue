@@ -11,6 +11,7 @@ const props = defineProps({
 });
 
 const transition = (to: RouteLocationRaw) => {
+  console.log("transition :", to);
   router.push(to);
 };
 </script>
