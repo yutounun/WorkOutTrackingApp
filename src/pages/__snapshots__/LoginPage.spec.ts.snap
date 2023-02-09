@@ -1,0 +1,193 @@
+// Vitest Snapshot v1
+
+exports[`Login page > matches an old snapshot 1`] = `
+{
+  "baseElement": <body>
+    <div>
+      <main
+        class="px-6 font-sans h-screen"
+      >
+        <div
+          class="flex justify-center items-center flex-col"
+        >
+          <h1
+            class="text-2xl pt-12 font-bold mt-5"
+          >
+            Login
+          </h1>
+          <!-- Email -->
+          <div>
+            <label
+              class="text-xs font-bold text-left block mb-2 mt-16"
+              for="email"
+            >
+               Email 
+            </label>
+            <input
+              class="input input-bordered w-80 rounded-full w-full mb-5 w-full mb-5"
+              id="email"
+              placeholder="Enter Your Email"
+            />
+          </div>
+          <div>
+            <label
+              class="text-xs font-bold text-left block mb-2 mt-5"
+              for="password"
+            >
+               Password 
+            </label>
+            <input
+              class="input input-bordered w-80 rounded-full w-full mb-16 w-full mb-16"
+              id="password"
+              placeholder="Enter Password"
+              type="password"
+            />
+          </div>
+          <!-- Login Button -->
+          <div
+            class="flex justify-center"
+          >
+            <button
+              class="btn w-48 text-center text-white bg-primary hover:bg-primary mb-8 text-white bg-primary hover:bg-primary mb-8"
+            >
+              Login
+            </button>
+          </div>
+          <!-- Go to create account page -->
+          <div
+            class="text-accent"
+          >
+            <span>
+              Don't have an account?? 
+            </span>
+            <a
+              class="mt-5 font-semibold text-accent"
+            >
+               Create one here. 
+            </a>
+          </div>
+        </div>
+      </main>
+    </div>
+  </body>,
+  "container": <div>
+    <main
+      class="px-6 font-sans h-screen"
+    >
+      <div
+        class="flex justify-center items-center flex-col"
+      >
+        <h1
+          class="text-2xl pt-12 font-bold mt-5"
+        >
+          Login
+        </h1>
+        <!-- Email -->
+        <div>
+          <label
+            class="text-xs font-bold text-left block mb-2 mt-16"
+            for="email"
+          >
+             Email 
+          </label>
+          <input
+            class="input input-bordered w-80 rounded-full w-full mb-5 w-full mb-5"
+            id="email"
+            placeholder="Enter Your Email"
+          />
+        </div>
+        <div>
+          <label
+            class="text-xs font-bold text-left block mb-2 mt-5"
+            for="password"
+          >
+             Password 
+          </label>
+          <input
+            class="input input-bordered w-80 rounded-full w-full mb-16 w-full mb-16"
+            id="password"
+            placeholder="Enter Password"
+            type="password"
+          />
+        </div>
+        <!-- Login Button -->
+        <div
+          class="flex justify-center"
+        >
+          <button
+            class="btn w-48 text-center text-white bg-primary hover:bg-primary mb-8 text-white bg-primary hover:bg-primary mb-8"
+          >
+            Login
+          </button>
+        </div>
+        <!-- Go to create account page -->
+        <div
+          class="text-accent"
+        >
+          <span>
+            Don't have an account?? 
+          </span>
+          <a
+            class="mt-5 font-semibold text-accent"
+          >
+             Create one here. 
+          </a>
+        </div>
+      </div>
+    </main>
+  </div>,
+  "debug": [Function],
+  "emitted": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "html": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
