@@ -72,11 +72,11 @@ const transition = (to: RouteLocationRaw) => {
       @click="transition('/chart')"
     >
       <img src="/icons/SelectedChart.svg" class="m-auto mt-1" alt="" />
-      <span class="text-xxs text-black block mb-1 mt-1 font-bold"> Chart </span>
+      <span class="text-xxs text-black block mb-1 mt-1 font-bold"> CHART </span>
     </div>
     <div v-else class="w-1/5 text-center" @click="transition('/chart')">
       <img src="/icons/Chart.svg" class="m-auto mt-1" alt="" />
-      <span class="text-xxs text-black block mb-1 mt-1 font-bold"> Chart </span>
+      <span class="text-xxs text-black block mb-1 mt-1 font-bold"> CHART </span>
     </div>
   </footer>
 </template>

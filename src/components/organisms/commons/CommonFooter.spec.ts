@@ -9,7 +9,7 @@ describe("CommonFooter", () => {
     expect(wrapper.html()).toContain("FOOD");
     expect(wrapper.html()).toContain("HOME");
     expect(wrapper.html()).toContain("MENU");
-    expect(wrapper.html()).toContain("PROFILE");
+    expect(wrapper.html()).toContain("CHART");
   });
   it("has home icon having thick color when opening related page", () => {
     const wrapper = mount(CommonFooter, {
@@ -31,8 +31,8 @@ describe("CommonFooter", () => {
   });
   it("has profile icon having thick color when opening related page", () => {
     const wrapper = mount(CommonFooter, {
-      props: { profile: true },
+      props: { chart: true },
     });
-    expect(wrapper.html()).toContain("/icons/SelectedProfile.svg");
+    expect(wrapper.html()).toContain("/icons/SelectedChart.svg");
   });
 });
