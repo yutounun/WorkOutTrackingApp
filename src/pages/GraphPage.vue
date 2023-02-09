@@ -29,14 +29,23 @@ const weightDataSet = [
     data: [40, 39, 10, 40, 39, 80, 300],
   },
 ];
+
+const goalData = {
+  weight: {
+    current: 54,
+    goal: 39,
+  },
+  bodyFat: {
+    current: 22,
+    goal: 15,
+  },
+};
 </script>
 <template>
   <Header title="Your recent activity" />
 
   <div class="mt-20">
-    <div class="mx-5 mb-40">
-      <Goal />
-    </div>
+    <div class="mx-5 mb-40"><Goal :goalData="goalData" /></div>
 
     <!-- PFC Balance -->
     <div class="mx-5 mb-10">
