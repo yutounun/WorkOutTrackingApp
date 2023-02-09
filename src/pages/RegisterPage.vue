@@ -10,9 +10,7 @@ import Header from "@/components/organisms/commons/CommonHeader.vue";
 import SelectBox from "@/components/atoms/commons/CommonSelectBox.vue";
 import Footer from "@/components/organisms/commons/CommonFooter.vue";
 import RoundedInput from "@/components/atoms/commons/CommonRoundedInput.vue";
-import { useRouter } from "vue-router";
 
-const router = useRouter();
 const SittingDownGirl = "/icons/SittingDownGirl.svg";
 const GirlHavingCookie = "/icons/GirlHavingCookie.svg";
 

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import PopularItem from "@/components/organisms/home/PopularItem.vue";
 import Footer from "@/components/organisms/commons/CommonFooter.vue";
-import { useRouter } from "vue-router";
 
 const video = "/temp-pix/video.svg";
 const runnerVideo = "/temp-pix/runnerVideo.svg";
