@@ -49,13 +49,13 @@ const goalData = {
 
     <!-- PFC Balance -->
     <div class="mx-5 mb-10">
-      <h1 class="text-lg mt-3 mx-3">PFC Balance</h1>
+      <h1 class="text-lg mt-3 mx-3 mb-2">PFC Balance</h1>
       <CommonGraph :dataSet="foodDataSet" />
     </div>
 
     <!-- Weight -->
     <div class="mx-5 mb-32">
-      <h1 class="text-lg mt-3 mx-3">Weight</h1>
+      <h1 class="text-lg mt-3 mx-3 mb-2">Weight</h1>
       <CommonGraph :dataSet="weightDataSet" />
     </div>
   </div>
