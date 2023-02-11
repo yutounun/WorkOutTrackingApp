@@ -1,4 +1,4 @@
-openapi: "3.0.3"
+openapi: 3.0.3
 x-stoplight:
   id: vcgndepiycclh
 info:
@@ -7,11 +7,11 @@ info:
   description: This API is used to login
   contact:
     name: API support
-    url: http://www.example.com/support
+    url: "http://www.example.com/support"
     email: support@example.com
   license:
     name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0.html
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 servers:
   - url: "http://localhost:3000"
 paths:
@@ -114,3 +114,89 @@ paths:
         description: ""
       description: This API is used to create a user account
     parameters: []
+components:
+  schemas:
+    User:
+      title: User
+      x-stoplight:
+        id: gz9vdyd4vsvkx
+      type: object
+      description: User Model
+      properties:
+        email:
+          type: string
+        weight:
+          type: number
+        workout_list:
+          type: array
+          items: {}
+        menu_list:
+          type: array
+          items: {}
+      example:
+        email: yutounwasese@gmail.com
+        weight: 81
+        workout_id_list:
+          - dhnou23823id
+          - cndoeew2332
+        menu_id_list:
+          - dweo3289d2j8
+          - d892398dhjuh8
+    Workout:
+      title: Workout
+      x-stoplight:
+        id: tcxp01f33yfe5
+      type: object
+      description: Workout menu model
+      properties:
+        id:
+          type: string
+        date:
+          type: string
+        thumnail:
+          type: string
+        reps:
+          type: number
+        sets:
+          type: number
+        title:
+          type: string
+        weight:
+          type: number
+      example:
+        id: 2893dh23
+        date: "2022-02-01"
+        thumnail: "https://blog.logrocket.com/wp-content/uploads/2022/11/Using-React-Testing-Library-debug-method.png"
+        reps: 10
+        sets: 3
+        title: push up
+        weight: 100
+    Menu:
+      title: Menu
+      x-stoplight:
+        id: 2i3nx3u0mn724
+      type: object
+      properties:
+        id:
+          type: string
+        date:
+          type: string
+        title:
+          type: string
+        protein:
+          type: number
+        fat:
+          type: number
+        carbo:
+          type: number
+        cost:
+          type: string
+      description: Food menu model
+      example:
+        id: 832yhde9
+        date: "2023-02-02"
+        title: rice bowl
+        protein: 30
+        fat: 20
+        carbo: 100
+        cost: 10
