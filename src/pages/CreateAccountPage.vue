@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { registerData } from "@/apis/postFirebase";
+import { setDoc, doc } from "firebase/firestore";
+import { db } from "@/firebase/init";
+
 import Button from "@/components/atoms/commons/CommonButton.vue";
 import RoundedInput from "@/components/atoms/commons/CommonRoundedInput.vue";
 import { useRouter } from "vue-router";
@@ -19,7 +21,10 @@ const registerAccountOnFirebase = async () => {
     email: email.value,
     weight: weight.value,
   };
-  await registerData("users", params, email.value);
+
+  // set user account
+  const sentData = await setDoc(doc(db, "users", email.value), params);
+  return sentData;
 };
 
 /** Go to Login page after create an account */

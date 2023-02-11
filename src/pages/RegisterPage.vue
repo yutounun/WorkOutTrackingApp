@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { format } from "date-fns";
-
+import { db } from "@/firebase/init";
+import { doc, addDoc, collection } from "firebase/firestore";
 import { getData } from "@/apis/getFirebase";
-import { registerData } from "@/apis/postFirebase";
 import Tabs from "@/components/organisms/commons/CommonTabs.vue";
 import Button from "@/components/atoms/commons/CommonButton.vue";
 import Header from "@/components/organisms/commons/CommonHeader.vue";
@@ -78,7 +78,15 @@ const onSelectWorkoutHistory = (selectedTitle: string) => {
 
 /** Register formed workout menu on firebase */
 const registerWorkout = async () => {
-  const registeredData = await registerData("workout", workoutMenus.value);
+  // Get the ref to each user doc
+  // TODO: Get current user's email from eternalized Pinia
+  const userDocRef = doc(db, "users", "testestesttyutounwasese@gmail.com");
+  // Get the ref to foods collection in user doc
+  const colRef = collection(userDocRef, "workouts");
+  // add data in workouts ref
+  const registeredData = await addDoc(colRef, workoutMenus.value);
+
+  console.log("registeredWorkoutData :", registeredData);
 
   // Clear up all the forms
   Object.assign(workoutMenus.value, {
@@ -161,7 +169,14 @@ const onSelectFoodHistory = (selectedTitle: string) => {
 
 /** Register formed foods menu on firebase */
 const registerFoods = async () => {
-  const registeredData = await registerData("foods", foodMenus.value);
+  // Get the ref to each user doc
+  const userDocRef = doc(db, "users", "testestesttyutounwasese@gmail.com");
+  // Get the ref to foods collection in user doc
+  const colRef = collection(userDocRef, "foods");
+  // add data in foods ref
+  const registeredData = await addDoc(colRef, foodMenus.value);
+
+  console.log("registeredFoodData :", registeredData);
 
   // Clear up all the forms
   Object.assign(foodMenus.value, {
