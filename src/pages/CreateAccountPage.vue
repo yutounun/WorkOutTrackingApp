@@ -19,7 +19,7 @@ const registerAccountOnFirebase = async () => {
     email: email.value,
     weight: weight.value,
   };
-  await registerData("users", params);
+  await registerData("users", params, email.value);
 };
 
 /** Go to Login page after create an account */
