@@ -1,21 +1,44 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { registerData } from "@/apis/postFirebase";
 import Button from "@/components/atoms/commons/CommonButton.vue";
 import RoundedInput from "@/components/atoms/commons/CommonRoundedInput.vue";
 import { useRouter } from "vue-router";
 import { signUp } from "@/apis/signUp";
 
 const router = useRouter();
+const userName = ref("");
+const weight = ref("");
 const email = ref("");
 const password = ref("");
+
+/** Register users account data on firebase */
+const registerAccountOnFirebase = async () => {
+  const params = {
+    userName: userName.value,
+    email: email.value,
+    weight: weight.value,
+  };
+  await registerData("users", params);
+};
 
 /** Go to Login page after create an account */
 const onClickCreate = () => {
   try {
     signUp(email.value, password.value);
+    registerAccountOnFirebase();
   } finally {
     router.push("/");
   }
+};
+
+/** Set userName in variable */
+const inputUserName = (e: string) => {
+  userName.value = e;
+};
+/** Set weight in variable */
+const inputWeight = (e: string) => {
+  weight.value = e;
 };
 /** Set email in variable */
 const inputEmail = (e: string) => {
@@ -32,11 +55,31 @@ const inputPass = (e: string) => {
     <div class="flex justify-center items-center flex-col">
       <h1 class="text-2xl pt-12 font-bold mt-5">Create your account</h1>
 
+      <!-- UserName -->
+      <div>
+        <p class="text-xs font-bold text-left mb-2 mt-10">User Name</p>
+        <RoundedInput
+          placeholder="Enter your name"
+          class="w-full mb-5"
+          @inputContent="inputUserName"
+        />
+      </div>
+
+      <!-- Weight -->
+      <div>
+        <p class="text-xs font-bold text-left mb-2 mt-5">Weight</p>
+        <RoundedInput
+          placeholder="Enter your weight"
+          class="w-full mb-5"
+          @inputContent="inputWeight"
+        />
+      </div>
+
       <!-- Email -->
       <div>
-        <p class="text-xs font-bold text-left mb-2 mt-16">Email</p>
+        <p class="text-xs font-bold text-left mb-2 mt-5">Email</p>
         <RoundedInput
-          placeholder="Enter email"
+          placeholder="Enter your email"
           class="w-full mb-5"
           @inputContent="inputEmail"
         />
