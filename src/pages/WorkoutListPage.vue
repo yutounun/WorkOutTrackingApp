@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { getData } from "@/apis/getFirebase";
+import { db } from "@/firebase/init";
+import { doc, collection, getDocs } from "firebase/firestore";
 import WorkoutCard from "@/components/organisms/workout/WorkoutCard.vue";
 import Footer from "@/components/organisms/commons/CommonFooter.vue";
 import Header from "@/components/organisms/commons/CommonHeader.vue";
@@ -7,8 +8,23 @@ import { ref } from "vue";
 
 const workoutList = ref([]);
 
+/** Get all workout menus from firestore */
 const getWorkoutList = async () => {
-  const list = await getData("workout");
+  // Get the ref to each user doc
+  // TODO: Get current user's email from eternalized Pinia
+  const userDocRef = doc(db, "users", "testestesttyutounwasese@gmail.com");
+  // Get the ref to foods collection in user doc
+  const colRef = collection(userDocRef, "workouts");
+  // add data in workouts ref
+  const workoutDocs = await getDocs(colRef);
+
+  const list = [];
+
+  workoutDocs.forEach((doc) => {
+    list.push(doc.data());
+  });
+
+  console.log("workout menus :", list);
 
   list.forEach((doc) => {
     workoutList.value.push(doc);

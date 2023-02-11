@@ -1,14 +1,29 @@
 <script setup lang="ts">
+import { db } from "@/firebase/init";
 import FoodCard from "@/components/organisms/food/FoodCard.vue";
 import Footer from "@/components/organisms/commons/CommonFooter.vue";
 import Header from "@/components/organisms/commons/CommonHeader.vue";
-import { getData } from "@/apis/getFirebase";
+import { doc, collection, getDocs } from "firebase/firestore";
 import { ref } from "vue";
 
 const foodList = ref([]);
 
 const getFoodsList = async () => {
-  const list = await getData("foods");
+  // Get the ref to each user doc
+  // TODO: Get current user's email from eternalized Pinia
+  const userDocRef = doc(db, "users", "testestesttyutounwasese@gmail.com");
+  // Get the ref to foods collection in user doc
+  const colRef = collection(userDocRef, "foods");
+  // add data in workouts ref
+  const workoutDocs = await getDocs(colRef);
+
+  const list = [];
+
+  workoutDocs.forEach((doc) => {
+    list.push(doc.data());
+  });
+
+  console.log("workout menus :", list);
 
   list.forEach((doc) => {
     foodList.value.push(doc);

@@ -2,8 +2,7 @@
 import { ref } from "vue";
 import { format } from "date-fns";
 import { db } from "@/firebase/init";
-import { doc, addDoc, collection } from "firebase/firestore";
-import { getData } from "@/apis/getFirebase";
+import { doc, addDoc, collection, getDocs } from "firebase/firestore";
 import Tabs from "@/components/organisms/commons/CommonTabs.vue";
 import Button from "@/components/atoms/commons/CommonButton.vue";
 import Header from "@/components/organisms/commons/CommonHeader.vue";
@@ -54,7 +53,19 @@ const workoutOptions = ref([]);
 const workoutList = ref([]);
 
 const getWorkoutList = async () => {
-  const list = await getData("workout");
+  // Get the ref to each user doc
+  // TODO: Get current user's email from eternalized Pinia
+  const userDocRef = doc(db, "users", "testestesttyutounwasese@gmail.com");
+  // Get the ref to foods collection in user doc
+  const colRef = collection(userDocRef, "workouts");
+  // add data in workouts ref
+  const workoutDocs = await getDocs(colRef);
+
+  const list = [];
+
+  workoutDocs.forEach((doc) => {
+    list.push(doc.data());
+  });
 
   list.forEach((doc) => {
     workoutList.value.push(doc);
@@ -146,7 +157,21 @@ const foodList = ref([]);
 
 /** get all foods on firebase that will be used on a history box */
 const getFoodsList = async () => {
-  const list = await getData("foods");
+  // Get the ref to each user doc
+  // TODO: Get current user's email from eternalized Pinia
+  const userDocRef = doc(db, "users", "testestesttyutounwasese@gmail.com");
+  // Get the ref to foods collection in user doc
+  const colRef = collection(userDocRef, "foods");
+  // add data in workouts ref
+  const workoutDocs = await getDocs(colRef);
+
+  const list = [];
+
+  workoutDocs.forEach((doc) => {
+    list.push(doc.data());
+  });
+
+  console.log("workout menus :", list);
 
   list.forEach((doc) => {
     foodList.value.push(doc);
