@@ -4,7 +4,9 @@ import Button from "@/components/atoms/commons/CommonButton.vue";
 import RoundedInput from "@/components/atoms/commons/CommonRoundedInput.vue";
 import { useRouter } from "vue-router";
 import { signIn } from "@/apis/signIn";
+import { useProfileStore } from "../stores/profile";
 
+const profile = useProfileStore();
 const router = useRouter();
 const email = ref("");
 const password = ref("");
@@ -12,6 +14,9 @@ const password = ref("");
 /** Go to Home page after login */
 const onClickLogin = () => {
   try {
+    // Persist email across pages on Pinia
+    profile.email = email.value;
+
     signIn(email.value, password.value);
   } finally {
     router.push("/register");

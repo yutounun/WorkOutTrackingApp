@@ -5,13 +5,14 @@ import Footer from "@/components/organisms/commons/CommonFooter.vue";
 import Header from "@/components/organisms/commons/CommonHeader.vue";
 import { doc, collection, getDocs } from "firebase/firestore";
 import { ref } from "vue";
+import { useProfileStore } from "@/stores/profile";
 
+const profile = useProfileStore();
 const foodList = ref([]);
 
 const getFoodsList = async () => {
   // Get the ref to each user doc
-  // TODO: Get current user's email from eternalized Pinia
-  const userDocRef = doc(db, "users", "testestesttyutounwasese@gmail.com");
+  const userDocRef = doc(db, "users", profile.email);
   // Get the ref to foods collection in user doc
   const colRef = collection(userDocRef, "foods");
   // add data in workouts ref

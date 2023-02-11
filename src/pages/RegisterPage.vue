@@ -9,7 +9,9 @@ import Header from "@/components/organisms/commons/CommonHeader.vue";
 import SelectBox from "@/components/atoms/commons/CommonSelectBox.vue";
 import Footer from "@/components/organisms/commons/CommonFooter.vue";
 import RoundedInput from "@/components/atoms/commons/CommonRoundedInput.vue";
+import { useProfileStore } from "../stores/profile";
 
+const profile = useProfileStore();
 const SittingDownGirl = "/icons/SittingDownGirl.svg";
 const GirlHavingCookie = "/icons/GirlHavingCookie.svg";
 
@@ -54,8 +56,8 @@ const workoutList = ref([]);
 
 const getWorkoutList = async () => {
   // Get the ref to each user doc
-  // TODO: Get current user's email from eternalized Pinia
-  const userDocRef = doc(db, "users", "testestesttyutounwasese@gmail.com");
+
+  const userDocRef = doc(db, "users", profile.email);
   // Get the ref to foods collection in user doc
   const colRef = collection(userDocRef, "workouts");
   // add data in workouts ref
@@ -90,8 +92,8 @@ const onSelectWorkoutHistory = (selectedTitle: string) => {
 /** Register formed workout menu on firebase */
 const registerWorkout = async () => {
   // Get the ref to each user doc
-  // TODO: Get current user's email from eternalized Pinia
-  const userDocRef = doc(db, "users", "testestesttyutounwasese@gmail.com");
+
+  const userDocRef = doc(db, "users", profile.email);
   // Get the ref to foods collection in user doc
   const colRef = collection(userDocRef, "workouts");
   // add data in workouts ref
@@ -158,8 +160,8 @@ const foodList = ref([]);
 /** get all foods on firebase that will be used on a history box */
 const getFoodsList = async () => {
   // Get the ref to each user doc
-  // TODO: Get current user's email from eternalized Pinia
-  const userDocRef = doc(db, "users", "testestesttyutounwasese@gmail.com");
+
+  const userDocRef = doc(db, "users", profile.email);
   // Get the ref to foods collection in user doc
   const colRef = collection(userDocRef, "foods");
   // add data in workouts ref
@@ -195,7 +197,7 @@ const onSelectFoodHistory = (selectedTitle: string) => {
 /** Register formed foods menu on firebase */
 const registerFoods = async () => {
   // Get the ref to each user doc
-  const userDocRef = doc(db, "users", "testestesttyutounwasese@gmail.com");
+  const userDocRef = doc(db, "users", profile.email);
   // Get the ref to foods collection in user doc
   const colRef = collection(userDocRef, "foods");
   // add data in foods ref

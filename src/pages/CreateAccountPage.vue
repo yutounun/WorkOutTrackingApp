@@ -7,7 +7,9 @@ import Button from "@/components/atoms/commons/CommonButton.vue";
 import RoundedInput from "@/components/atoms/commons/CommonRoundedInput.vue";
 import { useRouter } from "vue-router";
 import { signUp } from "@/apis/signUp";
+import { useProfileStore } from "../stores/profile";
 
+const profile = useProfileStore();
 const router = useRouter();
 const userName = ref("");
 const weight = ref("");
@@ -16,6 +18,9 @@ const password = ref("");
 
 /** Register users account data on firebase */
 const registerAccountOnFirebase = async () => {
+  // Persist email across pages on Pinia
+  profile.email = email.value;
+
   const params = {
     userName: userName.value,
     email: email.value,

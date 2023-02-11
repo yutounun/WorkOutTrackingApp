@@ -5,14 +5,16 @@ import WorkoutCard from "@/components/organisms/workout/WorkoutCard.vue";
 import Footer from "@/components/organisms/commons/CommonFooter.vue";
 import Header from "@/components/organisms/commons/CommonHeader.vue";
 import { ref } from "vue";
+import { useProfileStore } from "../stores/profile";
 
+const profile = useProfileStore();
 const workoutList = ref([]);
 
 /** Get all workout menus from firestore */
 const getWorkoutList = async () => {
   // Get the ref to each user doc
-  // TODO: Get current user's email from eternalized Pinia
-  const userDocRef = doc(db, "users", "testestesttyutounwasese@gmail.com");
+
+  const userDocRef = doc(db, "users", profile.email);
   // Get the ref to foods collection in user doc
   const colRef = collection(userDocRef, "workouts");
   // add data in workouts ref
