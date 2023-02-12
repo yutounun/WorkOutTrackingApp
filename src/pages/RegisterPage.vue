@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { format } from "date-fns";
 import { db } from "@/firebase/init";
 import { doc, addDoc, collection, getDocs } from "firebase/firestore";
@@ -11,7 +11,7 @@ import Footer from "@/components/organisms/commons/CommonFooter.vue";
 import RoundedInput from "@/components/atoms/commons/CommonRoundedInput.vue";
 import { useProfileStore } from "../stores/profile";
 
-const profile = useProfileStore();
+const profile = ref("");
 const SittingDownGirl = "/icons/SittingDownGirl.svg";
 const GirlHavingCookie = "/icons/GirlHavingCookie.svg";
 
@@ -33,6 +33,10 @@ const successfulAlertEvent = () => {
     showsSuccessAlert.value = false;
   }, 2000);
 };
+
+onMounted(() => {
+  profile.value = useProfileStore();
+});
 
 const initialDate = () => {
   return format(new Date(), "yyyy-MM-dd");

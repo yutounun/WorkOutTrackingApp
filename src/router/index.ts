@@ -70,13 +70,20 @@ const routes = [
       title: "Workout List",
     },
   },
-
   {
     path: "/chart",
     name: "Chart",
     component: () => import("@/pages/GraphPage.vue"),
     meta: {
       title: "Chart",
+    },
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: () => import("@/pages/ProfilePage.vue"),
+    meta: {
+      title: "Profile",
     },
   },
 ];
