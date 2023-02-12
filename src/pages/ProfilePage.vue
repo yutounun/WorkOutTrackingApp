@@ -105,7 +105,7 @@ const inputIdealBodyFat = (fat: string) => {
     <!-- profile picture -->
     <div class="relative">
       <img src="/icons/SmallProfile.svg" alt="" class="h-28 w-28" />
-      <img src="/icons/edit.svg" alt="" class="mr-2 absolute top-0 -left-1" />
+      <img src="/icons/edit.svg" alt="" class="mr-2 absolute top-0 -right-5" />
     </div>
 
     <div class="flex items-center">
