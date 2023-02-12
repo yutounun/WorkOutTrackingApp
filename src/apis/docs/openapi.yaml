@@ -122,81 +122,58 @@ components:
         id: gz9vdyd4vsvkx
       type: object
       description: User Model
+      example:
+        email: yutounwasese@gmail.com
+        weight: 80
+        userName: yuto
+        workout:
+          title: chest press
+          date: "2022-02-01"
+          reps: 10
+          weight: 80
+          icon: "https://yuto.stoplight.io/studio/workout-app?source=34vl72x7&symbol=%252Fp%252Freference%252Fworkout.yaml%252Fcomponents%252Fschemas%252FUser"
+          sets: 3
+        foods:
+          title: bun
+          date: "2023-01-01"
+          cost: 10
+          protein: 40
+          fat: 30
+          carbo: 100
       properties:
         email:
           type: string
         weight:
           type: number
-        workout_list:
-          type: array
-          items: {}
-        menu_list:
-          type: array
-          items: {}
-      example:
-        email: yutounwasese@gmail.com
-        weight: 81
-        workout_id_list:
-          - dhnou23823id
-          - cndoeew2332
-        menu_id_list:
-          - dweo3289d2j8
-          - d892398dhjuh8
-    Workout:
-      title: Workout
-      x-stoplight:
-        id: tcxp01f33yfe5
-      type: object
-      description: Workout menu model
-      properties:
-        id:
+        userName:
           type: string
-        date:
-          type: string
-        thumnail:
-          type: string
-        reps:
-          type: number
-        sets:
-          type: number
-        title:
-          type: string
-        weight:
-          type: number
-      example:
-        id: 2893dh23
-        date: "2022-02-01"
-        thumnail: "https://blog.logrocket.com/wp-content/uploads/2022/11/Using-React-Testing-Library-debug-method.png"
-        reps: 10
-        sets: 3
-        title: push up
-        weight: 100
-    Menu:
-      title: Menu
-      x-stoplight:
-        id: 2i3nx3u0mn724
-      type: object
-      properties:
-        id:
-          type: string
-        date:
-          type: string
-        title:
-          type: string
-        protein:
-          type: number
-        fat:
-          type: number
-        carbo:
-          type: number
-        cost:
-          type: string
-      description: Food menu model
-      example:
-        id: 832yhde9
-        date: "2023-02-02"
-        title: rice bowl
-        protein: 30
-        fat: 20
-        carbo: 100
-        cost: 10
+        workout:
+          type: object
+          properties:
+            title:
+              type: string
+            date:
+              type: string
+            reps:
+              type: number
+            weight:
+              type: number
+            icon:
+              type: string
+            sets:
+              type: number
+        foods:
+          type: object
+          properties:
+            title:
+              type: string
+            date:
+              type: string
+            cost:
+              type: number
+            protein:
+              type: number
+            fat:
+              type: number
+            carbo:
+              type: number
