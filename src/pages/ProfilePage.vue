@@ -109,7 +109,9 @@ const inputIdealBodyFat = (fat: string) => {
     </div>
 
     <div class="flex items-center">
-      <p class="text-white font-semibold text-lg block">Yuto Ichihara</p>
+      <p class="text-white font-semibold text-lg block pb-20">
+        {{ profile.userName }}
+      </p>
     </div>
   </header>
 
