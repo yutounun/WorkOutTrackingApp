@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { useProfileStore } from "@/stores/profile";
 
 const routes = [
   {
@@ -16,6 +17,7 @@ const routes = [
     component: () => import("@/pages/WelcomePage.vue"),
     meta: {
       title: "Welcome",
+      preLogin: true,
     },
   },
   {
@@ -24,6 +26,7 @@ const routes = [
     component: () => import("@/pages/CreateAccountPage.vue"),
     meta: {
       title: "CreateAccount",
+      preLogin: true,
     },
   },
   {
@@ -32,6 +35,7 @@ const routes = [
     component: () => import("@/pages/LoginPage.vue"),
     meta: {
       title: "Login",
+      preLogin: true,
     },
   },
   {
@@ -84,6 +88,14 @@ const router = createRouter({
 
 router.afterEach((to) => {
   document.title = to.meta.title as string;
+});
+
+router.beforeEach((to) => {
+  const email = useProfileStore().email;
+  // check if the next page is required to login and email is set on pinia store
+  if (!email && !to.meta.preLogin) {
+    return "/login";
+  }
 });
 
 export default router;
