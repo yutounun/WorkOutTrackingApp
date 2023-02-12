@@ -67,7 +67,7 @@ const inputPass = (e: string) => {
 
       <!-- UserName -->
       <div>
-        <p class="text-xs font-bold text-left mb-2 mt-10">User Name</p>
+        <p class="text-xs font-bold text-left mb-2 mt-16">User Name</p>
         <RoundedInput
           placeholder="Enter your name"
           class="w-full mb-5"
@@ -81,6 +81,8 @@ const inputPass = (e: string) => {
         <RoundedInput
           placeholder="Enter your weight"
           class="w-full mb-5"
+          type="text"
+          pattern="\d*"
           @inputContent="inputWeight"
         />
       </div>
@@ -116,7 +118,7 @@ const inputPass = (e: string) => {
       </div>
 
       <!-- Go to login page -->
-      <div class="flex items-center">
+      <div class="flex items-center mb-20">
         <span class="text-accent">Have an account?? </span>
         <a class="text-accent font-semibold" @click="$router.push('/login')">
           Sign up here.
