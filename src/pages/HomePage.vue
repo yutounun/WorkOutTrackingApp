@@ -1,9 +1,31 @@
 <script setup lang="ts">
+import { db } from "@/firebase/init";
 import PopularItem from "@/components/organisms/home/PopularItem.vue";
 import Footer from "@/components/organisms/commons/CommonFooter.vue";
+import { useProfileStore } from "@/stores/profile";
+import { doc, getDoc } from "@firebase/firestore";
+import { ref } from "vue";
+
+const email = ref("");
 
 const video = "/temp-pix/video.svg";
 const runnerVideo = "/temp-pix/runnerVideo.svg";
+const userName = ref("");
+
+const getUserName = async () => {
+  email.value = await useProfileStore().email;
+
+  const docRef = doc(db, "users", email.value);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    console.log("persisted profile:", docSnap.data());
+    userName.value = docSnap.data().userName;
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+  }
+};
+getUserName();
 </script>
 
 <template>
@@ -11,7 +33,7 @@ const runnerVideo = "/temp-pix/runnerVideo.svg";
     class="z-30 w-screen h-16 mt-4 text-primary text-2xl font-bold items-center flex justify-start"
   >
     <h1 class="font-semibold text-xl ml-7 border-primary border-b">
-      Welcome!!
+      Welcome {{ userName }}!!
     </h1>
   </div>
   <main class="px-6 font-sans h-screen">
