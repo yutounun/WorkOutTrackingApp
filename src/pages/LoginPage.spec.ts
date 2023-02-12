@@ -1,9 +1,14 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeEach } from "vitest";
 import { screen } from "@testing-library/dom";
 import { render } from "@testing-library/vue";
 import Login from "./LoginPage.vue";
+import { setActivePinia, createPinia } from "pinia";
 
 describe("Login page", () => {
+  beforeEach(() => {
+    // creates a fresh pinia and make it active so it's automatically picked
+    setActivePinia(createPinia());
+  });
   it("renders Login page properly", () => {
     render(Login);
 

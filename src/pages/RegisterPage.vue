@@ -92,7 +92,6 @@ const onSelectWorkoutHistory = (selectedTitle: string) => {
 /** Register formed workout menu on firebase */
 const registerWorkout = async () => {
   // Get the ref to each user doc
-
   const userDocRef = doc(db, "users", profile.email);
   // Get the ref to foods collection in user doc
   const colRef = collection(userDocRef, "workouts");
@@ -160,7 +159,6 @@ const foodList = ref([]);
 /** get all foods on firebase that will be used on a history box */
 const getFoodsList = async () => {
   // Get the ref to each user doc
-
   const userDocRef = doc(db, "users", profile.email);
   // Get the ref to foods collection in user doc
   const colRef = collection(userDocRef, "foods");
