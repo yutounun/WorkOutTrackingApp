@@ -93,7 +93,7 @@ const inputIdealBodyFat = (fat: string) => {
 
 <template>
   <header
-    class="px-6 font-sans h-1/3 bg-primary relative font-bold flex flex-col items-center gap-5 pt-3"
+    class="px-6 font-sans h-2/5 bg-primary relative font-bold flex flex-col items-center gap-5 pt-3"
   >
     <!-- round icons on background -->
     <img :src="BackgroundRound" alt="" class="absolute -top-10 -left-20" />
@@ -114,7 +114,7 @@ const inputIdealBodyFat = (fat: string) => {
   </header>
 
   <div class="mt-10 bg-white z-50">
-    <main class="px-6 font-sans mt-3 pb-32">
+    <main class="px-6 font-sans mt-3 pb-10">
       <div class="text-center">
         <!-- user name -->
         <p class="text-left mx-7">User Name</p>
@@ -203,5 +203,4 @@ const inputIdealBodyFat = (fat: string) => {
       <span>Congrats!! Succeeded to register workout data.</span>
     </div>
   </div>
-  <Footer />
 </template>
