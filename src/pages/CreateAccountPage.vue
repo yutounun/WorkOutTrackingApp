@@ -12,7 +12,6 @@ import { useProfileStore } from "../stores/profile";
 const profile = useProfileStore();
 const router = useRouter();
 const userName = ref("");
-const bodyFat = ref("");
 const email = ref("");
 const password = ref("");
 
@@ -46,10 +45,6 @@ const onClickCreate = async () => {
 const inputUserName = (e: string) => {
   userName.value = e;
 };
-/** Set body fat in variable */
-const inputBodyFat = (e: string) => {
-  bodyFat.value = e;
-};
 /** Set email in variable */
 const inputEmail = (e: string) => {
   email.value = e;
@@ -72,18 +67,6 @@ const inputPass = (e: string) => {
           placeholder="Enter your name"
           class="w-full mb-5"
           @inputContent="inputUserName"
-        />
-      </div>
-
-      <!-- BodyFat -->
-      <div>
-        <p class="text-xs font-bold text-left mb-2 mt-5">Current Body Fat</p>
-        <RoundedInput
-          placeholder="Enter your current body fat"
-          class="w-full mb-5"
-          type="text"
-          pattern="\d*"
-          @inputContent="inputBodyFat"
         />
       </div>
 
