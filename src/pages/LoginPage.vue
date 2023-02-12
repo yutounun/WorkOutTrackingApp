@@ -12,14 +12,15 @@ const email = ref("");
 const password = ref("");
 
 /** Go to Home page after login */
-const onClickLogin = () => {
-  try {
-    // Persist email across pages on Pinia
-    profile.email = email.value;
+const onClickLogin = async () => {
+  // Persist email across pages on Pinia
+  profile.email = email.value;
 
-    signIn(email.value, password.value);
-  } finally {
-    router.push("/register");
+  const status = await signIn(email.value, password.value);
+  // If signup can get done successfully
+  console.log("status :", status);
+  if (status) {
+    router.push("/");
   }
 };
 const inputEmail = (e: string) => {

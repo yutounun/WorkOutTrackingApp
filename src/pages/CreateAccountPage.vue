@@ -12,7 +12,7 @@ import { useProfileStore } from "../stores/profile";
 const profile = useProfileStore();
 const router = useRouter();
 const userName = ref("");
-const weight = ref("");
+const bodyFat = ref("");
 const email = ref("");
 const password = ref("");
 
@@ -24,7 +24,6 @@ const registerAccountOnFirebase = async () => {
   const params = {
     userName: userName.value,
     email: email.value,
-    weight: weight.value,
   };
 
   // set user account
@@ -33,22 +32,23 @@ const registerAccountOnFirebase = async () => {
 };
 
 /** Go to Login page after create an account */
-const onClickCreate = () => {
-  try {
-    signUp(email.value, password.value);
-    registerAccountOnFirebase();
-  } finally {
+const onClickCreate = async () => {
+  const status = await signUp(email.value, password.value);
+
+  // If signup can get done successfully
+  if (status) {
     router.push("/");
   }
+  registerAccountOnFirebase();
 };
 
 /** Set userName in variable */
 const inputUserName = (e: string) => {
   userName.value = e;
 };
-/** Set weight in variable */
-const inputWeight = (e: string) => {
-  weight.value = e;
+/** Set body fat in variable */
+const inputBodyFat = (e: string) => {
+  bodyFat.value = e;
 };
 /** Set email in variable */
 const inputEmail = (e: string) => {
@@ -75,15 +75,15 @@ const inputPass = (e: string) => {
         />
       </div>
 
-      <!-- Weight -->
+      <!-- BodyFat -->
       <div>
-        <p class="text-xs font-bold text-left mb-2 mt-5">Weight</p>
+        <p class="text-xs font-bold text-left mb-2 mt-5">Current Body Fat</p>
         <RoundedInput
-          placeholder="Enter your weight"
+          placeholder="Enter your current body fat"
           class="w-full mb-5"
           type="text"
           pattern="\d*"
-          @inputContent="inputWeight"
+          @inputContent="inputBodyFat"
         />
       </div>
 
