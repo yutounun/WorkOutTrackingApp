@@ -98,6 +98,10 @@ const onSelectWorkoutHistory = (selectedTitle: string) => {
 
 /** Register formed workout menu on firebase */
 const registerWorkout = async () => {
+  const workOutDate = workoutMenus.value.date.split("-");
+  const date = workOutDate[1] + "/" + workOutDate[2];
+  workoutMenus.value.date = date;
+
   // Get the ref to each user doc
   const userDocRef = doc(db, "users", profile.value.email);
   // Get the ref to foods collection in user doc
@@ -201,6 +205,10 @@ const onSelectFoodHistory = (selectedTitle: string) => {
 
 /** Register formed foods menu on firebase */
 const registerFoods = async () => {
+  const foodsDate = foodMenus.value.date.split("-");
+  const date = foodsDate[1] + "/" + foodsDate[2];
+  foodMenus.value.date = date;
+
   // Get the ref to each user doc
   const userDocRef = doc(db, "users", profile.value.email);
   // Get the ref to foods collection in user doc
