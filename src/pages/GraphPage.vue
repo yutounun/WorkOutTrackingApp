@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { db } from "@/firebase/init";
+import { computed } from "vue";
+import { format, subDays } from "date-fns";
+import { getFoodsList } from "@/apis/getFoodList";
 import CommonGraph from "@/components/organisms/commons/CommonGraph.vue";
 import Goal from "@/components/organisms/chart/ActivityGoals.vue";
 import Header from "@/components/organisms/commons/CommonHeader.vue";
@@ -10,6 +13,21 @@ import { ref } from "vue";
 
 const email = ref("");
 const goalData = ref({});
+
+////////// Common //////////
+/**
+ * @returns a recent week
+ */
+const date = computed(() => {
+  const dates = [];
+  for (let i = 0; i < 7; i++) {
+    dates.push(format(subDays(new Date(), i), "MM/dd"));
+  }
+  dates.reverse();
+  return dates;
+});
+
+////////// Goals //////////
 
 /** Get info about user such as weight */
 const getProfile = async () => {
@@ -38,13 +56,72 @@ const getProfile = async () => {
 // created
 getProfile();
 
-// const foodDataSet = [
-//   {
-//     label: "Carbo",
-//     backgroundColor: "#98B9F2",
-//     data: [20, 19, 30, 80, 20, 80, 10],
-//   },
-// ];
+////////// Food Chart //////////
+
+const foodDataSet = ref([
+  {
+    label: "Protein",
+    backgroundColor: "#918EF4",
+    data: [],
+  },
+  {
+    label: "Fat",
+    backgroundColor: "#141B41",
+    data: [],
+  },
+  {
+    label: "Carbo",
+    backgroundColor: "#98B9F2",
+    data: [],
+  },
+]);
+
+const getFoodData = () => {
+  getFoodsList(useProfileStore().email)
+    .then((result) => {
+      // insert sums of ingredients on one day into data property on foodDataSet
+      console.log(" :", result);
+      // 前のindexの日付と比べるならfor使った方が良いかも
+      // 前の日付と同じなら前のものに+=する。違うならpushする条件分岐で
+      // dateとmappingする
+      // まず日付順にsort???
+      date.value.forEach((el) => {
+        for (let i = 0; i < result.length; i++) {
+          // if (result[i].date === result[i - 1].date) {
+          //   // protein
+          //   foodDataSet.value[0].data[i - 1] += result[i].protein;
+          //   // fat
+          //   foodDataSet.value[1].data[i - 1] += result[i].fat;
+          //   // carbo
+          //   foodDataSet.value[2].data[i - 1] += result[i].carbo;
+          // } else {
+          //   // protein
+          //   foodDataSet.value[0].data.push(result[i].protein);
+          //   // fat
+          //   foodDataSet.value[1].data.push(result[i].fat);
+          //   // carbo
+          //   foodDataSet.value[2].data.push(result[i].carbo);
+          // }
+          if (el === result[i].date) {
+            // protein
+            foodDataSet.value[0].data.push(result[i].protein);
+            // fat
+            foodDataSet.value[1].data.push(result[i].fat);
+            // carbo
+            foodDataSet.value[2].data.push(result[i].carbo);
+            // cost
+            console.log("cost :", result[i].cost);
+          }
+        }
+      });
+    })
+    .catch((err) => {
+      console.log("err :", err);
+    });
+};
+getFoodData();
+
+////////// Weight Chart //////////
 
 // const weightDataSet = [
 //   {

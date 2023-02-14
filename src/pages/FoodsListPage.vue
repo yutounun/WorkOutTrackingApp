@@ -1,38 +1,24 @@
 <script setup lang="ts">
-import { db } from "@/firebase/init";
+import { getFoodsList } from "@/apis/getFoodList";
 import FoodCard from "@/components/organisms/food/FoodCard.vue";
 import Footer from "@/components/organisms/commons/CommonFooter.vue";
 import Header from "@/components/organisms/commons/CommonHeader.vue";
-import { doc, collection, getDocs } from "firebase/firestore";
 import { ref } from "vue";
 import { useProfileStore } from "@/stores/profile";
 
-const profile = useProfileStore();
 const foodList = ref([]);
 
-const getFoodsList = async () => {
-  // Get the ref to each user doc
-  const userDocRef = doc(db, "users", profile.email);
-  // Get the ref to foods collection in user doc
-  const colRef = collection(userDocRef, "foods");
-  // add data in workouts ref
-  const workoutDocs = await getDocs(colRef);
-
-  const list = [];
-
-  workoutDocs.forEach((doc) => {
-    list.push(doc.data());
-  });
-
-  console.log("workout menus :", list);
-
-  list.forEach((doc) => {
-    foodList.value.push(doc);
-  });
+const getList = () => {
+  getFoodsList(useProfileStore().email)
+    .then((result) => {
+      foodList.value = result;
+    })
+    .catch((err) => {
+      console.log("err :", err);
+    });
 };
-
 /** Created */
-getFoodsList();
+getList();
 </script>
 
 <template>
