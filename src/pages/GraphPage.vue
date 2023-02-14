@@ -123,13 +123,13 @@ getFoodData();
 
 ////////// Weight Chart //////////
 
-// const weightDataSet = [
-//   {
-//     label: "Weight",
-//     backgroundColor: "#918EF4",
-//     data: [40, 39, 10, 40, 39, 80, 300],
-//   },
-// ];
+const weightDataSet = [
+  {
+    label: "Weight",
+    backgroundColor: "#918EF4",
+    data: [40, 39, 10, 40, 39, 80, 300],
+  },
+];
 </script>
 <template>
   <Header title="Your recent activity" />
