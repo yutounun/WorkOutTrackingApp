@@ -127,7 +127,12 @@ const weightDataSet = [
   {
     label: "Weight",
     backgroundColor: "#918EF4",
-    data: [40, 39, 10, 40, 39, 80, 300],
+    data: [40, 39, 10, 40, 39, 80, 60],
+  },
+  {
+    label: "Body Fat",
+    backgroundColor: "RED",
+    data: [23, 22, 22, 21, 23, 20, 19],
   },
 ];
 </script>
@@ -145,7 +150,9 @@ const weightDataSet = [
 
     <!-- Weight -->
     <div class="mx-5 mb-32">
-      <h1 class="text-lg mt-3 mx-3 mb-2" data-testid="weight">Weight</h1>
+      <h1 class="text-lg mt-3 mx-3 mb-2" data-testid="weight">
+        Weight / Body Fat
+      </h1>
       <CommonGraph :dataSet="weightDataSet" />
     </div>
   </div>
