@@ -134,15 +134,15 @@ const inputTitle = (title: string) => {
 };
 
 const inputWeight = (weight: number) => {
-  workoutMenus.value.weight = weight;
+  workoutMenus.value.weight = Number(weight);
 };
 
 const inputReps = (reps: number) => {
-  workoutMenus.value.reps = reps;
+  workoutMenus.value.reps = Number(reps);
 };
 
 const inputSets = (sets: number) => {
-  workoutMenus.value.sets = sets;
+  workoutMenus.value.sets = Number(sets);
 };
 
 const onSelectWorkoutDate = (date: any) => {
@@ -241,19 +241,19 @@ const inputFoodTitle = (title: string) => {
 };
 
 const inputProtein = (protein: number) => {
-  foodMenus.value.protein = protein;
+  foodMenus.value.protein = Number(protein);
 };
 
 const inputCarbo = (carbo: number) => {
-  foodMenus.value.carbo = carbo;
+  foodMenus.value.carbo = Number(carbo);
 };
 
 const inputFat = (fat: number) => {
-  foodMenus.value.fat = fat;
+  foodMenus.value.fat = Number(fat);
 };
 
 const inputCost = (cost: number) => {
-  foodMenus.value.cost = cost;
+  foodMenus.value.cost = Number(cost);
 };
 
 const onSelectFoodDate = (date: any) => {
