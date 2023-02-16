@@ -10,7 +10,7 @@ const router = useRouter();
 
 <template>
   <div class="h-32 ml-4">
-    <div class="mx-5">
+    <div>
       <div class="flex items-center">
         <h1 class="text-xl mr-2">Goals</h1>
         <svg
