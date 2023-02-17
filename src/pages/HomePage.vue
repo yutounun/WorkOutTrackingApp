@@ -31,7 +31,7 @@ getUserName();
 
 <template>
   <div
-    class="z-30 w-screen h-16 mt-4 text-primary text-2xl font-bold items-center flex justify-start"
+    class="z-30 w-screen h-16 mt-16 text-primary text-2xl font-bold items-center flex justify-start"
     @click="router.push('/profile')"
   >
     <h1 class="font-semibold text-xl ml-7 border-primary border-b">
