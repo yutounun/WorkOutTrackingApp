@@ -77,17 +77,17 @@ const successfulAlertEvent = () => {
 const inputUserName = (name: string) => {
   profile.value.userName = name;
 };
-const inputCurrentWeight = (weight: string) => {
-  profile.value.currentWeight = weight;
+const inputCurrentWeight = (weight: number) => {
+  profile.value.currentWeight = Number(weight);
 };
-const inputIdealWeight = (weight: string) => {
-  profile.value.idealWeight = weight;
+const inputIdealWeight = (weight: number) => {
+  profile.value.idealWeight = Number(weight);
 };
-const inputCurrentBodyFat = (fat: string) => {
-  profile.value.currentBodyFat = fat;
+const inputCurrentBodyFat = (fat: number) => {
+  profile.value.currentBodyFat = Number(fat);
 };
-const inputIdealBodyFat = (fat: string) => {
-  profile.value.idealBodyFat = fat;
+const inputIdealBodyFat = (fat: number) => {
+  profile.value.idealBodyFat = Number(fat);
 };
 </script>
 
