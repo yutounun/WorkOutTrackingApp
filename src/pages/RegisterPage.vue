@@ -96,10 +96,6 @@ const onSelectWorkoutHistory = (selectedTitle: string) => {
 
 /** Register formed workout menu on firebase */
 const registerWorkout = async () => {
-  const workOutDate = workoutMenus.value.date.split("-");
-  const date = workOutDate[1] + "/" + workOutDate[2];
-  workoutMenus.value.date = date;
-
   // Get the ref to each user doc
   const userDocRef = doc(db, "users", profile.value.email);
   // Get the ref to foods collection in user doc
@@ -168,21 +164,19 @@ const foodList = ref([]);
 /** get all foods on firebase that will be used on a history box */
 const getFoodsList = async () => {
   // Get the ref to each user doc
-  console.log("profile.value.email :", profile.value.email);
   const userDocRef = doc(db, "users", profile.value.email);
   // Get the ref to foods collection in user doc
   const colRef = collection(userDocRef, "foods");
   // add data in workouts ref
-  const workoutDocs = await getDocs(colRef);
-  console.log("workoutDocs :", workoutDocs);
+  const foodDocs = await getDocs(colRef);
 
   const list = [];
 
-  workoutDocs.forEach((doc) => {
+  foodDocs.forEach((doc) => {
     list.push(doc.data());
   });
 
-  console.log("workout menus :", list);
+  console.log("food list :", list);
 
   list.forEach((doc) => {
     foodList.value.push(doc);
@@ -202,10 +196,6 @@ const onSelectFoodHistory = (selectedTitle: string) => {
 
 /** Register formed foods menu on firebase */
 const registerFoods = async () => {
-  const foodsDate = foodMenus.value.date.split("-");
-  const date = foodsDate[1] + "/" + foodsDate[2];
-  foodMenus.value.date = date;
-
   // Get the ref to each user doc
   const userDocRef = doc(db, "users", profile.value.email);
   // Get the ref to foods collection in user doc
