@@ -36,9 +36,10 @@ const successfulAlertEvent = () => {
   }, 2000);
 };
 
-onMounted(() => {
-  profile.value = useProfileStore();
-  console.log("profile :", profile.value);
+onMounted(async () => {
+  profile.value = await useProfileStore();
+  getFoodsList();
+  getWorkoutList();
 });
 
 const initialDate = () => {
@@ -82,9 +83,6 @@ const getWorkoutList = async () => {
     console.log("workoutOptions :", workoutOptions);
   });
 };
-
-/** Created */
-getWorkoutList();
 
 /** Fired when workout history is selected */
 const onSelectWorkoutHistory = (selectedTitle: string) => {
@@ -170,11 +168,13 @@ const foodList = ref([]);
 /** get all foods on firebase that will be used on a history box */
 const getFoodsList = async () => {
   // Get the ref to each user doc
+  console.log("profile.value.email :", profile.value.email);
   const userDocRef = doc(db, "users", profile.value.email);
   // Get the ref to foods collection in user doc
   const colRef = collection(userDocRef, "foods");
   // add data in workouts ref
   const workoutDocs = await getDocs(colRef);
+  console.log("workoutDocs :", workoutDocs);
 
   const list = [];
 
@@ -189,9 +189,6 @@ const getFoodsList = async () => {
     foodOptions.push(doc.title);
   });
 };
-
-/** Created */
-getFoodsList();
 
 /** Fired when food history is selected */
 const onSelectFoodHistory = (selectedTitle: string) => {
