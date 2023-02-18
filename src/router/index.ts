@@ -20,15 +20,15 @@ const routes = [
       preLogin: true,
     },
   },
-  {
-    path: "/create-account",
-    name: "CreateAccount",
-    component: () => import("@/pages/CreateAccountPage.vue"),
-    meta: {
-      title: "CreateAccount",
-      preLogin: true,
-    },
-  },
+  // {
+  //   path: "/create-account",
+  //   name: "CreateAccount",
+  //   component: () => import("@/pages/CreateAccountPage.vue"),
+  //   meta: {
+  //     title: "CreateAccount",
+  //     preLogin: true,
+  //   },
+  // },
   {
     path: "/login",
     name: "login",
