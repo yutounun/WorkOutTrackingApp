@@ -1,26 +1,30 @@
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { computed, onMounted, readonly, ref } from "vue";
 import { db } from "@/firebase/init";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import Footer from "@/components/organisms/commons/CommonFooter.vue";
 import Button from "@/components/atoms/commons/CommonButton.vue";
 import RoundedInput from "@/components/atoms/commons/CommonRoundedInput.vue";
+import SelectBox from "@/components/atoms/commons/CommonSelectBox.vue";
 import { useProfileStore } from "@/stores/profile";
-import { useRouter } from "vue-router";
 
-const router = useRouter();
 const email = ref("");
 
 const showsSuccessAlert = ref(false);
 const BackgroundRound = "/icons/BackgroundRound.svg";
+const genderOptions = readonly(["Male", "Female"]);
 
 /** Data that will be registered on user doc on Firebase Store */
 const profile = ref({
   userName: null,
+  age: null,
+  gender: null,
+  height: null,
   currentWeight: null,
   idealWeight: null,
   currentBodyFat: null,
   idealBodyFat: null,
+  basalMetabolism: null,
 });
 
 const isEdited = ref(false);
@@ -45,23 +49,28 @@ const getProfile = async () => {
   }
 };
 
+const basalMetabolism = computed(() => {
+  return (
+    66.47 +
+    profile.value.currentWeight * 13.75 +
+    profile.value.height * 5.0 -
+    profile.value.age * 6.76
+  );
+});
+
 /** Register profile on firebase */
 const registerProfile = async () => {
+  // Add basal metabolism
+  profile.value.basalMetabolism = basalMetabolism;
+  console.log("profile.value :", profile.value);
   // Get the ref to each user doc
   const userDocRef = doc(db, "users", email.value);
   await setDoc(userDocRef, profile.value)
     .then(() => {
       successfulAlertEvent();
       isEdited.value = false;
-      // Clear up all the forms
-      Object.assign(profile.value, {
-        userName: null,
-        currentWeight: null,
-        idealWeight: null,
-        currentBodyFat: null,
-        idealBodyFat: null,
-      });
-      router.push("/profile");
+      getProfile();
+      isEdited.value = false;
     })
     .catch((error) => {
       console.log(`Unsuccessful returned error ${error}`);
@@ -81,6 +90,12 @@ const successfulAlertEvent = () => {
 const inputUserName = (name: string) => {
   profile.value.userName = name;
 };
+const inputUserAge = (age: number) => {
+  profile.value.age = Number(age);
+};
+const inputUserHeight = (height: number) => {
+  profile.value.height = Number(height);
+};
 const inputCurrentWeight = (weight: number) => {
   profile.value.currentWeight = Number(weight);
 };
@@ -93,18 +108,21 @@ const inputCurrentBodyFat = (fat: number) => {
 const inputIdealBodyFat = (fat: number) => {
   profile.value.idealBodyFat = Number(fat);
 };
+const selectGender = (gender: string) => {
+  profile.value.gender = gender;
+};
 </script>
 
 <template>
   <header
-    class="px-6 font-sans h-2/5 bg-primary relative font-bold flex flex-col items-center gap-5 pt-3"
+    class="px-6 font-sans h-2/5 bg-primary relative font-bold flex flex-col items-center gap-5 pt-3 z-40"
   >
     <!-- round icons on background -->
     <img :src="BackgroundRound" alt="" class="absolute -top-10 -left-20" />
     <img :src="BackgroundRound" alt="" class="absolute top-10 -left-20" />
     <img :src="BackgroundRound" alt="" class="absolute bottom-10 -right-20" />
 
-    <p class="text-white font-semibold text-lg block text-xl">Profile</p>
+    <p class="text-white font-semibold text-xl block">Profile</p>
 
     <!-- profile picture -->
     <div class="relative">
@@ -130,6 +148,32 @@ const inputIdealBodyFat = (fat: number) => {
           class="mb-4 mt-2"
           @inputContent="inputUserName"
           :value="profile.userName"
+        />
+
+        <!-- age -->
+        <p class="text-left mx-7">Age</p>
+        <RoundedInput
+          placeholder="Enter your age"
+          class="mb-4 mt-2"
+          @inputContent="inputUserAge"
+          :value="profile.age"
+        />
+
+        <!-- gender -->
+        <p class="text-left mx-7 mb-3">Gender</p>
+        <SelectBox
+          placeholder="Gender"
+          :options="genderOptions"
+          @input="selectGender($event.target.value)"
+        ></SelectBox>
+
+        <!-- height -->
+        <p class="text-left mx-7 mt-3">Height</p>
+        <RoundedInput
+          placeholder="Enter your height"
+          class="mb-4 mt-2"
+          @inputContent="inputUserHeight"
+          :value="profile.height"
         />
 
         <!-- current weight -->
@@ -197,28 +241,52 @@ const inputIdealBodyFat = (fat: number) => {
           {{ profile.userName }}
         </div>
 
+        <!-- age -->
+        <div>
+          <p class="text-left mb-3 mt-5 font-semibold">Age</p>
+          {{ profile.age }} years old
+        </div>
+
+        <!-- gender -->
+        <div>
+          <p for="gender" class="text-left mb-3 mt-5 font-semibold">Gender</p>
+          {{ profile.gender }}
+        </div>
+
+        <!-- height -->
+        <div>
+          <p class="text-left mb-3 mt-5 font-semibold">Height</p>
+          {{ profile.height }} cm
+        </div>
+
         <!-- current weight -->
         <div>
           <p class="text-left mb-3 mt-5 font-semibold">Current Weight</p>
-          {{ profile.currentWeight }}
+          {{ profile.currentWeight }} kg
         </div>
 
         <!-- ideal weight -->
         <div>
           <p class="text-left mb-3 mt-5 font-semibold">Ideal Weight</p>
-          {{ profile.idealWeight }}
+          {{ profile.idealWeight }} kg
         </div>
 
         <!-- current body fat -->
         <div>
           <p class="text-left mb-3 mt-5 font-semibold">Current Body Fat</p>
-          {{ profile.currentBodyFat }}
+          {{ profile.currentBodyFat }} %
         </div>
 
         <!-- ideal body weight -->
         <div>
           <p class="text-left mb-3 mt-5 font-semibold">Ideal Body Fat</p>
-          {{ profile.idealBodyFat }}
+          {{ profile.idealBodyFat }} %
+        </div>
+
+        <!-- basal metabolism -->
+        <div>
+          <p class="text-left mb-3 mt-5 font-semibold">Basal Metabolism</p>
+          {{ profile.basalMetabolism }} g
         </div>
 
         <div class="text-center">
