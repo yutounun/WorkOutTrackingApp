@@ -4,7 +4,7 @@ import { useRouter, type RouteLocationRaw } from "vue-router";
 const router = useRouter();
 const props = defineProps({
   /** Select From which page you want to call this method. */
-  home: Boolean,
+  profile: Boolean,
   food: Boolean,
   menu: Boolean,
   chart: Boolean,
@@ -20,15 +20,22 @@ const transition = (to: RouteLocationRaw) => {
   <footer
     class="mx-4 h-20 flex items-center rounded-xl mb-5 flex-wrap flex-row bg-white fixed inset-x-0 bottom-0 drop-shadow-lg border border-gray-2"
   >
-    <div v-if="props.home" class="w-1/5 text-center" @click="transition('/')">
-      <img src="/icons/SelectedHome.svg" class="m-auto" alt="" />
-      <span class="text-xxs text-black block mb-1 font-bold"> HOME </span>
+    <div
+      v-if="props.profile"
+      class="w-1/5 text-center"
+      @click="transition('/chart')"
+    >
+      <img src="/icons/SelectedProfile.svg" class="m-auto mt-1" alt="" />
+      <span class="text-xxs text-black block mb-1 -mt-1 font-bold">
+        PROFILE
+      </span>
     </div>
-    <div v-else class="w-1/5 text-center" @click="transition('/')">
-      <img src="/icons/Home.svg" class="m-auto" alt="" />
-      <span class="text-xxs text-black block mb-1 font-bold"> HOME </span>
+    <div v-else class="w-1/5 text-center" @click="transition('/profile')">
+      <img src="/icons/Profile.svg" class="m-auto mt-1" alt="" />
+      <span class="text-xxs text-black block mb-1 -mt-1 font-bold">
+        PROFILE
+      </span>
     </div>
-
     <div
       v-if="props.food"
       class="w-1/5 text-center"

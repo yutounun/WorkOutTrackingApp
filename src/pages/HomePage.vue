@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { db } from "@/firebase/init";
 import PopularItem from "@/components/organisms/home/PopularItem.vue";
-import Footer from "@/components/organisms/commons/CommonFooter.vue";
 import { useProfileStore } from "@/stores/profile";
 import { doc, getDoc } from "@firebase/firestore";
 import { ref } from "vue";
@@ -108,5 +107,4 @@ getUserName();
       />
     </div>
   </main>
-  <Footer home />
 </template>

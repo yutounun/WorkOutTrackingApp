@@ -10,7 +10,7 @@ import Footer from "@/components/organisms/commons/CommonFooter.vue";
 import { useProfileStore } from "@/stores/profile";
 import { doc, getDoc } from "@firebase/firestore";
 import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { onBeforeRouteLeave, useRouter } from "vue-router";
 
 const email = ref("");
 const goalData = ref({});
@@ -19,14 +19,14 @@ const goalData = ref({});
 /**
  * @returns a recent week
  */
-const date = computed(() => {
-  const dates = [];
-  for (let i = 0; i < 7; i++) {
-    dates.push(format(subDays(new Date(), i), "MM/dd"));
-  }
-  dates.reverse();
-  return dates;
-});
+// const date = computed(() => {
+//   const dates = [];
+//   for (let i = 0; i < 7; i++) {
+//     dates.push(format(subDays(new Date(), i), "MM/dd"));
+//   }
+//   dates.reverse();
+//   return dates;
+// });
 
 const router = useRouter();
 
@@ -79,44 +79,44 @@ const foodDataSet = ref([
   },
 ]);
 
+const date = ref([]);
+
 const getFoodData = () => {
   getFoodsList(useProfileStore().email)
     .then((result) => {
       // insert sums of ingredients on one day into data property on foodDataSet
-      console.log(" :", result);
-      // 前のindexの日付と比べるならfor使った方が良いかも
-      // 前の日付と同じなら前のものに+=する。違うならpushする条件分岐で
-      // dateとmappingする
-      // まず日付順にsort???
-      date.value.forEach((el) => {
-        for (let i = 0; i < result.length; i++) {
-          // if (result[i].date === result[i - 1].date) {
-          //   // protein
-          //   foodDataSet.value[0].data[i - 1] += result[i].protein;
-          //   // fat
-          //   foodDataSet.value[1].data[i - 1] += result[i].fat;
-          //   // carbo
-          //   foodDataSet.value[2].data[i - 1] += result[i].carbo;
-          // } else {
-          //   // protein
-          //   foodDataSet.value[0].data.push(result[i].protein);
-          //   // fat
-          //   foodDataSet.value[1].data.push(result[i].fat);
-          //   // carbo
-          //   foodDataSet.value[2].data.push(result[i].carbo);
-          // }
-          if (el === result[i].date) {
-            // protein
-            foodDataSet.value[0].data.push(result[i].protein);
-            // fat
-            foodDataSet.value[1].data.push(result[i].fat);
-            // carbo
-            foodDataSet.value[2].data.push(result[i].carbo);
-            // cost
-            console.log("cost :", result[i].cost);
+      console.log("foodList :", result);
+      // ここで同じ日付のものを足す
+      for (let i = 0; i < result.length - 1; i++) {
+        console.log("element :", result[i]);
+        for (let j = 1; j < result.length; j++) {
+          console.log("element2 :", result[j]);
+          if (result[i].date === result[j].date) {
+            result[i].protein += result[j].protein;
+            result[i].fat += result[j].fat;
+            result[i].carbo += result[j].carbo;
+            console.log("index :", j, result[i]);
+            result.splice(j, 1);
           }
         }
-      });
+      }
+      console.log("result :", result);
+
+      // date全て確認して同じもののproteinなどはこの時点で合わせる
+      for (let i = 0; i < result.length; i++) {
+        // format date to show on beautifully on chart
+        date.value.push(
+          result[i].date.split("-")[1] + "/" + result[i].date.split("-")[2]
+        );
+        // protein
+        foodDataSet.value[0].data.push(result[i].protein);
+        // fat
+        foodDataSet.value[1].data.push(result[i].fat);
+        // carbo
+        foodDataSet.value[2].data.push(result[i].carbo);
+        // cost
+        console.log("cost :", result[i].cost);
+      }
     })
     .catch((err) => {
       console.log("err :", err);
@@ -172,20 +172,6 @@ const weightDataSet = [
       </div>
     </div>
     <div class="mx-5 h-72"><Goal :goalData="goalData" /></div>
-
-    <!-- PFC Balance -->
-    <div class="mx-5 mb-10">
-      <h1 class="text-lg mt-3 mx-3 mb-2" data-testid="pfc">PFC Balance</h1>
-      <CommonGraph :dataSet="foodDataSet" />
-    </div>
-
-    <!-- Weight -->
-    <div class="mx-5 mb-32">
-      <h1 class="text-lg mt-3 mx-3 mb-2" data-testid="weight">
-        Weight / Body Fat
-      </h1>
-      <CommonGraph :dataSet="weightDataSet" />
-    </div>
   </div>
   <Footer chart />
 </template>

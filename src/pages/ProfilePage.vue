@@ -2,6 +2,7 @@
 import { onMounted, ref } from "vue";
 import { db } from "@/firebase/init";
 import { doc, setDoc, getDoc } from "firebase/firestore";
+import Footer from "@/components/organisms/commons/CommonFooter.vue";
 import Button from "@/components/atoms/commons/CommonButton.vue";
 import RoundedInput from "@/components/atoms/commons/CommonRoundedInput.vue";
 import { useProfileStore } from "@/stores/profile";
@@ -21,6 +22,8 @@ const profile = ref({
   currentBodyFat: null,
   idealBodyFat: null,
 });
+
+const isEdited = ref(false);
 
 onMounted(async () => {
   email.value = await useProfileStore().email;
@@ -49,6 +52,7 @@ const registerProfile = async () => {
   await setDoc(userDocRef, profile.value)
     .then(() => {
       successfulAlertEvent();
+      isEdited.value = false;
       // Clear up all the forms
       Object.assign(profile.value, {
         userName: null,
@@ -57,7 +61,7 @@ const registerProfile = async () => {
         currentBodyFat: null,
         idealBodyFat: null,
       });
-      router.push("/");
+      router.push("/profile");
     })
     .catch((error) => {
       console.log(`Unsuccessful returned error ${error}`);
@@ -100,7 +104,7 @@ const inputIdealBodyFat = (fat: number) => {
     <img :src="BackgroundRound" alt="" class="absolute top-10 -left-20" />
     <img :src="BackgroundRound" alt="" class="absolute bottom-10 -right-20" />
 
-    <p class="text-white font-semibold block text-xl">Profile</p>
+    <p class="text-white font-semibold text-lg block text-xl">Profile</p>
 
     <!-- profile picture -->
     <div class="relative">
@@ -115,9 +119,10 @@ const inputIdealBodyFat = (fat: number) => {
     </div>
   </header>
 
-  <div class="mt-10 bg-white z-50">
+  <div class="mt-10 bg-white mb-20">
     <main class="px-6 font-sans mt-3 pb-10">
-      <div class="text-center">
+      <!-- Editing mode -->
+      <div class="text-center" v-if="isEdited">
         <!-- user name -->
         <p class="text-left mx-7">User Name</p>
         <RoundedInput
@@ -180,11 +185,53 @@ const inputIdealBodyFat = (fat: number) => {
         <Button
           class="bg-white w-52 text-gray-3 mt-5 hover:bg-white rounded-full border-none"
           label="Cancel"
-          @click="router.push('/')"
+          @click="isEdited = false"
         />
+      </div>
+
+      <!-- Not editing mode -->
+      <div class="mx-7" v-else>
+        <!-- user name -->
+        <div>
+          <p class="text-left mb-3 mt-5 font-semibold">User Name</p>
+          {{ profile.userName }}
+        </div>
+
+        <!-- current weight -->
+        <div>
+          <p class="text-left mb-3 mt-5 font-semibold">Current Weight</p>
+          {{ profile.currentWeight }}
+        </div>
+
+        <!-- ideal weight -->
+        <div>
+          <p class="text-left mb-3 mt-5 font-semibold">Ideal Weight</p>
+          {{ profile.idealWeight }}
+        </div>
+
+        <!-- current body fat -->
+        <div>
+          <p class="text-left mb-3 mt-5 font-semibold">Current Body Fat</p>
+          {{ profile.currentBodyFat }}
+        </div>
+
+        <!-- ideal body weight -->
+        <div>
+          <p class="text-left mb-3 mt-5 font-semibold">Ideal Body Fat</p>
+          {{ profile.idealBodyFat }}
+        </div>
+
+        <div class="text-center">
+          <Button
+            class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full"
+            label="Edit"
+            @click="isEdited = true"
+          />
+        </div>
       </div>
     </main>
   </div>
+  <Footer profile />
 
   <!-- Successful Alert -->
   <div class="alert shadow-lg fixed top-0 z-20" v-if="showsSuccessAlert">
