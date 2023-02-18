@@ -238,55 +238,62 @@ const selectGender = (gender: string) => {
         <!-- user name -->
         <div>
           <p class="text-left mb-3 mt-5 font-semibold">User Name</p>
-          {{ profile.userName }}
+          {{ profile.userName ? profile.userName : "No Information" }}
         </div>
 
         <!-- age -->
         <div>
           <p class="text-left mb-3 mt-5 font-semibold">Age</p>
-          {{ profile.age }} years old
+          <p v-if="profile.age">{{ profile.age }} years old</p>
+          <p v-else>No Information</p>
         </div>
 
         <!-- gender -->
         <div>
           <p for="gender" class="text-left mb-3 mt-5 font-semibold">Gender</p>
-          {{ profile.gender }}
+          {{ profile.gender ? profile.gender : "No Information" }}
         </div>
 
         <!-- height -->
         <div>
           <p class="text-left mb-3 mt-5 font-semibold">Height</p>
-          {{ profile.height }} cm
+          <p v-if="profile.height">{{ profile.height }} cm</p>
+          <p v-else>No Information</p>
         </div>
 
         <!-- current weight -->
         <div>
           <p class="text-left mb-3 mt-5 font-semibold">Current Weight</p>
-          {{ profile.currentWeight }} kg
+          <p v-if="profile.currentWeight">{{ profile.currentWeight }} kg</p>
+          <p v-else>No Information</p>
         </div>
 
         <!-- ideal weight -->
         <div>
           <p class="text-left mb-3 mt-5 font-semibold">Ideal Weight</p>
-          {{ profile.idealWeight }} kg
+          <p v-if="profile.idealWeight">{{ profile.idealWeight }} kg</p>
+          <p v-else>No Information</p>
         </div>
 
         <!-- current body fat -->
         <div>
           <p class="text-left mb-3 mt-5 font-semibold">Current Body Fat</p>
-          {{ profile.currentBodyFat }} %
+          <p v-if="profile.currentBodyFat">{{ profile.currentBodyFat }} %</p>
+          <p v-else>No Information</p>
         </div>
 
         <!-- ideal body weight -->
         <div>
           <p class="text-left mb-3 mt-5 font-semibold">Ideal Body Fat</p>
-          {{ profile.idealBodyFat }} %
+          <p v-if="profile.idealBodyFat">{{ profile.idealBodyFat }} %</p>
+          <p v-else>No Information</p>
         </div>
 
         <!-- basal metabolism -->
         <div>
           <p class="text-left mb-3 mt-5 font-semibold">Basal Metabolism</p>
-          {{ profile.basalMetabolism }} g
+          <p v-if="profile.basalMetabolism">{{ profile.basalMetabolism }} g</p>
+          <p v-else>No Information</p>
         </div>
 
         <div class="text-center">
