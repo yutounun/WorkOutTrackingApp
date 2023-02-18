@@ -162,8 +162,8 @@ const selectGender = (gender: string) => {
         <!-- gender -->
         <p class="text-left mx-7 mb-3">Gender</p>
         <SelectBox
-          placeholder="Gender"
           :options="genderOptions"
+          :placeholder="profile.gender"
           @input="selectGender($event.target.value)"
         ></SelectBox>
 
