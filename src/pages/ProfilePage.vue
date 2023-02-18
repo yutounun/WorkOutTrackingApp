@@ -290,13 +290,13 @@ const selectGender = (gender: string) => {
         </div>
 
         <!-- basal metabolism -->
-        <div>
+        <div class="mb-3">
           <p class="text-left mb-3 mt-5 font-semibold">Basal Metabolism</p>
           <p v-if="profile.basalMetabolism">{{ profile.basalMetabolism }} g</p>
           <p v-else>No Information</p>
         </div>
 
-        <div class="text-center">
+        <div class="text-center mb-5">
           <Button
             class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full"
             label="Edit"
