@@ -36,7 +36,7 @@ const onClickCreate = async () => {
 
   // If signup can get done successfully
   if (status) {
-    router.push("/");
+    router.push("/profile");
   }
   registerAccountOnFirebase();
 };

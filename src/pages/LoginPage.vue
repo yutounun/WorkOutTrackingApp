@@ -20,7 +20,7 @@ const onClickLogin = async () => {
   // If signup can get done successfully
   console.log("status :", status);
   if (status) {
-    router.push("/");
+    router.push("/register");
   }
 };
 const inputEmail = (e: string) => {
