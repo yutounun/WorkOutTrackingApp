@@ -1,23 +1,21 @@
 import { db } from "@/firebase/init";
 import {
-  doc,
   collection,
   getDocs,
+  query,
+  orderBy,
   type DocumentData,
 } from "firebase/firestore";
 
-export const getFoodsList = async (email: string) => {
-  // Get the ref to each user doc
-  const userDocRef = doc(db, "users", email);
-  // Get the ref to foods collection in user doc
-  const colRef = collection(userDocRef, "foods");
-  // add data in workouts ref
-  const foodDocs = await getDocs(colRef);
-
+export const getFoodsList = async (email: string, order: any) => {
   const list: DocumentData[] = [];
-
-  foodDocs.forEach((doc) => {
-    list.push(doc.data());
+  const q = query(
+    collection(db, "users", email, "foods"),
+    orderBy("date", order)
+  );
+  const snapShots = await getDocs(q);
+  snapShots.forEach((s) => {
+    list.push(s.data());
   });
   return list;
 };

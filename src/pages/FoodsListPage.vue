@@ -9,7 +9,7 @@ import { useProfileStore } from "@/stores/profile";
 const foodList = ref([]);
 
 const getList = () => {
-  getFoodsList(useProfileStore().email)
+  getFoodsList(useProfileStore().email, "desc")
     .then((result) => {
       foodList.value = result;
     })
