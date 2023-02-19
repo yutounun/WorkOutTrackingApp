@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { db } from "@/firebase/init";
-import { computed } from "vue";
-import { format, subDays } from "date-fns";
 import { getFoodsList } from "@/apis/getFoodList";
 import CommonGraph from "@/components/organisms/commons/CommonGraph.vue";
 import Goal from "@/components/organisms/chart/ActivityGoals.vue";
@@ -10,7 +8,7 @@ import Footer from "@/components/organisms/commons/CommonFooter.vue";
 import { useProfileStore } from "@/stores/profile";
 import { doc, getDoc } from "@firebase/firestore";
 import { ref } from "vue";
-import { onBeforeRouteLeave, useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 
 const email = ref("");
 const goalData = ref({});
@@ -80,46 +78,51 @@ const foodDataSet = ref([
 ]);
 
 const date = ref([]);
+const sortFoodData = (dates) => {
+  return dates.sort((x, y) => {
+    console.log(" :", x, y);
+    x.date - y.date;
+  });
+};
 
 const getFoodData = () => {
-  getFoodsList(useProfileStore().email)
+  getFoodsList(useProfileStore().email, "asc")
     .then((result) => {
-      // insert sums of ingredients on one day into data property on foodDataSet
-      console.log("result :", result);
-      // ここで同じ日付のものを足す
-      for (let i = 0; i < result.length - 1; i++) {
-        console.log("element :", result[i]);
-        console.log("i :", i);
-        for (let j = i + 1; j < result.length; j++) {
-          console.log("element2 :", result[j]);
-          console.log("ij :", i, j);
-          if (result[i].date === result[j].date) {
-            console.log("ここです", result[i].date);
-            result[i].protein += result[j].protein;
-            result[i].fat += result[j].fat;
-            result[i].carbo += result[j].carbo;
-            console.log("index :", j, result[i]);
-            result.splice(j, 1);
-            console.log("結果", result);
+      // Sort result by date
+      const sortedFoodData = sortFoodData(result);
+      const arr = sortedFoodData;
+
+      arr.forEach((el) => {
+        el.isDuplicated = false;
+      });
+      for (let i = 0; i < arr.length - 1; i++) {
+        // If date is duplicated, add that to data which has same date
+        if (!arr[i].isDuplicated) {
+          for (let j = i + 1; j < arr.length; j++) {
+            if (arr[i].date === arr[j].date) {
+              arr[i].protein += arr[j].protein;
+              arr[i].fat += arr[j].fat;
+              arr[i].carbo += arr[j].carbo;
+              arr[j].isDuplicated = true;
+            }
           }
         }
       }
-      console.log("result :", result);
 
-      // date全て確認して同じもののproteinなどはこの時点で合わせる
-      for (let i = 0; i < result.length; i++) {
-        // format date to show on beautifully on chart
+      const newArr = arr.filter((arr) => !arr.isDuplicated);
+
+      for (let i = 0; i < newArr.length; i++) {
         date.value.push(
-          result[i].date.split("-")[1] + "/" + result[i].date.split("-")[2]
+          newArr[i].date.split("-")[1] + "/" + newArr[i].date.split("-")[2]
         );
         // protein
-        foodDataSet.value[0].data.push(result[i].protein);
+        foodDataSet.value[0].data.push(newArr[i].protein);
         // fat
-        foodDataSet.value[1].data.push(result[i].fat);
+        foodDataSet.value[1].data.push(newArr[i].fat);
         // carbo
-        foodDataSet.value[2].data.push(result[i].carbo);
+        foodDataSet.value[2].data.push(newArr[i].carbo);
         // cost
-        console.log("cost :", result[i].cost);
+        console.log("cost :", newArr[i].cost);
       }
     })
     .catch((err) => {
