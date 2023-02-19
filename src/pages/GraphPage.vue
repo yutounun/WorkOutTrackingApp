@@ -14,17 +14,6 @@ const email = ref("");
 const goalData = ref({});
 
 ////////// Common //////////
-/**
- * @returns a recent week
- */
-// const date = computed(() => {
-//   const dates = [];
-//   for (let i = 0; i < 7; i++) {
-//     dates.push(format(subDays(new Date(), i), "MM/dd"));
-//   }
-//   dates.reverse();
-//   return dates;
-// });
 
 const router = useRouter();
 

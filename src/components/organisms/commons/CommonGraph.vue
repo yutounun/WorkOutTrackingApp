@@ -54,7 +54,6 @@ const chartOptions = {
 </script>
 <template>
   <div class="h-44">
-    a
     <Line :data="chartData" :options="chartOptions" />
   </div>
 </template>
