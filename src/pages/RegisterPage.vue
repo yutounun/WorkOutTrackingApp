@@ -110,6 +110,7 @@ const onSelectWorkoutHistory = (selectedTitle: string) => {
   workoutList.value.forEach((doc) => {
     // Set data from firebase which matches the template user selected
     if (doc.title === selectedTitle) {
+      doc.date = initialDate();
       Object.assign(workoutMenus.value, doc);
     }
   });
@@ -205,6 +206,7 @@ const onSelectFoodHistory = (selectedTitle: string) => {
   foodList.value.forEach((doc) => {
     // Set data from firebase which matches the template user selected
     if (doc.title === selectedTitle) {
+      doc.date = initialDate();
       Object.assign(foodMenus.value, doc);
     }
   });
@@ -331,7 +333,7 @@ const getProfile = async () => {
           <RoundedInput
             type="date"
             class="h-10 mb-5 rounded-lg"
-            :value="initialDate()"
+            :value="workoutMenus.date"
             @input="onSelectWorkoutDate($event.target.value)"
           />
           <!-- history -->
@@ -408,7 +410,7 @@ const getProfile = async () => {
           <RoundedInput
             type="date"
             class="h-10 mb-2 rounded-lg"
-            :value="initialDate()"
+            :value="foodMenus.date"
             @inputContent="onSelectFoodDate"
           />
 
