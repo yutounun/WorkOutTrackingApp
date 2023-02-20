@@ -67,7 +67,7 @@ const submit = () => {
         <!-- Remove item -->
         <img src="/icons/trash.svg" alt="" @click="remove" />
         <!-- Edit item -->
-        <Modal @submit="submit">
+        <Modal @submit="submit" to="#workout-list-body">
           <template #inputBoxes>
             <main class="px-6 font-sans mt-3">
               <div class="text-center">

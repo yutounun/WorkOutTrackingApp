@@ -6,7 +6,8 @@ import Footer from "@/components/organisms/commons/CommonFooter.vue";
 import Header from "@/components/organisms/commons/CommonHeader.vue";
 import { ref } from "vue";
 import { useProfileStore } from "@/stores/profile";
-import { deleteDoc, doc } from "@firebase/firestore";
+import { deleteDoc, doc, setDoc } from "@firebase/firestore";
+import CommonAlert from "../components/organisms/commons/CommonAlert.vue";
 
 const foodList = ref([]);
 
@@ -26,36 +27,69 @@ const remove = async (id) => {
   await deleteDoc(doc(db, "users", useProfileStore().email, "foods", id));
   getList();
 };
-const edit = (id) => {
-  console.log("id :", id);
+const edit = async (food) => {
+  const userDocRef = doc(
+    db,
+    "users",
+    useProfileStore().email,
+    "foods",
+    food.id
+  );
+  await setDoc(userDocRef, food)
+    .then(() => {
+      successfulAlertEvent();
+      getList();
+    })
+    .catch((error) => {
+      console.log(`Unsuccessful returned error ${error}`);
+    });
+};
+
+const showsSuccessAlert = ref(false);
+
+/** Shows an alert showing you succeeded to register */
+const successfulAlertEvent = () => {
+  showsSuccessAlert.value = true;
+
+  // Keeps showing a bar for 2 secs
+  setTimeout(() => {
+    showsSuccessAlert.value = false;
+  }, 2000);
 };
 </script>
 
 <template>
   <Header title="Food List" />
-  <main class="font-sans mt-20 pb-32">
-    <div v-for="(menu, index) in foodList" :key="menu.title">
-      <div
-        class="mt-7"
-        v-if="index === 0 || foodList[index - 1].date !== menu.date"
-      >
-        <span class="px-6 font-semibold text-lg text-primary">{{
-          menu.date
-        }}</span>
+  <div class="pb-32 mt-20" id="food-list-body">
+    <main class="font-sans mt-20 pb-32">
+      <div v-for="(menu, index) in foodList" :key="menu.title">
+        <div
+          class="mt-7"
+          v-if="index === 0 || foodList[index - 1].date !== menu.date"
+        >
+          <span class="px-6 font-semibold text-lg text-primary">{{
+            menu.date
+          }}</span>
+        </div>
+        <FoodCard
+          @remove="remove(menu.id)"
+          @edit="edit"
+          class="mt-5"
+          :date="menu.date"
+          :id="menu.id"
+          :title="menu.title"
+          :carbo="menu.carbo"
+          :protein="menu.protein"
+          :fat="menu.fat"
+          :cost="menu.cost"
+        />
       </div>
-      <FoodCard
-        @remove="remove(menu.id)"
-        @edit="edit(menu.id)"
-        class="mt-5"
-        :id="menu.id"
-        :date="menu.date"
-        :title="menu.title"
-        :carbo="menu.carbo"
-        :protein="menu.protein"
-        :fat="menu.fat"
-        :cost="menu.cost"
-      />
-    </div>
-  </main>
+    </main>
+  </div>
+  <CommonAlert
+    :showsSuccessAlert="showsSuccessAlert"
+    label="Congrats!! Succeeded to register workout data"
+    class="fixed bottom-28"
+  />
   <Footer food />
 </template>

@@ -55,7 +55,6 @@ const remove = async (id) => {
   getWorkoutList();
 };
 const submit = async (workoutMenu) => {
-  console.log("id :", workoutMenu);
   const userDocRef = doc(
     db,
     "users",
