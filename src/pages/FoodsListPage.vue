@@ -1,10 +1,12 @@
 <script setup lang="ts">
+import { db } from "@/firebase/init";
 import { getFoodsList } from "@/apis/getFoodList";
 import FoodCard from "@/components/organisms/food/FoodCard.vue";
 import Footer from "@/components/organisms/commons/CommonFooter.vue";
 import Header from "@/components/organisms/commons/CommonHeader.vue";
 import { ref } from "vue";
 import { useProfileStore } from "@/stores/profile";
+import { deleteDoc, doc } from "@firebase/firestore";
 
 const foodList = ref([]);
 
@@ -19,6 +21,14 @@ const getList = () => {
 };
 /** Created */
 getList();
+
+const remove = async (id) => {
+  await deleteDoc(doc(db, "users", useProfileStore().email, "foods", id));
+  getList();
+};
+const edit = (id) => {
+  console.log("id :", id);
+};
 </script>
 
 <template>
@@ -34,7 +44,10 @@ getList();
         }}</span>
       </div>
       <FoodCard
+        @remove="remove(menu.id)"
+        @edit="edit(menu.id)"
         class="mt-5"
+        :id="menu.id"
         :date="menu.date"
         :title="menu.title"
         :carbo="menu.carbo"

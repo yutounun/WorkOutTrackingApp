@@ -1,9 +1,17 @@
 <script setup lang="ts">
+import Alert from "@/components/organisms/commons/CommonAlert.vue";
 import { db } from "@/firebase/init";
-import { doc, collection, getDocs } from "firebase/firestore";
+import {
+  doc,
+  collection,
+  getDocs,
+  deleteDoc,
+  setDoc,
+} from "firebase/firestore";
 import WorkoutCard from "@/components/organisms/workout/WorkoutCard.vue";
 import Footer from "@/components/organisms/commons/CommonFooter.vue";
 import Header from "@/components/organisms/commons/CommonHeader.vue";
+import Modal from "@/components/organisms/commons/CommonModal.vue";
 import { ref } from "vue";
 import { useProfileStore } from "../stores/profile";
 
@@ -23,10 +31,16 @@ const getWorkoutList = async () => {
   const list = [];
 
   workoutDocs.forEach((doc) => {
-    list.push(doc.data());
+    const data = doc.data();
+    // Insert id of a document
+    data.id = doc.id;
+    list.push(data);
   });
 
   console.log("workout menus :", list);
+
+  // clear workout list
+  workoutList.value = [];
 
   list.forEach((doc) => {
     workoutList.value.push(doc);
@@ -35,28 +49,82 @@ const getWorkoutList = async () => {
 
 /** Created */
 getWorkoutList();
+
+const remove = async (id) => {
+  await deleteDoc(doc(db, "users", useProfileStore().email, "workouts", id));
+  getWorkoutList();
+};
+const submit = async (workoutMenu) => {
+  console.log("id :", workoutMenu);
+  const userDocRef = doc(
+    db,
+    "users",
+    useProfileStore().email,
+    "workouts",
+    workoutMenu.id
+  );
+  await setDoc(userDocRef, workoutMenu)
+    .then(() => {
+      successfulAlertEvent();
+    })
+    .catch((error) => {
+      console.log(`Unsuccessful returned error ${error}`);
+    });
+};
+
+const showsSuccessAlert = ref(false);
+
+/** Shows an alert showing you succeeded to register */
+const successfulAlertEvent = () => {
+  showsSuccessAlert.value = true;
+
+  // Keeps showing a bar for 2 secs
+  setTimeout(() => {
+    showsSuccessAlert.value = false;
+  }, 2000);
+};
 </script>
 
 <template>
   <Header title="Workout List" />
-  <main class="font-sans pb-32 mt-20">
-    <div v-for="(menu, index) in workoutList" :key="menu.title">
+  <div class="pb-32 mt-20" id="workout-list-body">
+    <main>
       <div
-        v-if="index === 0 || workoutList[index - 1].date !== menu.date"
-        class="px-6 mt-7"
+        v-for="(menu, index) in workoutList"
+        :key="menu.title"
+        class="font-sans"
       >
-        <span class="font-semibold text-lg text-primary">{{ menu.date }}</span>
-      </div>
-      <WorkoutCard class="mt-5">
-        <template #icon>
-          <img :src="menu.icon" alt="" />
-        </template>
-        <template #title>{{ menu.title }}</template>
-        <template #bottom
-          >{{ menu.weight }}kg × {{ menu.reps }}reps × {{ menu.sets }}</template
+        <div
+          v-if="index === 0 || workoutList[index - 1].date !== menu.date"
+          class="px-6 mt-7"
         >
-      </WorkoutCard>
-    </div>
-  </main>
+          <span class="font-semibold text-lg text-primary">{{
+            menu.date
+          }}</span>
+        </div>
+        <WorkoutCard
+          class="mt-5"
+          @remove="remove(menu.id)"
+          @submit="submit"
+          :menu="menu"
+        >
+          <template #icon>
+            <img :src="menu.icon" alt="" />
+          </template>
+          <template #title>{{ menu.title }}</template>
+          <template #bottom
+            >{{ menu.weight }}kg × {{ menu.reps }}reps ×
+            {{ menu.sets }}</template
+          >
+          <Modal />
+        </WorkoutCard>
+      </div>
+    </main>
+  </div>
+  <Alert
+    :showsSuccessAlert="showsSuccessAlert"
+    label="Congrats!! Succeeded to register workout data"
+    class="fixed bottom-28"
+  />
   <Footer menu />
 </template>

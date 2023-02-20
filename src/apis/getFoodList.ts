@@ -15,7 +15,11 @@ export const getFoodsList = async (email: string, order: any) => {
   );
   const snapShots = await getDocs(q);
   snapShots.forEach((s) => {
-    list.push(s.data());
+    const data = s.data();
+    // Insert id of a document
+    data.id = s.id;
+    list.push(data);
   });
+  console.log(" :", list);
   return list;
 };

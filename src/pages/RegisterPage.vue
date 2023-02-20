@@ -2,6 +2,7 @@
 import { onMounted, ref } from "vue";
 import { format } from "date-fns";
 import { db } from "@/firebase/init";
+import Alert from "@/components/organisms/commons/CommonAlert.vue";
 import {
   query,
   orderBy,
@@ -513,24 +514,11 @@ const getProfile = async () => {
     </div>
   </div>
 
-  <!-- Successful Alert -->
-  <div class="alert shadow-lg fixed top-20 z-20" v-if="showsSuccessAlert">
-    <div>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        class="stroke-info flex-shrink-0 w-6 h-6"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-        ></path>
-      </svg>
-      <span>Congrats!! Succeeded to register workout data.</span>
-    </div>
-  </div>
+  <!-- Success Alert -->
+  <Alert
+    :showsSuccessAlert="showsSuccessAlert"
+    label="Congrats!! Succeeded to register workout data"
+    class="fixed top-28"
+  />
   <Footer />
 </template>

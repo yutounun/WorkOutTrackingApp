@@ -7,6 +7,14 @@ const props = defineProps({
   cost: Number,
   date: String,
 });
+
+const emits = defineEmits(["remove", "edit"]);
+const remove = () => {
+  emits("remove");
+};
+const edit = () => {
+  emits("edit");
+};
 </script>
 
 <template>
@@ -24,8 +32,10 @@ const props = defineProps({
         </div>
       </div>
       <div class="flex mr-16">
-        <img src="/icons/trash.svg" alt="" />
-        <img src="/icons/pen.svg" alt="" />
+        <!-- Remove item -->
+        <img src="/icons/trash.svg" alt="" @click="remove" />
+        <!-- Edit item -->
+        <img src="/icons/pen.svg" alt="" @click="edit" />
       </div>
     </div>
   </div>
