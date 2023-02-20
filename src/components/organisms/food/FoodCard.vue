@@ -10,19 +10,22 @@ const props = defineProps({
 </script>
 
 <template>
-  <div
-    class="card p-5 py-3 mb-5 border border-gray-3 flex flex-row"
-    :class="$attrs"
-  >
-    <div class="flex-col flex justify-start gap-2">
-      <span class="font-semibold text-lg text-primary">
-        {{ props.title }}
-      </span>
-      <div class="flex gap-2">
-        <span class="text-gray-3"> ${{ props.cost }} </span>
-        <span class="text-gray-3"> P: {{ props.protein }} </span>
-        <span class="text-gray-3"> F: {{ props.fat }} </span>
-        <span class="text-gray-3"> C: {{ props.carbo }} </span>
+  <div class="border-b border-gray-2 mt-0 w-auto">
+    <div class="ml-3 my-2 flex justify-between" :class="$attrs">
+      <div class="pl-6">
+        <span class="font-semibold text-lg text-primary">
+          {{ props.title }}
+        </span>
+        <div class="flex gap-2 mt-2">
+          <span class="text-gray-3"> ${{ props.cost }} </span>
+          <span class="text-gray-3"> P: {{ props.protein }} </span>
+          <span class="text-gray-3"> F: {{ props.fat }} </span>
+          <span class="text-gray-3"> C: {{ props.carbo }} </span>
+        </div>
+      </div>
+      <div class="flex mr-16">
+        <img src="/icons/trash.svg" alt="" />
+        <img src="/icons/pen.svg" alt="" />
       </div>
     </div>
   </div>

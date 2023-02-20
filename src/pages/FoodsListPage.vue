@@ -23,10 +23,15 @@ getList();
 
 <template>
   <Header title="Food List" />
-  <main class="px-6 font-sans mt-20 pb-32">
+  <main class="font-sans mt-20 pb-32">
     <div v-for="(menu, index) in foodList" :key="menu.title">
-      <div v-if="index === 0 || foodList[index - 1].date !== menu.date">
-        <span class="font-semibold text-lg text-primary">{{ menu.date }}</span>
+      <div
+        class="mt-7"
+        v-if="index === 0 || foodList[index - 1].date !== menu.date"
+      >
+        <span class="px-6 font-semibold text-lg text-primary">{{
+          menu.date
+        }}</span>
       </div>
       <FoodCard
         class="mt-5"

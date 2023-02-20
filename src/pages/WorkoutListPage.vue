@@ -39,9 +39,12 @@ getWorkoutList();
 
 <template>
   <Header title="Workout List" />
-  <main class="px-6 font-sans pb-32 mt-20">
+  <main class="font-sans pb-32 mt-20">
     <div v-for="(menu, index) in workoutList" :key="menu.title">
-      <div v-if="index === 0 || workoutList[index - 1].date !== menu.date">
+      <div
+        v-if="index === 0 || workoutList[index - 1].date !== menu.date"
+        class="px-6 mt-7"
+      >
         <span class="font-semibold text-lg text-primary">{{ menu.date }}</span>
       </div>
       <WorkoutCard class="mt-5">
