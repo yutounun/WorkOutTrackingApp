@@ -7,6 +7,8 @@ import {
   getDocs,
   deleteDoc,
   setDoc,
+  orderBy,
+  query,
 } from "firebase/firestore";
 import WorkoutCard from "@/components/organisms/workout/WorkoutCard.vue";
 import Footer from "@/components/organisms/commons/CommonFooter.vue";
@@ -20,13 +22,13 @@ const workoutList = ref([]);
 
 /** Get all workout menus from firestore */
 const getWorkoutList = async () => {
-  // Get the ref to each user doc
-
-  const userDocRef = doc(db, "users", profile.email);
-  // Get the ref to foods collection in user doc
-  const colRef = collection(userDocRef, "workouts");
+  // Get the ref to workouts collection in user doc
+  const q = query(
+    collection(db, "users", profile.email, "workouts"),
+    orderBy("date", "desc")
+  );
   // add data in workouts ref
-  const workoutDocs = await getDocs(colRef);
+  const workoutDocs = await getDocs(q);
 
   const list = [];
 
