@@ -326,6 +326,7 @@ const getProfile = async () => {
       <main class="px-6 font-sans mt-3 pb-32">
         <div class="text-center">
           <!-- calendar -->
+          <p class="font-medium text-base ml-3 text-left mb-2">Date</p>
           <RoundedInput
             type="date"
             class="h-10 mb-5 rounded-lg"
@@ -333,6 +334,7 @@ const getProfile = async () => {
             @input="onSelectWorkoutDate($event.target.value)"
           />
           <!-- history -->
+          <p class="font-medium text-base ml-3 text-left mb-2">History</p>
           <SelectBox
             placeholder="Select from the history"
             :options="workoutOptions"
@@ -340,6 +342,9 @@ const getProfile = async () => {
             @input="onSelectWorkoutHistory($event.target.value)"
           />
           <!-- title -->
+          <p class="font-medium text-base ml-3 text-left mb-2">
+            Name Of Workout
+          </p>
           <RoundedInput
             placeholder="Enter the title"
             class="my-2"
@@ -348,6 +353,7 @@ const getProfile = async () => {
           />
 
           <!-- weight -->
+          <p class="font-medium text-base ml-3 text-left mb-2">Weight</p>
           <RoundedInput
             placeholder="Enter the weight"
             class="my-2"
@@ -358,6 +364,7 @@ const getProfile = async () => {
           />
 
           <!-- reps -->
+          <p class="font-medium text-base ml-3 text-left mb-2">Reps</p>
           <RoundedInput
             placeholder="Enter the reps"
             class="my-2"
@@ -368,6 +375,7 @@ const getProfile = async () => {
           />
 
           <!-- sets -->
+          <p class="font-medium text-base ml-3 text-left mb-2">Sets</p>
           <RoundedInput
             placeholder="Enter the number of sets"
             class="my-2"
@@ -395,24 +403,31 @@ const getProfile = async () => {
       <!-- When Foods tab is selected -->
       <main class="px-6 font-sans mt-3 pb-32">
         <div class="text-center">
+          <p class="font-medium text-base ml-3 text-left mb-2">Date</p>
           <RoundedInput
             type="date"
             class="h-10 mb-2 rounded-lg"
             :value="initialDate()"
             @inputContent="onSelectFoodDate"
           />
+
+          <p class="font-medium text-base ml-3 text-left mb-2">History</p>
           <SelectBox
             placeholder="Select from the history"
             :options="foodOptions"
             class="h-5/6 my-3"
             @input="onSelectFoodHistory($event.target.value)"
           />
+
+          <p class="font-medium text-base ml-3 text-left mb-2">Food</p>
           <RoundedInput
             placeholder="Enter the name of a food"
             class="my-2"
             :value="foodMenus.title"
             @inputContent="inputFoodTitle"
           />
+
+          <p class="font-medium text-base ml-3 text-left mb-2">Protein</p>
           <RoundedInput
             placeholder="Enter the amount of protein"
             class="my-2"
@@ -421,6 +436,8 @@ const getProfile = async () => {
             pattern="\d*"
             @inputContent="inputProtein"
           />
+
+          <p class="font-medium text-base ml-3 text-left mb-2">Fat</p>
           <RoundedInput
             placeholder="Enter the amount of fat"
             class="my-2"
@@ -429,6 +446,8 @@ const getProfile = async () => {
             :value="foodMenus.fat"
             @inputContent="inputFat"
           />
+
+          <p class="font-medium text-base ml-3 text-left mb-2">Carbo</p>
           <RoundedInput
             placeholder="Enter the amount of carbohydrate"
             class="my-2"
@@ -437,6 +456,8 @@ const getProfile = async () => {
             :value="foodMenus.carbo"
             @inputContent="inputCarbo"
           />
+
+          <p class="font-medium text-base ml-3 text-left mb-2">Cost</p>
           <RoundedInput
             placeholder="Enter the cost"
             class="my-2"
