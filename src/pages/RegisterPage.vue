@@ -9,6 +9,8 @@ import {
   addDoc,
   collection,
   getDocs,
+  setDoc,
+  getDoc,
 } from "firebase/firestore";
 import Tabs from "@/components/organisms/commons/CommonTabs.vue";
 import Button from "@/components/atoms/commons/CommonButton.vue";
@@ -64,6 +66,7 @@ onMounted(async () => {
   profile.value = await useProfileStore();
   getFoodsList();
   getWorkoutList();
+  getProfile();
 });
 
 const initialDate = () => {
@@ -260,56 +263,43 @@ const onSelectFoodDate = (date: any) => {
 };
 
 //////////// Weight Page ///////////
-const weight = ref();
-const bodyFat = ref();
 const inputWeight = (arg: number) => {
-  weight.value = Number(arg);
+  userProfile.value.currentWeight = Number(arg);
 };
 
 const inputBodyFat = (arg: number) => {
-  bodyFat.value = Number(arg);
+  userProfile.value.currentBodyFat = Number(arg);
 };
 
 // /** Register formed foods menu on firebase */
-// const registerFoods = async () => {
-//   // Get the ref to each user doc
-//   const userDocRef = doc(db, "users", profile.value.email);
-//   // Get the ref to foods collection in user doc
-//   const colRef = collection(userDocRef, "foods");
-//   // add data in foods ref
-//   const registeredData = await addDoc(colRef, foodMenus.value);
+const registerWeightAndFat = async () => {
+  // Get the ref to each user doc
+  const userDocRef = doc(db, "users", profile.value.email);
+  // add data in foods ref
+  await setDoc(userDocRef, userProfile.value)
+    .then(() => {
+      successfulAlertEvent();
+      getProfile();
+    })
+    .catch((error) => {
+      console.log(`Unsuccessful returned error ${error}`);
+    });
+};
+const userProfile = ref();
 
-//   console.log("registeredFoodData :", registeredData);
+/** get profile on firebase */
+const getProfile = async () => {
+  // Get the ref to foods collection in user doc
+  const docRef = doc(db, "users", profile.value.email);
 
-//   // Clear up all the forms
-//   Object.assign(foodMenus.value, {
-//     date: initialDate(),
-//     title: null,
-//     carbo: null,
-//     protein: null,
-//     fat: null,
-//     cost: null,
-//   });
-
-//   // In case when data is registered successfully
-//   if (registeredData) {
-//     successfulAlertEvent();
-//   }
-// };
-
-// const getWorkoutList = async () => {
-//   const list = [];
-//   const q = query(
-//     collection(db, "users", profile.value.email, "workouts"),
-//     orderBy("date", "desc")
-//   );
-//   const snapShots = await getDocs(q);
-//   snapShots.forEach((s) => {
-//     list.push(s.data());
-//     workoutList.value.push(s.data());
-//     workoutOptions.value.push(s.data().title);
-//   });
-// };
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    userProfile.value = docSnap.data();
+  } else {
+    // doc.data() will be undefined in this case
+    console.log("No such document!");
+  }
+};
 </script>
 
 <template>
@@ -469,31 +459,33 @@ const inputBodyFat = (arg: number) => {
   <div v-if="isThirdMenuClicked === true">
     <div>
       <div class="mt-5 flex items-center mx-8">
-        <p>Let’s see the things giving you fat :(</p>
-        <img :src="GirlHavingCookie" alt="" />
+        <p>Body fat is what you really should care about</p>
+        <img src="/icons/pilates.svg" alt="" />
       </div>
       <main class="px-6 font-sans mt-3 pb-32">
         <div class="text-center">
+          <h2 class="text-base mx-3 text-left font-medium">Weight</h2>
           <RoundedInput
             placeholder="Enter your weight"
             class="my-2"
             type="text"
             pattern="\d*"
-            :value="weight"
+            :value="userProfile.currentWeight"
             @inputContent="inputWeight"
           />
+          <h2 class="text-base mx-3 text-left mt-3 font-medium">Body Fat</h2>
           <RoundedInput
             placeholder="Enter your body fat"
             class="my-2"
             type="text"
             pattern="\d*"
-            :value="bodyFat"
+            :value="userProfile.currentBodyFat"
             @inputContent="inputBodyFat"
           />
           <Button
-            class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full"
+            class="bg-primary w-52 text-white mt-8 hover:bg-primary rounded-full"
             label="Done"
-            @click="registerFoods"
+            @click="registerWeightAndFat"
           />
         </div>
       </main>
