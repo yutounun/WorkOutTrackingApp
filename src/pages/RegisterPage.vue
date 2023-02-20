@@ -2,7 +2,14 @@
 import { onMounted, ref } from "vue";
 import { format } from "date-fns";
 import { db } from "@/firebase/init";
-import { doc, addDoc, collection, getDocs } from "firebase/firestore";
+import {
+  query,
+  orderBy,
+  doc,
+  addDoc,
+  collection,
+  getDocs,
+} from "firebase/firestore";
 import Tabs from "@/components/organisms/commons/CommonTabs.vue";
 import Button from "@/components/atoms/commons/CommonButton.vue";
 import Header from "@/components/organisms/commons/CommonHeader.vue";
@@ -18,12 +25,29 @@ const SittingDownGirl = "/icons/SittingDownGirl.svg";
 const GirlHavingCookie = "/icons/GirlHavingCookie.svg";
 
 /** status true means you clicked WORKOUT tab */
-const isFirstTabClicked = ref(true);
+// const isFirstTabClicked = ref(true);
+const isFirstMenuClicked = ref(true);
+const isSecondMenuClicked = ref(false);
+const isThirdMenuClicked = ref(false);
 
 const showsSuccessAlert = ref(false);
 
-const onClickFirstMenu = (status: any) => {
-  isFirstTabClicked.value = status;
+/////////// Tabs Control ///////////
+
+const onClickFirstMenu = () => {
+  isFirstMenuClicked.value = true;
+  isSecondMenuClicked.value = false;
+  isThirdMenuClicked.value = false;
+};
+const onClickSecondMenu = () => {
+  isFirstMenuClicked.value = false;
+  isSecondMenuClicked.value = true;
+  isThirdMenuClicked.value = false;
+};
+const onClickThirdMenu = () => {
+  isFirstMenuClicked.value = false;
+  isSecondMenuClicked.value = false;
+  isThirdMenuClicked.value = true;
 };
 
 /** Shows an alert showing you succeeded to register */
@@ -62,25 +86,18 @@ const workoutOptions = ref([]);
 
 const workoutList = ref([]);
 
+/** get workout list from firebase */
 const getWorkoutList = async () => {
-  // Get the ref to each user doc
-
-  const userDocRef = doc(db, "users", profile.value.email);
-  // Get the ref to foods collection in user doc
-  const colRef = collection(userDocRef, "workouts");
-  // add data in workouts ref
-  const workoutDocs = await getDocs(colRef);
-
   const list = [];
-
-  workoutDocs.forEach((doc) => {
-    list.push(doc.data());
-  });
-
-  list.forEach((doc) => {
-    workoutList.value.push(doc);
-    workoutOptions.value.push(doc.title);
-    console.log("workoutOptions :", workoutOptions);
+  const q = query(
+    collection(db, "users", profile.value.email, "workouts"),
+    orderBy("date", "desc")
+  );
+  const snapShots = await getDocs(q);
+  snapShots.forEach((s) => {
+    list.push(s.data());
+    workoutList.value.push(s.data());
+    workoutOptions.value.push(s.data().title);
   });
 };
 
@@ -126,11 +143,6 @@ const registerWorkout = async () => {
 const inputTitle = (title: string) => {
   workoutMenus.value.title = title;
 };
-
-const inputWeight = (weight: number) => {
-  workoutMenus.value.weight = Number(weight);
-};
-
 const inputReps = (reps: number) => {
   workoutMenus.value.reps = Number(reps);
 };
@@ -246,6 +258,58 @@ const inputCost = (cost: number) => {
 const onSelectFoodDate = (date: any) => {
   foodMenus.value.date = date;
 };
+
+//////////// Weight Page ///////////
+const weight = ref();
+const bodyFat = ref();
+const inputWeight = (arg: number) => {
+  weight.value = Number(arg);
+};
+
+const inputBodyFat = (arg: number) => {
+  bodyFat.value = Number(arg);
+};
+
+// /** Register formed foods menu on firebase */
+// const registerFoods = async () => {
+//   // Get the ref to each user doc
+//   const userDocRef = doc(db, "users", profile.value.email);
+//   // Get the ref to foods collection in user doc
+//   const colRef = collection(userDocRef, "foods");
+//   // add data in foods ref
+//   const registeredData = await addDoc(colRef, foodMenus.value);
+
+//   console.log("registeredFoodData :", registeredData);
+
+//   // Clear up all the forms
+//   Object.assign(foodMenus.value, {
+//     date: initialDate(),
+//     title: null,
+//     carbo: null,
+//     protein: null,
+//     fat: null,
+//     cost: null,
+//   });
+
+//   // In case when data is registered successfully
+//   if (registeredData) {
+//     successfulAlertEvent();
+//   }
+// };
+
+// const getWorkoutList = async () => {
+//   const list = [];
+//   const q = query(
+//     collection(db, "users", profile.value.email, "workouts"),
+//     orderBy("date", "desc")
+//   );
+//   const snapShots = await getDocs(q);
+//   snapShots.forEach((s) => {
+//     list.push(s.data());
+//     workoutList.value.push(s.data());
+//     workoutOptions.value.push(s.data().title);
+//   });
+// };
 </script>
 
 <template>
@@ -254,12 +318,15 @@ const onSelectFoodDate = (date: any) => {
     class="mt-16"
     first-item="WORKOUT"
     second-item="FOODS"
-    @isFirstMenuClicked="onClickFirstMenu"
+    third-item="WEIGHT"
+    @onFirstTab="onClickFirstMenu"
+    @onSecondTab="onClickSecondMenu"
+    @onThirdTab="onClickThirdMenu"
   />
 
   <div class="mt-32">
     <!-- Workout Tab -->
-    <div v-if="isFirstTabClicked === true">
+    <div v-if="isFirstMenuClicked === true">
       <div class="mt-5 flex items-center mx-8">
         <p>Let’s see how hard you had workout today</p>
         <img :src="SittingDownGirl" alt="" />
@@ -329,7 +396,7 @@ const onSelectFoodDate = (date: any) => {
     </div>
 
     <!-- Foods Tab -->
-    <div v-if="isFirstTabClicked === false">
+    <div v-if="isSecondMenuClicked === true">
       <div class="mt-5 flex items-center mx-8">
         <p>Let’s see the things giving you fat :(</p>
         <img :src="GirlHavingCookie" alt="" />
@@ -387,6 +454,41 @@ const onSelectFoodDate = (date: any) => {
             pattern="\d*"
             :value="foodMenus.cost"
             @inputContent="inputCost"
+          />
+          <Button
+            class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full"
+            label="Done"
+            @click="registerFoods"
+          />
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Weight Tab -->
+  <div v-if="isThirdMenuClicked === true">
+    <div>
+      <div class="mt-5 flex items-center mx-8">
+        <p>Let’s see the things giving you fat :(</p>
+        <img :src="GirlHavingCookie" alt="" />
+      </div>
+      <main class="px-6 font-sans mt-3 pb-32">
+        <div class="text-center">
+          <RoundedInput
+            placeholder="Enter your weight"
+            class="my-2"
+            type="text"
+            pattern="\d*"
+            :value="weight"
+            @inputContent="inputWeight"
+          />
+          <RoundedInput
+            placeholder="Enter your body fat"
+            class="my-2"
+            type="text"
+            pattern="\d*"
+            :value="bodyFat"
+            @inputContent="inputBodyFat"
           />
           <Button
             class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full"
