@@ -122,29 +122,28 @@ components:
         id: gz9vdyd4vsvkx
       type: object
       description: User Model
-      example:
-        email: yutounwasese@gmail.com
-        weight: 80
-        userName: yuto
-        workout:
-          title: chest press
-          date: "2022-02-01"
-          reps: 10
+      x-examples:
+        Example 2:
+          email: yutounwasese@gmail.com
           weight: 80
-          icon: "https://yuto.stoplight.io/studio/workout-app?source=34vl72x7&symbol=%252Fp%252Freference%252Fworkout.yaml%252Fcomponents%252Fschemas%252FUser"
-          sets: 3
-        foods:
-          title: bun
-          date: "2023-01-01"
-          cost: 10
-          protein: 40
-          fat: 30
-          carbo: 100
+          userName: yuto
+          workout:
+            title: chest press
+            date: "2022-02-01"
+            reps: 10
+            weight: 80
+            icon: "https://yuto.stoplight.io/studio/workout-app?source=34vl72x7&symbol=%252Fp%252Freference%252Fworkout.yaml%252Fcomponents%252Fschemas%252FUser"
+            sets: 3
+          foods:
+            title: bun
+            date: "2023-01-01"
+            cost: 10
+            protein: 40
+            fat: 30
+            carbo: 100
       properties:
         email:
           type: string
-        weight:
-          type: number
         userName:
           type: string
         workout:
@@ -176,4 +175,33 @@ components:
             fat:
               type: number
             carbo:
+              type: number
+        current:
+          type: object
+          properties:
+            weight:
+              type: number
+            bodyFat:
+              type: number
+        idealBodyFat:
+          type: number
+        idealWeight:
+          type: number
+        currentBodyFat:
+          type: number
+        currentWeight:
+          type: number
+        weight:
+          type: object
+          properties:
+            date:
+              type: string
+            value:
+              type: number
+        bodyFat:
+          type: object
+          properties:
+            date:
+              type: string
+            value:
               type: number
