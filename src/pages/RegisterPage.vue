@@ -266,20 +266,45 @@ const onSelectFoodDate = (date: any) => {
 };
 
 //////////// Weight Page ///////////
+const weight = ref({
+  value: null,
+  date: initialDate(),
+});
+
+const bodyFat = ref({
+  value: null,
+  date: initialDate(),
+});
+
+const selectWeightAndFatDate = (arg: string) => {
+  weight.value.date = arg;
+  bodyFat.value.date = arg;
+};
+
 const inputWeight = (arg: number) => {
-  userProfile.value.currentWeight = Number(arg);
+  weight.value.value = Number(arg);
 };
 
 const inputBodyFat = (arg: number) => {
-  userProfile.value.currentBodyFat = Number(arg);
+  bodyFat.value.value = Number(arg);
 };
 
-// /** Register formed foods menu on firebase */
-const registerWeightAndFat = async () => {
+/** Register formed foods menu on firebase */
+const registerWeightAndFat = () => {
+  registerWeight();
+  registerBodyFat();
+};
+
+const registerWeight = async () => {
   // Get the ref to each user doc
-  const userDocRef = doc(db, "users", profile.value.email);
-  // add data in foods ref
-  await setDoc(userDocRef, userProfile.value)
+  const weightCollectionRef = collection(
+    db,
+    "users",
+    profile.value.email,
+    "weight"
+  );
+  // add data in weight ref
+  await addDoc(weightCollectionRef, weight.value)
     .then(() => {
       successfulAlertEvent();
       getProfile();
@@ -288,6 +313,26 @@ const registerWeightAndFat = async () => {
       console.log(`Unsuccessful returned error ${error}`);
     });
 };
+
+const registerBodyFat = async () => {
+  // Get the ref to each user doc
+  const bodyFatCollectionRef = collection(
+    db,
+    "users",
+    profile.value.email,
+    "bodyFat"
+  );
+  // add data in weight ref
+  await addDoc(bodyFatCollectionRef, bodyFat.value)
+    .then(() => {
+      successfulAlertEvent();
+      getProfile();
+    })
+    .catch((error) => {
+      console.log(`Unsuccessful returned error ${error}`);
+    });
+};
+
 const userProfile = ref();
 
 /** get profile on firebase */
@@ -488,13 +533,21 @@ const getProfile = async () => {
       </div>
       <main class="px-6 font-sans mt-3 pb-32">
         <div class="text-center">
-          <h2 class="text-base mx-3 text-left font-medium">Weight</h2>
+          <p class="font-medium text-base ml-3 text-left mb-2">Date</p>
+          <RoundedInput
+            type="date"
+            class="h-10 mb-2 rounded-lg"
+            :value="initialDate()"
+            @inputContent="selectWeightAndFatDate"
+          />
+
+          <h2 class="text-base mx-3 mt-2 text-left font-medium">Weight</h2>
           <RoundedInput
             placeholder="Enter your weight"
             class="my-2"
             type="text"
             pattern="\d*"
-            :value="userProfile.currentWeight"
+            :value="weight.value"
             @inputContent="inputWeight"
           />
           <h2 class="text-base mx-3 text-left mt-3 font-medium">Body Fat</h2>
@@ -503,7 +556,7 @@ const getProfile = async () => {
             class="my-2"
             type="text"
             pattern="\d*"
-            :value="userProfile.currentBodyFat"
+            :value="bodyFat.value"
             @inputContent="inputBodyFat"
           />
           <Button

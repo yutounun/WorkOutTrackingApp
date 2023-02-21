@@ -6,7 +6,14 @@ import Goal from "@/components/organisms/chart/ActivityGoals.vue";
 import Header from "@/components/organisms/commons/CommonHeader.vue";
 import Footer from "@/components/organisms/commons/CommonFooter.vue";
 import { useProfileStore } from "@/stores/profile";
-import { doc, getDoc } from "@firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  orderBy,
+  query,
+} from "@firebase/firestore";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 
@@ -67,7 +74,7 @@ const foodDataSet = ref([
 ]);
 
 const date = ref([]);
-const sortFoodData = (dates) => {
+const sortByDate = (dates) => {
   return dates.sort((x, y) => {
     console.log(" :", x, y);
     x.date - y.date;
@@ -78,7 +85,7 @@ const getFoodData = () => {
   getFoodsList(useProfileStore().email, "asc")
     .then((result) => {
       // Sort result by date
-      const sortedFoodData = sortFoodData(result);
+      const sortedFoodData = sortByDate(result);
       const arr = sortedFoodData;
 
       arr.forEach((el) => {
@@ -120,18 +127,87 @@ const getFoodData = () => {
 };
 getFoodData();
 
+const weightList = ref([]);
+const weightDates = ref([]);
+
+const getWeight = async () => {
+  // Get the ref to weight collection in user doc
+  const q = query(
+    collection(db, "users", useProfileStore().email, "weight"),
+    orderBy("date", "asc")
+  );
+  // add data in weight ref
+  const weightDocs = await getDocs(q);
+
+  const list = [];
+
+  weightDocs.forEach((doc) => {
+    const data = doc.data();
+    // Insert id of a document
+    data.id = doc.id;
+    list.push(data);
+
+    // Add dates for weight graph
+    weightDates.value.push(
+      data.date.split("-")[1] + "/" + data.date.split("-")[2]
+    );
+  });
+
+  console.log("workout menus :", list);
+
+  // clear weight list
+  weightList.value = [];
+
+  list.forEach((doc) => {
+    const weightValue = doc.value;
+    weightDataSet[0].data.push(weightValue);
+  });
+};
+getWeight();
+
+const bodyFatList = ref([]);
+const getBodyFat = async () => {
+  // Get the ref to bodyFat collection in user doc
+  const q = query(
+    collection(db, "users", useProfileStore().email, "bodyFat"),
+    orderBy("date", "asc")
+  );
+  // add data in bodyFat ref
+  const bodyFatDocs = await getDocs(q);
+
+  const list = [];
+
+  bodyFatDocs.forEach((doc) => {
+    const data = doc.data();
+    // Insert id of a document
+    data.id = doc.id;
+    list.push(data);
+  });
+
+  console.log("bodyFatList :", list);
+
+  // clear workout list
+  bodyFatList.value = [];
+
+  list.forEach((doc) => {
+    const bodyFatValue = doc.value;
+    weightDataSet[1].data.push(bodyFatValue);
+  });
+};
+getBodyFat();
 ////////// Weight Chart //////////
 
+console.log("bodyFatList.value :", bodyFatList.value);
 const weightDataSet = [
   {
     label: "Weight",
     backgroundColor: "#918EF4",
-    data: [40, 39, 10, 40, 39, 80, 60],
+    data: [],
   },
   {
     label: "Body Fat",
     backgroundColor: "RED",
-    data: [23, 22, 22, 21, 23, 20, 19],
+    data: [],
   },
 ];
 </script>
@@ -152,7 +228,7 @@ const weightDataSet = [
       <h1 class="text-lg mt-3 mx-3 mb-2" data-testid="weight">
         Weight / Body Fat
       </h1>
-      <CommonGraph :dataSet="weightDataSet" />
+      <CommonGraph :dataSet="weightDataSet" :labels="weightDates" />
     </div>
   </div>
   <Footer chart />
