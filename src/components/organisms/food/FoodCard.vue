@@ -70,7 +70,7 @@ const submit = () => {
           <span class="text-gray-3"> C: {{ props.carbo }} </span>
         </div>
       </div>
-      <div class="flex mr-16">
+      <div class="flex mr-8">
         <!-- Remove item -->
         <img src="/icons/trash.svg" alt="" @click="remove" />
         <!-- Edit item -->
