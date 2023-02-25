@@ -16,13 +16,11 @@ This app helps trainees to track exercises and meals they do.
 - ✅Daisy UI
 - UX. Especially describe how to let users know what this app is for.
 - ✅production and local envs
-- TDD
-- Use StoryBook
+- ✅Use StoryBook
 - ✅Swagger with spotlight
-- draw.io
 - Dev-container
 - ✅PWA
-- Get a domain
+- ✅Get a google-domain
 
 ## See the latest DEV environment
 
