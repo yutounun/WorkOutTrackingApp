@@ -51,7 +51,8 @@ const getProfile = async () => {
   const docSnap = await getDoc(docRef);
   if (docSnap.exists()) {
     console.log("persisted profile:", docSnap.data());
-    Object.assign(profile.value, docSnap.data());
+    const data = docSnap.data();
+    profile.value = data;
 
     // Fetch profile image and set on the top
     fetchProfileImg();
@@ -74,9 +75,10 @@ const basalMetabolism = computed(() => {
 const registerProfile = async () => {
   // Add basal metabolism
   profile.value.basalMetabolism = basalMetabolism;
-  console.log("profile.value :", profile.value);
+
   // Get the ref to each user doc
   const userDocRef = doc(db, "users", email.value);
+
   await setDoc(userDocRef, profile.value)
     .then(() => {
       successfulAlertEvent();
