@@ -132,7 +132,6 @@ const fetchProfileImg = () => {
   const storage = getStorage();
 
   // Create a storage reference from our storage service
-  // TODO: profileのprofileImgプロパティに格納したパスをtest.pngに入れ替える
   const gsReference = firebaseRef(
     storage,
     `gs://workout-app-5e81f.appspot.com/imgs/${profile.value.imgUrl}`
@@ -176,7 +175,7 @@ const inputImgPath = (e) => {
 
     <!-- profile picture -->
     <div class="relative">
-      <img alt="" :src="profileImgUrl" class="h-28 w-28" />
+      <img alt="" :src="profileImgUrl" class="rounded-full h-28 w-28" />
       <!-- File Upload -->
       <div class="absolute bottom-20 -right-8">
         <label for="file-input">
