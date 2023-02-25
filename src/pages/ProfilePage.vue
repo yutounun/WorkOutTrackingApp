@@ -171,21 +171,24 @@ const inputImgPath = (e) => {
     <!-- round icons on background -->
     <img :src="BackgroundRound" alt="" class="absolute -top-10 -left-20" />
     <img :src="BackgroundRound" alt="" class="absolute top-10 -left-20" />
-    <div class="absolute bottom-10 -right-20">
-      <input type="file" class="bg-red-400 z-40" @change="inputImgPath" />
-
-      <!-- TODO: Replace file input style with edit icon  -->
-      <img :src="BackgroundRound" alt="" class="" />
-    </div>
-    >
 
     <p class="text-white font-semibold text-xl block">Profile</p>
-    <input type="file" />
 
     <!-- profile picture -->
     <div class="relative">
       <img alt="" :src="profileImgUrl" class="h-28 w-28" />
-      <img src="/icons/edit.svg" alt="" class="mr-2 absolute top-0 -right-5" />
+      <!-- File Upload -->
+      <div class="absolute bottom-20 -right-8">
+        <label for="file-input">
+          <img src="/icons/edit.svg" alt="" class="mr-2" />
+        </label>
+        <input
+          id="file-input"
+          type="file"
+          class="hidden"
+          @change="inputImgPath"
+        />
+      </div>
     </div>
 
     <div class="flex items-center">
