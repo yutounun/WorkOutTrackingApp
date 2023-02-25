@@ -109,9 +109,6 @@ const successfulAlertEvent = () => {
           @submit="submit"
           :menu="menu"
         >
-          <template #icon>
-            <img :src="menu.icon" alt="" />
-          </template>
           <template #title>{{ menu.title }}</template>
           <template #bottom
             >{{ menu.weight }}kg × {{ menu.reps }}reps ×

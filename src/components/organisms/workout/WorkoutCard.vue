@@ -52,7 +52,7 @@ const submit = () => {
       <span class="font-semibold text-lg text-primary">
         <slot name="date" />
       </span>
-      <div class="w-1/5 flex justify-center items-center">
+      <div class="w-1/12 flex justify-center items-center">
         <slot name="icon" />
       </div>
       <div class="w-3/5 flex-col flex justify-start">
