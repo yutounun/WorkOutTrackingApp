@@ -33,6 +33,7 @@ const profile = ref({
   currentBodyFat: null,
   idealBodyFat: null,
   basalMetabolism: null,
+  imgUrl: null,
 });
 
 const isEdited = ref(false);
@@ -51,6 +52,9 @@ const getProfile = async () => {
   if (docSnap.exists()) {
     console.log("persisted profile:", docSnap.data());
     Object.assign(profile.value, docSnap.data());
+
+    // Fetch profile image and set on the top
+    fetchProfileImg();
   } else {
     // doc.data() will be undefined in this case
     console.log("No such document!");
@@ -131,25 +135,28 @@ const fetchProfileImg = () => {
   // TODO: profileのprofileImgプロパティに格納したパスをtest.pngに入れ替える
   const gsReference = firebaseRef(
     storage,
-    "gs://workout-app-5e81f.appspot.com/imgs/test.png"
+    `gs://workout-app-5e81f.appspot.com/imgs/${profile.value.imgUrl}`
   );
+
   getDownloadURL(gsReference)
     .then((url) => {
       profileImgUrl.value = url;
     })
     .catch((err) => console.log(err));
 };
-fetchProfileImg();
 
 const inputImgPath = (e) => {
   const image = e.target.files[0];
   const storage = getStorage();
-  // TODO: image.nameをDBに登録する
   const url = `gs://workout-app-5e81f.appspot.com/imgs/${image.name}`;
   const imageRef = firebaseRef(storage, url);
   uploadBytes(imageRef, image)
     .then(() => {
       console.log("Uploaded a file!");
+
+      // Register profile image url on Profile table
+      profile.value.imgUrl = image.name;
+      registerProfile();
     })
     .catch((err) => {
       console.log("error: ", err);
