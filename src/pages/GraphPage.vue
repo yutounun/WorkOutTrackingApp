@@ -74,52 +74,49 @@ const foodDataSet = ref([
 ]);
 
 const date = ref([]);
-const sortByDate = (dates) => {
-  return dates.sort((x, y) => {
-    console.log(" :", x, y);
-    x.date - y.date;
-  });
-};
 
-const getFoodData = () => {
-  getFoodsList(useProfileStore().email, "asc")
+/**
+ * 1. sort by date → prob no need since it's done by firebase yet.
+ * 2. Add isDuplicated property on each food menu obj
+ *
+ */
+const getFoodData = async () => {
+  const email = await useProfileStore().email;
+  getFoodsList(email, "asc")
     .then((result) => {
-      // Sort result by date
-      const sortedFoodData = sortByDate(result);
-      const arr = sortedFoodData;
-
-      arr.forEach((el) => {
+      result.forEach((el) => {
         el.isDuplicated = false;
       });
-      for (let i = 0; i < arr.length - 1; i++) {
-        // If date is duplicated, add that to data which has same date
-        if (!arr[i].isDuplicated) {
-          for (let j = i + 1; j < arr.length; j++) {
-            if (arr[i].date === arr[j].date) {
-              arr[i].protein += arr[j].protein;
-              arr[i].fat += arr[j].fat;
-              arr[i].carbo += arr[j].carbo;
-              arr[j].isDuplicated = true;
+
+      // Find the duplicated objects and add it on the first one
+      for (let i = 0; i < result.length - 1; i++) {
+        // If date is duplicated, add the data on the previous duplicated data having same date
+        if (!result[i].isDuplicated) {
+          for (let j = i + 1; j < result.length; j++) {
+            if (result[i].date === result[j].date) {
+              result[i].protein += result[j].protein;
+              result[i].fat += result[j].fat;
+              result[i].carbo += result[j].carbo;
+              result[j].isDuplicated = true;
             }
           }
         }
       }
 
-      const newArr = arr.filter((arr) => !arr.isDuplicated);
-
-      for (let i = 0; i < newArr.length; i++) {
-        date.value.push(
-          newArr[i].date.split("-")[1] + "/" + newArr[i].date.split("-")[2]
-        );
+      // Extract the first one whose isDuplicated value is false
+      const filteredArr = result.filter((result) => !result.isDuplicated);
+      filteredArr.forEach((el) => {
+        // Add each date into labels of the chart
+        date.value.push(el.date.split("-")[1] + "/" + el.date.split("-")[2]);
         // protein
-        foodDataSet.value[0].data.push(newArr[i].protein);
+        foodDataSet.value[0].data = [...foodDataSet.value[0].data, el.protein];
         // fat
-        foodDataSet.value[1].data.push(newArr[i].fat);
+        foodDataSet.value[1].data = [...foodDataSet.value[1].data, el.fat];
         // carbo
-        foodDataSet.value[2].data.push(newArr[i].carbo);
+        foodDataSet.value[2].data = [...foodDataSet.value[2].data, el.carbo];
         // cost
-        console.log("cost :", newArr[i].cost);
-      }
+        console.log("cost :", el.cost);
+      });
     })
     .catch((err) => {
       console.log("err :", err);
@@ -205,7 +202,7 @@ const weightDataSet = [
     data: [],
   },
   {
-    label: "Body Fat",
+    label: "BodyFat",
     backgroundColor: "RED",
     data: [],
   },

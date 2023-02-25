@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
 
-defineProps({
+const props = defineProps({
   goalData: Object,
 });
 
@@ -33,7 +33,7 @@ const router = useRouter();
       <div class="">
         <h2 class="block text-lg">Weight</h2>
         <p class="inline text-4xl font-semibold">
-          {{ goalData.weight.current }}
+          {{ props.goalData.weight ? props.goalData.weight.current : "" }}
         </p>
         <p class="inline text-lg">kg</p>
         <p class="block text-gray-600">Current</p>
@@ -41,7 +41,9 @@ const router = useRouter();
       <p class="text-2xl text-center w-1/3">→</p>
       <div class="w-1/3">
         <h2 class="block">Lose Weight</h2>
-        <p class="inline text-4xl font-semibold">{{ goalData.weight.goal }}</p>
+        <p class="inline text-4xl font-semibold">
+          {{ props.goalData.weight ? props.goalData.weight.goal : "" }}
+        </p>
         <p class="inline text-lg">kg</p>
         <p class="block text-gray-600">Goal</p>
       </div>
@@ -50,7 +52,7 @@ const router = useRouter();
       <div class="">
         <h2 class="block text-lg">Body Fat</h2>
         <p class="inline text-4xl font-semibold">
-          {{ goalData.bodyFat.current }}
+          {{ props.goalData.bodyFat ? props.goalData.bodyFat.current : "" }}
         </p>
         <p class="inline text-lg">%</p>
         <p class="block text-gray-600">Current</p>
@@ -58,7 +60,9 @@ const router = useRouter();
       <p class="text-2xl w-1/3 text-center">→</p>
       <div class="w-1/3">
         <h2 class="block">Lose Fat</h2>
-        <p class="inline text-4xl font-semibold">{{ goalData.bodyFat.goal }}</p>
+        <p class="inline text-4xl font-semibold">
+          {{ props.goalData.bodyFat ? props.goalData.bodyFat.goal : "" }}
+        </p>
         <p class="inline text-lg">%</p>
         <p class="block text-gray-600">Goal</p>
       </div>

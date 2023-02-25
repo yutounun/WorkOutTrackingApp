@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Line } from "vue-chartjs";
-import { format, subDays } from "date-fns";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -11,7 +10,6 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { computed } from "vue";
 
 ChartJS.register(
   CategoryScale,
@@ -22,29 +20,45 @@ ChartJS.register(
   Tooltip,
   Legend
 );
+interface IFoodArray {
+  label?: string;
+  backgroundColor?: string;
+  data?: number[];
+}
+type IFoodDataSet = IFoodArray[];
 
-const props = defineProps({
+interface propsType {
+  dataSet?: IFoodDataSet;
+  labels?: string[];
+}
+const props: propsType = defineProps({
   dataSet: Array,
   labels: Array,
 });
 
-/**
- * @returns a recent week
- */
-// const date = computed(() => {
-//   const dates = [];
-//   for (let i = 0; i < 7; i++) {
-//     dates.push(format(subDays(new Date(), i), "MM/dd"));
-//   }
-//   dates.reverse();
-//   return dates;
-// });
-
 const chartData = {
+  // 多分うまくProps渡ってないタイミング的に
   // Get each date from dataset of props
-  // labels: date.value,
-  labels: props.labels,
-  datasets: props.dataSet,
+  datasets: [
+    {
+      label: "Protein",
+      data: [12, 19, 3, 5, 2, 3],
+      borderWidth: 1,
+      backgroundColor: "#98B9F2",
+    },
+    {
+      label: "fat",
+      data: [12, 9, 3, 5, 2, 3],
+      borderWidth: 1,
+      backgroundColor: "#98B9F2",
+    },
+    {
+      label: "carbo",
+      data: [12, 19, 4, 5, 2, 3],
+      borderWidth: 1,
+      backgroundColor: "#98B9F2",
+    },
+  ],
 };
 
 const chartOptions = {
@@ -54,6 +68,33 @@ const chartOptions = {
 </script>
 <template>
   <div class="h-44">
-    <Line :data="chartData" :options="chartOptions" />
+    <Line
+      v-if="props.dataSet[2]"
+      :data="{
+        labels: props.labels,
+        datasets: [
+          {
+            label: 'Protein',
+            data: props.dataSet[0].data,
+            borderWidth: 1,
+            backgroundColor: '#98B9F2',
+          },
+          {
+            label: 'fat',
+            data: props.dataSet[1].data,
+            borderWidth: 1,
+            backgroundColor: '#98B9F2',
+          },
+          // そもそもこのdataSet[2]が読み込まれないことが問題
+          {
+            label: 'carbo',
+            data: props.dataSet[2].data,
+            borderWidth: 1,
+            backgroundColor: '#98B9F2',
+          },
+        ],
+      }"
+      :options="chartOptions"
+    />
   </div>
 </template>
