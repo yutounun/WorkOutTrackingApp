@@ -62,7 +62,13 @@ const successfulAlertEvent = () => {
   <Header title="Food List" />
   <div class="pb-32 mt-20" id="food-list-body">
     <main class="font-sans mt-20 pb-32">
-      <div v-for="(menu, index) in foodList" :key="menu.title">
+      <!-- Shown only when any data hasn't been registered -->
+      <div v-if="foodList.length === 0" class="mt-24">
+        <p class="font-semibold text-center">No Data Registered</p>
+      </div>
+
+      <!-- When any data is registered -->
+      <div v-for="(menu, index) in foodList" :key="menu.title" v-else>
         <div
           class="mt-7"
           v-if="index === 0 || foodList[index - 1].date !== menu.date"

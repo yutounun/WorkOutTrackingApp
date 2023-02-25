@@ -90,7 +90,14 @@ const successfulAlertEvent = () => {
   <Header title="Workout List" />
   <div class="pb-32 mt-20" id="workout-list-body">
     <main>
+      <!-- Shown only when any data hasn't been registered -->
+      <div v-if="workoutList.length === 0" class="mt-24">
+        <p class="font-semibold text-center">No Data Registered</p>
+      </div>
+
+      <!-- When any data is registered -->
       <div
+        v-else
         v-for="(menu, index) in workoutList"
         :key="menu.title"
         class="font-sans"
