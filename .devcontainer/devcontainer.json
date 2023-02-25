@@ -1,0 +1,6 @@
+{
+  "name": "WorkOutTrackingApp",
+  "dockerFile": "Dockerfile",
+  "forwardPorts": [3000],
+  "postCreateCommand": "npm ci"
+}
