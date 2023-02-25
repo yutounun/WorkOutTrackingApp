@@ -24,5 +24,4 @@ export const parameters = {
     viewports: { ...customViewports, ...INITIAL_VIEWPORTS },
     defaultViewport: "iphone8",
   },
-  layout: "centered",
 };

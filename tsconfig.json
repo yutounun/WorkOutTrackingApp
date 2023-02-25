@@ -5,7 +5,8 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     // ↓追加する
-    "node_modules/vite-plugin-pwa/client.d.ts"
+    "node_modules/vite-plugin-pwa/client.d.ts",
+    "src/components/atoms/commons/CommonRoundedInput.stories.js"
   ],
   "files": [],
   "references": [
