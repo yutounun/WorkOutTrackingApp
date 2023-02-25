@@ -353,7 +353,9 @@ const inputImgPath = (e) => {
 
         <!-- basal metabolism -->
         <div class="mb-3">
-          <p class="text-left mb-3 mt-5 font-semibold">Basal Metabolism</p>
+          <p class="text-left mb-3 mt-5 font-semibold">
+            Calculated Basal Metabolism
+          </p>
           <p v-if="profile.basalMetabolism">{{ profile.basalMetabolism }} g</p>
           <p v-else>No Information</p>
         </div>
