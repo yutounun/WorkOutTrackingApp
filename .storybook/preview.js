@@ -1,5 +1,8 @@
 // Without the following code, you cannot use tailwind with storybook
 import "tailwindcss/tailwind.css";
+// .storybook/preview.js
+
+import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -8,5 +11,8 @@ export const parameters = {
       color: /(background|color)$/i,
       date: /Date$/,
     },
+  },
+  viewport: {
+    viewports: INITIAL_VIEWPORTS,
   },
 };
