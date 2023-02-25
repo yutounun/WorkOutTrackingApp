@@ -18,7 +18,7 @@ This app helps trainees to track exercises and meals they do.
 - ✅production and local envs
 - ✅Use StoryBook
 - ✅Swagger with spotlight
-- Dev-container
+- ✅Dev-container(Dockerfile, devcontainer.json)
 - ✅PWA
 - ✅Get a google-domain
 
@@ -61,6 +61,12 @@ npm run local
 
 ```sh
 npm run build
+```
+
+## Run Storybook to see and play with components
+
+```sh
+npm run storybook
 ```
 
 ### Run Unit Tests with [Vitest](https://vitest.dev/)
