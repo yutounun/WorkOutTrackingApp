@@ -122,25 +122,36 @@ components:
         id: gz9vdyd4vsvkx
       type: object
       description: User Model
-      x-examples:
-        Example 2:
-          email: yutounwasese@gmail.com
+      example:
+        email: yutounwasese@gmail.com
+        weight:
+          - date: 2022/02/01
+            value: 80
+        userName: yuto
+        workout:
+          title: chest press
+          date: "2022-02-01"
+          reps: 10
           weight: 80
-          userName: yuto
-          workout:
-            title: chest press
-            date: "2022-02-01"
-            reps: 10
-            weight: 80
-            icon: "https://yuto.stoplight.io/studio/workout-app?source=34vl72x7&symbol=%252Fp%252Freference%252Fworkout.yaml%252Fcomponents%252Fschemas%252FUser"
-            sets: 3
-          foods:
-            title: bun
-            date: "2023-01-01"
-            cost: 10
-            protein: 40
-            fat: 30
-            carbo: 100
+          icon: "https://yuto.stoplight.io/studio/workout-app?source=34vl72x7&symbol=%252Fp%252Freference%252Fworkout.yaml%252Fcomponents%252Fschemas%252FUser"
+          sets: 3
+        foods:
+          title: bun
+          date: "2023-01-01"
+          cost: 10
+          protein: 40
+          fat: 30
+          carbo: 100
+        bodyFat:
+          - date: 2022/02/01
+            value: 80
+        idealBodyFat: 15
+        idealWeight: 80
+        currentBodyFat: 20
+        currentWeight: 70
+        imgUrl: 59F857BA-B33B-45BD-B61B-15A658403C49.jpeg
+        gender: female
+        basalMetabolism: 1890
       properties:
         email:
           type: string
@@ -205,3 +216,14 @@ components:
               type: string
             value:
               type: number
+        imgUrl:
+          type: string
+        gender:
+          type: string
+          example: female
+        basalMetabolism:
+          type: number
+          example: 1890
+        height:
+          type: number
+          example: 169
