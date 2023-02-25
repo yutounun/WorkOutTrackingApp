@@ -290,9 +290,9 @@ const inputBodyFat = (arg: number) => {
 };
 
 /** Register formed foods menu on firebase */
-const registerWeightAndFat = () => {
-  registerWeight();
-  registerBodyFat();
+const registerWeightAndFat = async () => {
+  await registerWeight();
+  await registerBodyFat();
 };
 
 const registerWeight = async () => {
@@ -327,6 +327,10 @@ const registerBodyFat = async () => {
     .then(() => {
       successfulAlertEvent();
       getProfile();
+
+      // Clean up the form
+      weight.value.value = null;
+      bodyFat.value.value = null;
     })
     .catch((error) => {
       console.log(`Unsuccessful returned error ${error}`);
