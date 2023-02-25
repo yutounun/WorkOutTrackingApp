@@ -29,7 +29,7 @@ https://workout-app-5e81f.web.app/
 ## Design
 
 https://www.figma.com/file/7vvfcNq19fBDlVO3i7IVnv/WorkoutApp?node-id=7%3A604&t=3VBsrBVIwm4r6Wpi-1
-![Figma](./public/temp-pix/figma.png)
+<img width="911" alt="image" src="https://user-images.githubusercontent.com/96335290/221384942-b503bb23-49d3-43f5-86c9-79a5845ca92d.png">
 
 ## Project Setup
 
