@@ -20,6 +20,6 @@ export const getFoodsList = async (email: string, order: any) => {
     data.id = s.id;
     list.push(data);
   });
-  console.log(" :", list);
+  console.log("FoodList from firebase :", list);
   return list;
 };

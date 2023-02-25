@@ -60,16 +60,19 @@ const foodDataSet = ref([
     label: "Protein",
     backgroundColor: "#918EF4",
     data: [],
+    borderWidth: 1,
   },
   {
     label: "Fat",
     backgroundColor: "#141B41",
     data: [],
+    borderWidth: 1,
   },
   {
     label: "Carbo",
     backgroundColor: "#98B9F2",
     data: [],
+    borderWidth: 1,
   },
 ]);
 
@@ -217,7 +220,7 @@ const weightDataSet = [
     <!-- PFC Balance -->
     <div class="mx-5 mb-10">
       <h1 class="text-lg mt-3 mx-3 mb-2" data-testid="pfc">PFC Balance</h1>
-      <CommonGraph :dataSet="foodDataSet" :labels="date" />
+      <CommonGraph :dataSet="foodDataSet" :labels="date" type="pfc" />
     </div>
 
     <!-- Weight -->
@@ -225,7 +228,11 @@ const weightDataSet = [
       <h1 class="text-lg mt-3 mx-3 mb-2" data-testid="weight">
         Weight / Body Fat
       </h1>
-      <CommonGraph :dataSet="weightDataSet" :labels="weightDates" />
+      <CommonGraph
+        :dataSet="weightDataSet"
+        :labels="weightDates"
+        type="weight"
+      />
     </div>
   </div>
   <Footer chart />
