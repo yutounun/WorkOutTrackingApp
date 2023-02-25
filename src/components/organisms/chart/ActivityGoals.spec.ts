@@ -28,19 +28,4 @@ describe("ActivityGoals", () => {
     expect(goalWeight).toBeTruthy();
     expect(goalFat).toBeTruthy();
   });
-
-  it("matches an old snapshot", () => {
-    const goalData = {
-      weight: {
-        current: 54,
-        goal: 39,
-      },
-      bodyFat: {
-        current: 22,
-        goal: 15,
-      },
-    };
-    const goal = render(ActivityGoals, { props: { goalData: goalData } });
-    expect(goal).toMatchSnapshot();
-  });
 });

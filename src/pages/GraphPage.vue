@@ -15,14 +15,12 @@ import {
   query,
 } from "@firebase/firestore";
 import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { createPinia, setActivePinia } from "pinia";
 
 const email = ref("");
 const goalData = ref({});
 
 ////////// Common //////////
-
-const router = useRouter();
 
 ////////// Goals //////////
 
@@ -51,6 +49,7 @@ const getProfile = async () => {
 };
 
 // created
+setActivePinia(createPinia());
 getProfile();
 
 ////////// Food Chart //////////
