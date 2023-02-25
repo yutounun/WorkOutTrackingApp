@@ -67,7 +67,11 @@ npm run build
 
 ```sh
 npm run storybook
+# http://localhost:6006/?path=/story
 ```
+<img width="1680" alt="image" src="https://user-images.githubusercontent.com/96335290/221383105-69745a56-cee5-4836-9fe9-ccc2df370b90.png">
+
+
 
 ### Run Unit Tests with [Vitest](https://vitest.dev/)
 
