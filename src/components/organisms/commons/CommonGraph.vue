@@ -58,22 +58,22 @@ const chartOptions = {
         labels: props.labels,
         datasets: [
           {
-            label: 'Protein',
+            label: props.dataSet[0].label,
             data: props.dataSet[0].data,
             borderWidth: 1,
-            backgroundColor: 'BLUE',
+            backgroundColor: props.dataSet[0].backgroundColor,
           },
           {
-            label: 'fat',
+            label: props.dataSet[1].label,
             data: props.dataSet[1].data,
             borderWidth: 1,
-            backgroundColor: 'YELLOW',
+            backgroundColor: props.dataSet[1].backgroundColor,
           },
           {
-            label: 'carbo',
+            label: props.dataSet[2].label,
             data: props.dataSet[2].data,
             borderWidth: 1,
-            backgroundColor: 'RED',
+            backgroundColor: props.dataSet[2].backgroundColor,
           },
         ],
       }"
@@ -87,16 +87,16 @@ const chartOptions = {
         labels: props.labels,
         datasets: [
           {
-            label: 'Weight',
+            label: props.dataSet[0].label,
             data: props.dataSet[0].data,
             borderWidth: 1,
-            backgroundColor: 'RED',
+            backgroundColor: props.dataSet[0].backgroundColor,
           },
           {
-            label: 'BodyFat',
+            label: props.dataSet[1].label,
             data: props.dataSet[1].data,
             borderWidth: 1,
-            backgroundColor: 'BLUE',
+            backgroundColor: props.dataSet[1].backgroundColor,
           },
         ],
       }"

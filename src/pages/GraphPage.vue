@@ -57,19 +57,19 @@ getProfile();
 const foodDataSet = ref([
   {
     label: "Protein",
-    backgroundColor: "#918EF4",
+    backgroundColor: "RED",
     data: [],
     borderWidth: 1,
   },
   {
     label: "Fat",
-    backgroundColor: "#141B41",
+    backgroundColor: "ORANGE",
     data: [],
     borderWidth: 1,
   },
   {
     label: "Carbo",
-    backgroundColor: "#98B9F2",
+    backgroundColor: "Blue",
     data: [],
     borderWidth: 1,
   },
