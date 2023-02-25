@@ -136,31 +136,25 @@ const getWeight = async () => {
     collection(db, "users", useProfileStore().email, "weight"),
     orderBy("date", "asc")
   );
-  // add data in weight ref
+  // // add data in weight ref
   const weightDocs = await getDocs(q);
-
   const list = [];
-
   weightDocs.forEach((doc) => {
     const data = doc.data();
     // Insert id of a document
     data.id = doc.id;
     list.push(data);
-
     // Add dates for weight graph
     weightDates.value.push(
       data.date.split("-")[1] + "/" + data.date.split("-")[2]
     );
   });
-
   console.log("workout menus :", list);
-
   // clear weight list
   weightList.value = [];
-
   list.forEach((doc) => {
     const weightValue = doc.value;
-    weightDataSet[0].data.push(weightValue);
+    weightDataSet.value[0].data = [...weightDataSet.value[0].data, weightValue];
   });
 };
 getWeight();
@@ -172,9 +166,9 @@ const getBodyFat = async () => {
     collection(db, "users", useProfileStore().email, "bodyFat"),
     orderBy("date", "asc")
   );
+
   // add data in bodyFat ref
   const bodyFatDocs = await getDocs(q);
-
   const list = [];
 
   bodyFatDocs.forEach((doc) => {
@@ -184,21 +178,23 @@ const getBodyFat = async () => {
     list.push(data);
   });
 
-  console.log("bodyFatList :", list);
-
   // clear workout list
   bodyFatList.value = [];
 
   list.forEach((doc) => {
     const bodyFatValue = doc.value;
-    weightDataSet[1].data.push(bodyFatValue);
+
+    weightDataSet.value[1].data = [
+      ...weightDataSet.value[1].data,
+      bodyFatValue,
+    ];
   });
 };
 getBodyFat();
 ////////// Weight Chart //////////
 
 console.log("bodyFatList.value :", bodyFatList.value);
-const weightDataSet = [
+const weightDataSet = ref([
   {
     label: "Weight",
     backgroundColor: "#918EF4",
@@ -209,7 +205,7 @@ const weightDataSet = [
     backgroundColor: "RED",
     data: [],
   },
-];
+]);
 </script>
 <template>
   <Header title="Your recent activity" />

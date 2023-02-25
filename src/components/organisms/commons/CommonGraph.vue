@@ -20,15 +20,15 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-interface IFoodArray {
+interface IDataArray {
   label?: string;
   backgroundColor?: string;
   data?: number[];
 }
-type IFoodDataSet = IFoodArray[];
+type IDataSet = IDataArray[];
 
 interface propsType {
-  dataSet?: IFoodDataSet;
+  dataSet?: IDataSet;
   labels?: string[];
   type: string;
 }
@@ -80,24 +80,21 @@ const chartOptions = {
       :options="chartOptions"
     />
 
-    <!-- For some reason, the code following must be written here to show the weight graph... -->
-    <p class="hidden">{{ props.labels }}</p>
-
     <!-- Weight & body fat chart -->
     <Line
-      v-if="props.type === 'weight'"
+      v-if="props.type === 'weight' && props.dataSet"
       :data="{
         labels: props.labels,
         datasets: [
           {
             label: 'Weight',
-            data: [1, 3, 4],
+            data: props.dataSet[0].data,
             borderWidth: 1,
             backgroundColor: 'RED',
           },
           {
             label: 'BodyFat',
-            data: [2, 3, 4],
+            data: props.dataSet[1].data,
             borderWidth: 1,
             backgroundColor: 'BLUE',
           },
