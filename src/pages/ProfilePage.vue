@@ -1,4 +1,11 @@
 <script setup lang="ts">
+import {
+  getStorage,
+  ref as firebaseRef,
+  uploadBytes,
+  getDownloadURL,
+} from "firebase/storage";
+
 import { computed, onMounted, readonly, ref } from "vue";
 import { db } from "@/firebase/init";
 import { doc, setDoc, getDoc } from "firebase/firestore";
@@ -112,6 +119,42 @@ const inputIdealBodyFat = (fat: number) => {
 const selectGender = (gender: string) => {
   profile.value.gender = gender;
 };
+
+////////// Picture //////////
+const profileImgUrl = ref("");
+
+/** Fetch profile image path on firebase cloud storage */
+const fetchProfileImg = () => {
+  const storage = getStorage();
+
+  // Create a storage reference from our storage service
+  // TODO: profileのprofileImgプロパティに格納したパスをtest.pngに入れ替える
+  const gsReference = firebaseRef(
+    storage,
+    "gs://workout-app-5e81f.appspot.com/imgs/test.png"
+  );
+  getDownloadURL(gsReference)
+    .then((url) => {
+      profileImgUrl.value = url;
+    })
+    .catch((err) => console.log(err));
+};
+fetchProfileImg();
+
+const inputImgPath = (e) => {
+  const image = e.target.files[0];
+  const storage = getStorage();
+  // TODO: image.nameをDBに登録する
+  const url = `gs://workout-app-5e81f.appspot.com/imgs/${image.name}`;
+  const imageRef = firebaseRef(storage, url);
+  uploadBytes(imageRef, image)
+    .then(() => {
+      console.log("Uploaded a file!");
+    })
+    .catch((err) => {
+      console.log("error: ", err);
+    });
+};
 </script>
 
 <template>
@@ -121,13 +164,20 @@ const selectGender = (gender: string) => {
     <!-- round icons on background -->
     <img :src="BackgroundRound" alt="" class="absolute -top-10 -left-20" />
     <img :src="BackgroundRound" alt="" class="absolute top-10 -left-20" />
-    <img :src="BackgroundRound" alt="" class="absolute bottom-10 -right-20" />
+    <div class="absolute bottom-10 -right-20">
+      <input type="file" class="bg-red-400 z-40" @change="inputImgPath" />
+
+      <!-- TODO: Replace file input style with edit icon  -->
+      <img :src="BackgroundRound" alt="" class="" />
+    </div>
+    >
 
     <p class="text-white font-semibold text-xl block">Profile</p>
+    <input type="file" />
 
     <!-- profile picture -->
     <div class="relative">
-      <img src="/icons/SmallProfile.svg" alt="" class="h-28 w-28" />
+      <img alt="" :src="profileImgUrl" class="h-28 w-28" />
       <img src="/icons/edit.svg" alt="" class="mr-2 absolute top-0 -right-5" />
     </div>
 
