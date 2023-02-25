@@ -1,6 +1,14 @@
 // Without the following code, you cannot use tailwind with storybook
 import "tailwindcss/tailwind.css";
-// .storybook/preview.js
+const customViewports = {
+  iphone8: {
+    name: "iphone8",
+    styles: {
+      width: "375px",
+      height: "667px",
+    },
+  },
+};
 
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 
@@ -13,6 +21,8 @@ export const parameters = {
     },
   },
   viewport: {
-    viewports: INITIAL_VIEWPORTS,
+    viewports: { ...customViewports, ...INITIAL_VIEWPORTS },
+    defaultViewport: "iphone8",
   },
+  layout: "centered",
 };
