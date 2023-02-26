@@ -4,6 +4,14 @@ This app helps trainees to track exercises and meals they have.
 
 https://doloveworkout.com/login
 
+
+
+
+https://user-images.githubusercontent.com/96335290/221389268-5169a711-145f-47ed-8dcd-461d76d048f5.mp4
+
+
+
+
 ## TODO before start development
 
 - ✅typescript
@@ -118,6 +126,9 @@ A group of atoms working together as a unit. Molecules are tangible UI elements.
 
 Atoms and molecules working together in a complex structure. A search field grouped with a navigation bar forms a header organism on a website.
 Only this component can inherit from a same level of a organism component.
+
+
+
 
 ##### Templates
 
