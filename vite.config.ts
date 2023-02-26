@@ -29,9 +29,9 @@ export default defineConfig({
       manifest: {
         theme_color: "#001449",
         background_color: "#FFFFFF",
-        display: "standalone",
-        scope: "/doloveworkout/",
-        start_url: "/doloveworkout/",
+        display: "fullscreen",
+        scope: "/",
+        start_url: "/login/",
         name: "Workout App",
         short_name: "Workout App",
         description: "An app to record the workout and foods history",
