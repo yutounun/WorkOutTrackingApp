@@ -1,6 +1,7 @@
 # WorkoutTrackingApp
 
-This app helps trainees to track exercises and meals they do.
+This app helps trainees to track exercises and meals they have.
+
 https://doloveworkout.com/login
 
 ## TODO before start development
