@@ -1,6 +1,7 @@
 # WorkoutTrackingApp
 
 This app helps trainees to track exercises and meals they do.
+https://doloveworkout.com/login
 
 ## TODO before start development
 
@@ -21,10 +22,6 @@ This app helps trainees to track exercises and meals they do.
 - ✅Dev-container(Dockerfile, devcontainer.json)
 - ✅PWA
 - ✅Get a google-domain
-
-## See the latest DEV environment
-
-https://workout-app-5e81f.web.app/
 
 ## Design
 
