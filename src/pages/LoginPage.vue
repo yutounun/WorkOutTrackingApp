@@ -33,12 +33,15 @@ const inputPass = (e: string) => {
 
 <template>
   <main class="px-6 font-sans h-screen">
-    <div class="flex justify-center items-center flex-col">
-      <h1 class="text-2xl pt-12 font-bold mt-5">Login</h1>
+    <div class="flex flex-col sm:justify-center lg:justify-start items-center">
+      <h1 class="text-2xl lg:text-3xl pt-12 font-bold mt-5">Login</h1>
 
       <!-- Email -->
       <div>
-        <label for="email" class="text-xs font-bold text-left block mb-2 mt-16">
+        <label
+          for="email"
+          class="text-xs lg:text-base font-bold text-left block mb-2 mt-16"
+        >
           Email
         </label>
         <RoundedInput
@@ -52,7 +55,7 @@ const inputPass = (e: string) => {
       <div>
         <label
           for="password"
-          class="text-xs font-bold text-left block mb-2 mt-5"
+          class="text-xs lg:text-base font-bold text-left block mb-2 mt-5"
         >
           Password
         </label>
