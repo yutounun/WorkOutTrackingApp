@@ -5,39 +5,39 @@ exports[`Login page > matches an old snapshot 1`] = `
   "baseElement": <body>
     <div>
       <main
-        class="px-6 font-sans h-screen"
+        class="px-6 font-sans h-screen w-screen flex justify-center"
       >
         <div
-          class="flex justify-center items-center flex-col"
+          class="flex flex-col sm:justify-center lg:justify-start items-center"
         >
           <h1
-            class="text-2xl pt-12 font-bold mt-5"
+            class="text-2xl lg:text-3xl pt-12 font-bold mt-5"
           >
             Login
           </h1>
           <!-- Email -->
           <div>
             <label
-              class="text-xs font-bold text-left block mb-2 mt-16"
+              class="text-xs lg:text-base font-bold text-left block mb-2 mt-16"
               for="email"
             >
                Email 
             </label>
             <input
-              class="input input-bordered w-80 rounded-full w-full mb-5 w-full mb-5"
+              class="input input-bordered w-80 rounded-full w-full mb-5"
               id="email"
               placeholder="Enter Your Email"
             />
           </div>
           <div>
             <label
-              class="text-xs font-bold text-left block mb-2 mt-5"
+              class="text-xs lg:text-base font-bold text-left block mb-2 mt-5"
               for="password"
             >
                Password 
             </label>
             <input
-              class="input input-bordered w-80 rounded-full w-full mb-16 w-full mb-16"
+              class="input input-bordered w-80 rounded-full w-full mb-16"
               id="password"
               placeholder="Enter Password"
               type="password"
@@ -48,7 +48,7 @@ exports[`Login page > matches an old snapshot 1`] = `
             class="flex justify-center"
           >
             <button
-              class="btn w-48 text-center text-white bg-primary hover:bg-primary mb-8 text-white bg-primary hover:bg-primary mb-8"
+              class="btn w-48 text-center text-white bg-primary hover:bg-primary mb-8"
             >
               Login
             </button>
@@ -72,39 +72,39 @@ exports[`Login page > matches an old snapshot 1`] = `
   </body>,
   "container": <div>
     <main
-      class="px-6 font-sans h-screen"
+      class="px-6 font-sans h-screen w-screen flex justify-center"
     >
       <div
-        class="flex justify-center items-center flex-col"
+        class="flex flex-col sm:justify-center lg:justify-start items-center"
       >
         <h1
-          class="text-2xl pt-12 font-bold mt-5"
+          class="text-2xl lg:text-3xl pt-12 font-bold mt-5"
         >
           Login
         </h1>
         <!-- Email -->
         <div>
           <label
-            class="text-xs font-bold text-left block mb-2 mt-16"
+            class="text-xs lg:text-base font-bold text-left block mb-2 mt-16"
             for="email"
           >
              Email 
           </label>
           <input
-            class="input input-bordered w-80 rounded-full w-full mb-5 w-full mb-5"
+            class="input input-bordered w-80 rounded-full w-full mb-5"
             id="email"
             placeholder="Enter Your Email"
           />
         </div>
         <div>
           <label
-            class="text-xs font-bold text-left block mb-2 mt-5"
+            class="text-xs lg:text-base font-bold text-left block mb-2 mt-5"
             for="password"
           >
              Password 
           </label>
           <input
-            class="input input-bordered w-80 rounded-full w-full mb-16 w-full mb-16"
+            class="input input-bordered w-80 rounded-full w-full mb-16"
             id="password"
             placeholder="Enter Password"
             type="password"
@@ -115,7 +115,7 @@ exports[`Login page > matches an old snapshot 1`] = `
           class="flex justify-center"
         >
           <button
-            class="btn w-48 text-center text-white bg-primary hover:bg-primary mb-8 text-white bg-primary hover:bg-primary mb-8"
+            class="btn w-48 text-center text-white bg-primary hover:bg-primary mb-8"
           >
             Login
           </button>
