@@ -32,7 +32,7 @@ const inputPass = (e: string) => {
 </script>
 
 <template>
-  <main class="px-6 font-sans h-screen">
+  <main class="px-6 font-sans h-screen w-screen flex justify-center">
     <div class="flex flex-col sm:justify-center lg:justify-start items-center">
       <h1 class="text-2xl lg:text-3xl pt-12 font-bold mt-5">Login</h1>
 
