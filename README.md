@@ -1,6 +1,24 @@
 # WorkoutTrackingApp
 
-This app helps trainees to track exercises and meals they do.
+This app helps trainees to track exercises and meals they have.
+
+https://doloveworkout.com/login
+
+
+
+
+https://user-images.githubusercontent.com/96335290/221389268-5169a711-145f-47ed-8dcd-461d76d048f5.mp4
+
+
+
+https://user-images.githubusercontent.com/96335290/221389390-ab380130-794b-4573-a9f2-01f56550a929.mp4
+
+
+
+
+https://user-images.githubusercontent.com/96335290/221389394-0369bf35-ddd5-496f-a930-14fe9f4e8d31.mp4
+
+
 
 ## TODO before start development
 
@@ -21,10 +39,6 @@ This app helps trainees to track exercises and meals they do.
 - ✅Dev-container(Dockerfile, devcontainer.json)
 - ✅PWA
 - ✅Get a google-domain
-
-## See the latest DEV environment
-
-https://workout-app-5e81f.web.app/
 
 ## Design
 
@@ -120,6 +134,9 @@ A group of atoms working together as a unit. Molecules are tangible UI elements.
 
 Atoms and molecules working together in a complex structure. A search field grouped with a navigation bar forms a header organism on a website.
 Only this component can inherit from a same level of a organism component.
+
+
+
 
 ##### Templates
 
