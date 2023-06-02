@@ -18,7 +18,7 @@ const transition = (to: RouteLocationRaw) => {
 
 <template>
   <footer
-    class="mx-4 h-20 flex items-center rounded-xl mb-5 flex-wrap flex-row bg-white fixed inset-x-0 bottom-0 drop-shadow-lg border border-gray-2"
+    class="lg:hidden mx-4 h-20 flex items-center rounded-xl mb-5 flex-wrap flex-row bg-white fixed inset-x-0 bottom-0 drop-shadow-lg border border-gray-2"
   >
     <div
       v-if="props.profile"

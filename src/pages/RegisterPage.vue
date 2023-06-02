@@ -366,16 +366,16 @@ const getProfile = async () => {
     @onThirdTab="onClickThirdMenu"
   />
 
-  <div class="mt-32">
+  <div class="mt-32 lg:w-screen">
     <!-- Workout Tab -->
     <div v-if="isFirstMenuClicked === true">
-      <div class="mt-5 flex items-center mx-8">
+      <div class="mt-5 flex lg:justify-center items-center mx-8">
         <p>Let’s see how hard you had workout today</p>
         <img :src="SittingDownGirl" alt="" />
       </div>
 
       <!-- When Workout tab is selected -->
-      <main class="px-6 font-sans mt-3 pb-32">
+      <main class="px-6 font-sans mt-3 pb-32 lg:flex lg:justify-center">
         <div class="text-center">
           <!-- calendar -->
           <p class="font-medium text-base ml-3 text-left mb-2">Date</p>
@@ -436,24 +436,26 @@ const getProfile = async () => {
             @inputContent="inputSets"
             :value="workoutMenus.sets"
           />
-          <Button
-            class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full"
-            label="Done"
-            @click="registerWorkout"
-          />
+          <div class="flex justify-center">
+            <Button
+              class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full lg:block"
+              label="Done"
+              @click="registerWorkout"
+            />
+          </div>
         </div>
       </main>
     </div>
 
     <!-- Foods Tab -->
     <div v-if="isSecondMenuClicked === true">
-      <div class="mt-5 flex items-center mx-8">
+      <div class="mt-5 flex lg:justify-center items-center mx-8">
         <p>Let’s see the things giving you fat :(</p>
         <img :src="GirlHavingCookie" alt="" />
       </div>
 
       <!-- When Foods tab is selected -->
-      <main class="px-6 font-sans mt-3 pb-32">
+      <main class="px-6 font-sans mt-3 pb-32 lg:flex lg:justify-center">
         <div class="text-center">
           <p class="font-medium text-base ml-3 text-left mb-2">Date</p>
           <RoundedInput
@@ -512,64 +514,68 @@ const getProfile = async () => {
           <p class="font-medium text-base ml-3 text-left mb-2">Cost</p>
           <RoundedInput
             placeholder="Enter the cost"
-            class="my-2"
+            class="my-2 lg:block"
             type="text"
             pattern="\d*"
             :value="foodMenus.cost"
             @inputContent="inputCost"
           />
-          <Button
-            class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full"
-            label="Done"
-            @click="registerFoods"
-          />
+          <div class="flex justify-center">
+            <Button
+              class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full lg:block"
+              label="Done"
+              @click="registerFoods"
+            />
+          </div>
         </div>
       </main>
     </div>
-  </div>
 
-  <!-- Weight Tab -->
-  <div v-if="isThirdMenuClicked === true">
-    <div>
-      <div class="mt-5 flex items-center mx-8">
-        <p>Body fat is what you really should care about</p>
-        <img src="/icons/pilates.svg" alt="" />
-      </div>
-      <main class="px-6 font-sans mt-3 pb-32">
-        <div class="text-center">
-          <p class="font-medium text-base ml-3 text-left mb-2">Date</p>
-          <RoundedInput
-            type="date"
-            class="h-10 mb-2 rounded-lg"
-            :value="initialDate()"
-            @inputContent="selectWeightAndFatDate"
-          />
-
-          <h2 class="text-base mx-3 mt-2 text-left font-medium">Weight</h2>
-          <RoundedInput
-            placeholder="Enter your weight"
-            class="my-2"
-            type="text"
-            pattern="\d*"
-            :value="weight.value"
-            @inputContent="inputWeight"
-          />
-          <h2 class="text-base mx-3 text-left mt-3 font-medium">Body Fat</h2>
-          <RoundedInput
-            placeholder="Enter your body fat"
-            class="my-2"
-            type="text"
-            pattern="\d*"
-            :value="bodyFat.value"
-            @inputContent="inputBodyFat"
-          />
-          <Button
-            class="bg-primary w-52 text-white mt-8 hover:bg-primary rounded-full"
-            label="Done"
-            @click="registerWeightAndFat"
-          />
+    <!-- Weight Tab -->
+    <div v-if="isThirdMenuClicked === true">
+      <div>
+        <div class="mt-5 flex lg:justify-center items-center mx-8">
+          <p>Body fat is what you really should care about</p>
+          <img src="/icons/pilates.svg" alt="" />
         </div>
-      </main>
+        <main class="px-6 font-sans mt-3 pb-32 lg:flex lg:justify-center">
+          <div class="text-center">
+            <p class="font-medium text-base ml-3 text-left mb-2">Date</p>
+            <RoundedInput
+              type="date"
+              class="h-10 mb-2 rounded-lg"
+              :value="initialDate()"
+              @inputContent="selectWeightAndFatDate"
+            />
+
+            <h2 class="text-base mx-3 mt-2 text-left font-medium">Weight</h2>
+            <RoundedInput
+              placeholder="Enter your weight"
+              class="my-2"
+              type="text"
+              pattern="\d*"
+              :value="weight.value"
+              @inputContent="inputWeight"
+            />
+            <h2 class="text-base mx-3 text-left mt-3 font-medium">Body Fat</h2>
+            <RoundedInput
+              placeholder="Enter your body fat"
+              class="my-2"
+              type="text"
+              pattern="\d*"
+              :value="bodyFat.value"
+              @inputContent="inputBodyFat"
+            />
+            <div class="flex justify-center">
+              <Button
+                class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full lg:block"
+                label="Done"
+                @click="registerWeightAndFat"
+              />
+            </div>
+          </div>
+        </main>
+      </div>
     </div>
   </div>
 
