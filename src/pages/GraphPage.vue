@@ -130,64 +130,75 @@ const weightList = ref([]);
 const weightDates = ref([]);
 
 const getWeight = async () => {
-  // Get the ref to weight collection in user doc
-  const q = query(
-    collection(db, "users", useProfileStore().email, "weight"),
-    orderBy("date", "asc")
-  );
-  // // add data in weight ref
-  const weightDocs = await getDocs(q);
-  const list = [];
-  weightDocs.forEach((doc) => {
-    const data = doc.data();
-    // Insert id of a document
-    data.id = doc.id;
-    list.push(data);
-    // Add dates for weight graph
-    weightDates.value.push(
-      data.date.split("-")[1] + "/" + data.date.split("-")[2]
+  try {
+    // Get the ref to weight collection in user doc
+    const q = query(
+      collection(db, "users", useProfileStore().email, "weight"),
+      orderBy("date", "asc")
     );
-  });
-  console.log("workout menus :", list);
-  // clear weight list
-  weightList.value = [];
-  list.forEach((doc) => {
-    const weightValue = doc.value;
-    weightDataSet.value[0].data = [...weightDataSet.value[0].data, weightValue];
-  });
+    // // add data in weight ref
+    const weightDocs = await getDocs(q);
+    const list = [];
+    weightDocs.forEach((doc) => {
+      const data = doc.data();
+      // Insert id of a document
+      data.id = doc.id;
+      list.push(data);
+      // Add dates for weight graph
+      weightDates.value.push(
+        data.date.split("-")[1] + "/" + data.date.split("-")[2]
+      );
+    });
+    console.log("workout menus :", list);
+    // clear weight list
+    weightList.value = [];
+    list.forEach((doc) => {
+      const weightValue = doc.value;
+      weightDataSet.value[0].data = [
+        ...weightDataSet.value[0].data,
+        weightValue,
+      ];
+    });
+  } catch (e) {
+    console.log(e);
+  }
 };
 getWeight();
 
 const bodyFatList = ref([]);
 const getBodyFat = async () => {
-  // Get the ref to bodyFat collection in user doc
-  const q = query(
-    collection(db, "users", useProfileStore().email, "bodyFat"),
-    orderBy("date", "asc")
-  );
+  try {
+    // Get the ref to bodyFat collection in user doc
+    const q = query(
+      collection(db, "users", useProfileStore().email, "bodyFat"),
+      orderBy("date", "asc")
+    );
 
-  // add data in bodyFat ref
-  const bodyFatDocs = await getDocs(q);
-  const list = [];
+    // add data in bodyFat ref
+    const bodyFatDocs = await getDocs(q);
+    const list = [];
 
-  bodyFatDocs.forEach((doc) => {
-    const data = doc.data();
-    // Insert id of a document
-    data.id = doc.id;
-    list.push(data);
-  });
+    bodyFatDocs.forEach((doc) => {
+      const data = doc.data();
+      // Insert id of a document
+      data.id = doc.id;
+      list.push(data);
+    });
 
-  // clear workout list
-  bodyFatList.value = [];
+    // clear workout list
+    bodyFatList.value = [];
 
-  list.forEach((doc) => {
-    const bodyFatValue = doc.value;
+    list.forEach((doc) => {
+      const bodyFatValue = doc.value;
 
-    weightDataSet.value[1].data = [
-      ...weightDataSet.value[1].data,
-      bodyFatValue,
-    ];
-  });
+      weightDataSet.value[1].data = [
+        ...weightDataSet.value[1].data,
+        bodyFatValue,
+      ];
+    });
+  } catch (e) {
+    console.log(e);
+  }
 };
 getBodyFat();
 ////////// Weight Chart //////////

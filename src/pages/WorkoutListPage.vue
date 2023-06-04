@@ -22,31 +22,35 @@ const workoutList = ref([]);
 
 /** Get all workout menus from firestore */
 const getWorkoutList = async () => {
-  // Get the ref to workouts collection in user doc
-  const q = query(
-    collection(db, "users", profile.email, "workouts"),
-    orderBy("date", "desc")
-  );
-  // add data in workouts ref
-  const workoutDocs = await getDocs(q);
+  try {
+    // Get the ref to workouts collection in user doc
+    const q = query(
+      collection(db, "users", profile.email, "workouts"),
+      orderBy("date", "desc")
+    );
+    // add data in workouts ref
+    const workoutDocs = await getDocs(q);
 
-  const list = [];
+    const list = [];
 
-  workoutDocs.forEach((doc) => {
-    const data = doc.data();
-    // Insert id of a document
-    data.id = doc.id;
-    list.push(data);
-  });
+    workoutDocs.forEach((doc) => {
+      const data = doc.data();
+      // Insert id of a document
+      data.id = doc.id;
+      list.push(data);
+    });
 
-  console.log("workout menus :", list);
+    console.log("workout menus :", list);
 
-  // clear workout list
-  workoutList.value = [];
+    // clear workout list
+    workoutList.value = [];
 
-  list.forEach((doc) => {
-    workoutList.value.push(doc);
-  });
+    list.forEach((doc) => {
+      workoutList.value.push(doc);
+    });
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 /** Created */

@@ -8,14 +8,18 @@ import {
 import { db } from "@/firebase/init";
 
 export const getData = async (collectionLabel: string) => {
-  const q = query(collection(db, collectionLabel), orderBy("date", "desc"));
-  const querySnapshot = await getDocs(q);
-  const rtnArr: DocumentData[] = [];
+  try {
+    const q = query(collection(db, collectionLabel), orderBy("date", "desc"));
+    const querySnapshot = await getDocs(q);
+    const rtnArr: DocumentData[] = [];
 
-  querySnapshot.forEach((doc) => {
-    rtnArr.push(doc.data());
-  });
-  console.log("getData :", rtnArr);
+    querySnapshot.forEach((doc) => {
+      rtnArr.push(doc.data());
+    });
+    console.log("getData :", rtnArr);
 
-  return rtnArr;
+    return rtnArr;
+  } catch (error) {
+    console.error("Error getting documents: ", error);
+  }
 };

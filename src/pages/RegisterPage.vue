@@ -92,17 +92,21 @@ const workoutList = ref([]);
 
 /** get workout list from firebase */
 const getWorkoutList = async () => {
-  const list = [];
-  const q = query(
-    collection(db, "users", profile.value.email, "workouts"),
-    orderBy("date", "desc")
-  );
-  const snapShots = await getDocs(q);
-  snapShots.forEach((s) => {
-    list.push(s.data());
-    workoutList.value.push(s.data());
-    workoutOptions.value.push(s.data().title);
-  });
+  try {
+    const list = [];
+    const q = query(
+      collection(db, "users", profile.value.email, "workouts"),
+      orderBy("date", "desc")
+    );
+    const snapShots = await getDocs(q);
+    snapShots.forEach((s) => {
+      list.push(s.data());
+      workoutList.value.push(s.data());
+      workoutOptions.value.push(s.data().title);
+    });
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 /** Fired when workout history is selected */
@@ -121,25 +125,28 @@ const registerWorkout = async () => {
   // Get the ref to each user doc
   const userDocRef = doc(db, "users", profile.value.email);
   // Get the ref to foods collection in user doc
-  const colRef = collection(userDocRef, "workouts");
-  // add data in workouts ref
-  const registeredData = await addDoc(colRef, workoutMenus.value);
+  try {
+    const colRef = collection(userDocRef, "workouts");
 
-  console.log("registeredWorkoutData :", registeredData);
+    // add data in workouts ref
+    const registeredData = await addDoc(colRef, workoutMenus.value);
+    console.log("registeredWorkoutData :", registeredData);
+    // Clear up all the forms
+    Object.assign(workoutMenus.value, {
+      date: initialDate(),
+      icon: "/icons/barbel.svg",
+      title: null,
+      weight: null,
+      reps: null,
+      sets: null,
+    });
 
-  // Clear up all the forms
-  Object.assign(workoutMenus.value, {
-    date: initialDate(),
-    icon: "/icons/barbel.svg",
-    title: null,
-    weight: null,
-    reps: null,
-    sets: null,
-  });
-
-  // In case when data is registered successfully
-  if (registeredData) {
-    successfulAlertEvent();
+    // In case when data is registered successfully
+    if (registeredData) {
+      successfulAlertEvent();
+    }
+  } catch (e) {
+    console.log(e);
   }
 };
 
@@ -180,25 +187,29 @@ const foodList = ref([]);
 
 /** get all foods on firebase that will be used on a history box */
 const getFoodsList = async () => {
-  // Get the ref to each user doc
-  const userDocRef = doc(db, "users", profile.value.email);
-  // Get the ref to foods collection in user doc
-  const colRef = collection(userDocRef, "foods");
-  // add data in workouts ref
-  const foodDocs = await getDocs(colRef);
+  try {
+    // Get the ref to each user doc
+    const userDocRef = doc(db, "users", profile.value.email);
+    // Get the ref to foods collection in user doc
+    const colRef = collection(userDocRef, "foods");
+    // add data in workouts ref
+    const foodDocs = await getDocs(colRef);
 
-  const list = [];
+    const list = [];
 
-  foodDocs.forEach((doc) => {
-    list.push(doc.data());
-  });
+    foodDocs.forEach((doc) => {
+      list.push(doc.data());
+    });
 
-  console.log("food list :", list);
+    console.log("food list :", list);
 
-  list.forEach((doc) => {
-    foodList.value.push(doc);
-    foodOptions.push(doc.title);
-  });
+    list.forEach((doc) => {
+      foodList.value.push(doc);
+      foodOptions.push(doc.title);
+    });
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 /** Fired when food history is selected */
@@ -214,28 +225,32 @@ const onSelectFoodHistory = (selectedTitle: string) => {
 
 /** Register formed foods menu on firebase */
 const registerFoods = async () => {
-  // Get the ref to each user doc
-  const userDocRef = doc(db, "users", profile.value.email);
-  // Get the ref to foods collection in user doc
-  const colRef = collection(userDocRef, "foods");
-  // add data in foods ref
-  const registeredData = await addDoc(colRef, foodMenus.value);
+  try {
+    // Get the ref to each user doc
+    const userDocRef = doc(db, "users", profile.value.email);
+    // Get the ref to foods collection in user doc
+    const colRef = collection(userDocRef, "foods");
+    // add data in foods ref
+    const registeredData = await addDoc(colRef, foodMenus.value);
 
-  console.log("registeredFoodData :", registeredData);
+    console.log("registeredFoodData :", registeredData);
 
-  // Clear up all the forms
-  Object.assign(foodMenus.value, {
-    date: initialDate(),
-    title: null,
-    carbo: null,
-    protein: null,
-    fat: null,
-    cost: null,
-  });
+    // Clear up all the forms
+    Object.assign(foodMenus.value, {
+      date: initialDate(),
+      title: null,
+      carbo: null,
+      protein: null,
+      fat: null,
+      cost: null,
+    });
 
-  // In case when data is registered successfully
-  if (registeredData) {
-    successfulAlertEvent();
+    // In case when data is registered successfully
+    if (registeredData) {
+      successfulAlertEvent();
+    }
+  } catch (e) {
+    console.log(e);
   }
 };
 
@@ -296,45 +311,53 @@ const registerWeightAndFat = async () => {
 };
 
 const registerWeight = async () => {
-  // Get the ref to each user doc
-  const weightCollectionRef = collection(
-    db,
-    "users",
-    profile.value.email,
-    "weight"
-  );
-  // add data in weight ref
-  await addDoc(weightCollectionRef, weight.value)
-    .then(() => {
-      successfulAlertEvent();
-      getProfile();
-    })
-    .catch((error) => {
-      console.log(`Unsuccessful returned error ${error}`);
-    });
+  try {
+    // Get the ref to each user doc
+    const weightCollectionRef = collection(
+      db,
+      "users",
+      profile.value.email,
+      "weight"
+    );
+    // add data in weight ref
+    await addDoc(weightCollectionRef, weight.value)
+      .then(() => {
+        successfulAlertEvent();
+        getProfile();
+      })
+      .catch((error) => {
+        console.log(`Unsuccessful returned error ${error}`);
+      });
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 const registerBodyFat = async () => {
-  // Get the ref to each user doc
-  const bodyFatCollectionRef = collection(
-    db,
-    "users",
-    profile.value.email,
-    "bodyFat"
-  );
-  // add data in weight ref
-  await addDoc(bodyFatCollectionRef, bodyFat.value)
-    .then(() => {
-      successfulAlertEvent();
-      getProfile();
+  try {
+    // Get the ref to each user doc
+    const bodyFatCollectionRef = collection(
+      db,
+      "users",
+      profile.value.email,
+      "bodyFat"
+    );
+    // add data in weight ref
+    await addDoc(bodyFatCollectionRef, bodyFat.value)
+      .then(() => {
+        successfulAlertEvent();
+        getProfile();
 
-      // Clean up the form
-      weight.value.value = null;
-      bodyFat.value.value = null;
-    })
-    .catch((error) => {
-      console.log(`Unsuccessful returned error ${error}`);
-    });
+        // Clean up the form
+        weight.value.value = null;
+        bodyFat.value.value = null;
+      })
+      .catch((error) => {
+        console.log(`Unsuccessful returned error ${error}`);
+      });
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 const userProfile = ref();
