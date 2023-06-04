@@ -220,7 +220,7 @@ const weightDataSet = ref([
 <template>
   <Header title="Your recent activity" />
 
-  <div class="mt-20">
+  <div class="mt-20 lg:mx-96">
     <div class="mx-5 h-72"><Goal :goalData="goalData" /></div>
 
     <!-- PFC Balance -->
