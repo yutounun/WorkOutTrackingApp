@@ -51,27 +51,37 @@ const navigate = (to) => {
         <div class="w-1/5 text-black bg-white">
           <div class="flex-col text-center">
             <div @click="navigate('/register')">
-              <p class="py-4 hover:bg-gray-300 rounded-lg mx-7 my-3 text-lg">
+              <p
+                class="py-4 hover:bg-gray-300 cursor-alias rounded-lg mx-7 my-3 text-lg"
+              >
                 Add record
               </p>
             </div>
             <div @click="navigate('/workout/list')">
-              <p class="py-4 hover:bg-gray-300 rounded-lg mx-7 my-3 text-lg">
+              <p
+                class="py-4 hover:bg-gray-300 cursor-alias rounded-lg mx-7 my-3 text-lg"
+              >
                 Workout records
               </p>
             </div>
             <div @click="navigate('/food/list')">
-              <p class="py-4 hover:bg-gray-300 rounded-lg mx-7 my-3 text-lg">
+              <p
+                class="py-4 hover:bg-gray-300 cursor-alias rounded-lg mx-7 my-3 text-lg"
+              >
                 Food records
               </p>
             </div>
             <div @click="navigate('/chart')">
-              <p class="py-4 hover:bg-gray-300 rounded-lg mx-7 my-3 text-lg">
+              <p
+                class="py-4 hover:bg-gray-300 cursor-alias rounded-lg mx-7 my-3 text-lg"
+              >
                 Chart
               </p>
             </div>
             <div @click="navigate('/profile')">
-              <p class="py-4 hover:bg-gray-300 rounded-lg mx-7 my-3 text-lg">
+              <p
+                class="py-4 hover:bg-gray-300 cursor-alias rounded-lg mx-7 my-3 text-lg"
+              >
                 Profile
               </p>
             </div>
