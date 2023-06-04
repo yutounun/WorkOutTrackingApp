@@ -2,7 +2,7 @@
 import RoundedInput from "@/components/atoms/commons/CommonRoundedInput.vue";
 import Modal from "@/components/organisms/commons/CommonModal.vue";
 import { format } from "date-fns";
-import { reactive, ref } from "vue";
+import { ref } from "vue";
 
 const props = defineProps({
   menu: Object,
@@ -63,7 +63,7 @@ const submit = () => {
           <slot name="bottom" />
         </span>
       </div>
-      <div class="w-1/5 flex mr-10">
+      <div class="w-1/5 flex mr-10 lg:mr-0 lg:justify-end">
         <!-- Remove item -->
         <img src="/icons/trash.svg" alt="" @click="remove" />
         <!-- Edit item -->

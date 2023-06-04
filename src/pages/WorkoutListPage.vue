@@ -92,7 +92,7 @@ const successfulAlertEvent = () => {
 
 <template>
   <Header title="Workout List" />
-  <div class="pb-32 mt-20" id="workout-list-body">
+  <div class="pb-32 mt-20 lg:mx-96" id="workout-list-body">
     <main>
       <!-- Shown only when any data hasn't been registered -->
       <div v-if="workoutList.length === 0" class="mt-24">
