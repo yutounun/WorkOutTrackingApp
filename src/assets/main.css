@@ -33,7 +33,6 @@ a,
     /* display: grid; */
     grid-template-columns: 1fr 1fr;
     margin: 0;
-    overflow-x: hidden;
-    overflow-y: hidden;
+    max-width: 100dvw;
   }
 }
