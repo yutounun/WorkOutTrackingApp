@@ -15,6 +15,7 @@ import Alert from "@/components/organisms/commons/CommonAlert.vue";
 import RoundedInput from "@/components/atoms/commons/CommonRoundedInput.vue";
 import SelectBox from "@/components/atoms/commons/CommonSelectBox.vue";
 import { useProfileStore } from "@/stores/profile";
+import CommonBurgerMenu from "@/components/organisms/commons/CommonBurgerMenu.vue";
 
 const email = ref("");
 
@@ -172,9 +173,9 @@ const inputImgPath = (e) => {
     <!-- round icons on background -->
     <img :src="BackgroundRound" alt="" class="absolute -top-10 -left-20" />
     <img :src="BackgroundRound" alt="" class="absolute top-10 -left-20" />
+    <CommonBurgerMenu />
 
     <p class="text-white font-semibold text-xl block">Profile</p>
-
     <!-- profile picture -->
     <div class="relative">
       <img alt="" :src="profileImgUrl" class="rounded-full h-28 w-28" />
