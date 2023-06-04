@@ -392,46 +392,50 @@ const getProfile = async () => {
   <div class="mt-32 lg:w-screen">
     <!-- Workout Tab -->
     <div v-if="isFirstMenuClicked === true">
-      <div class="mt-5 flex lg:justify-center items-center mx-8">
+      <div class="mt-5 flex lg:justify-center items-center mx-8 lg:w-screen">
         <p>Let’s see how hard you had workout today</p>
         <img :src="SittingDownGirl" alt="" />
       </div>
 
       <!-- When Workout tab is selected -->
       <main class="px-6 font-sans mt-3 pb-32 lg:flex lg:justify-center">
-        <div class="text-center">
+        <div class="text-center lg:w-screen">
           <!-- calendar -->
-          <p class="font-medium text-base ml-3 text-left mb-2">Date</p>
+          <p class="font-medium text-base ml-3 lg:ml-80 text-left mb-2">Date</p>
           <RoundedInput
             type="date"
-            class="h-10 mb-5 rounded-lg"
+            class="h-10 lg:w-4/12 mb-5 rounded-lg"
             :value="workoutMenus.date"
             @input="onSelectWorkoutDate($event.target.value)"
           />
           <!-- history -->
-          <p class="font-medium text-base ml-3 text-left mb-2">History</p>
+          <p class="font-medium text-base ml-3 lg:ml-80 text-left mb-2">
+            History
+          </p>
           <SelectBox
             placeholder="Select from the history"
             :options="workoutOptions"
-            class="h-5/6 mb-3"
+            class="h-5/6 mb-3 lg:w-4/12"
             @input="onSelectWorkoutHistory($event.target.value)"
           />
           <!-- title -->
-          <p class="font-medium text-base ml-3 text-left mb-2">
+          <p class="font-medium text-base ml-3 lg:ml-80 text-left mb-2">
             Name Of Workout
           </p>
           <RoundedInput
             placeholder="Enter the title"
-            class="my-2"
+            class="my-2 lg:w-4/12"
             @inputContent="inputTitle"
             :value="workoutMenus.title"
           />
 
           <!-- weight -->
-          <p class="font-medium text-base ml-3 text-left mb-2">Weight</p>
+          <p class="font-medium text-base ml-3 lg:ml-80 text-left mb-2">
+            Weight
+          </p>
           <RoundedInput
             placeholder="Enter the weight"
-            class="my-2"
+            class="my-2 lg:w-4/12"
             @inputContent="inputWeight"
             type="text"
             pattern="\d*"
@@ -439,10 +443,10 @@ const getProfile = async () => {
           />
 
           <!-- reps -->
-          <p class="font-medium text-base ml-3 text-left mb-2">Reps</p>
+          <p class="font-medium text-base ml-3 lg:ml-80 text-left mb-2">Reps</p>
           <RoundedInput
             placeholder="Enter the reps"
-            class="my-2"
+            class="my-2 lg:w-4/12"
             type="text"
             pattern="\d*"
             @inputContent="inputReps"
@@ -450,10 +454,10 @@ const getProfile = async () => {
           />
 
           <!-- sets -->
-          <p class="font-medium text-base ml-3 text-left mb-2">Sets</p>
+          <p class="font-medium text-base ml-3 lg:ml-80 text-left mb-2">Sets</p>
           <RoundedInput
             placeholder="Enter the number of sets"
-            class="my-2"
+            class="my-2 lg:w-4/12"
             type="text"
             pattern="\d*"
             @inputContent="inputSets"
@@ -461,7 +465,7 @@ const getProfile = async () => {
           />
           <div class="flex justify-center">
             <Button
-              class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full lg:block"
+              class="bg-primary w-52 lg:w-2/12 text-white mt-5 hover:bg-primary rounded-full lg:block"
               label="Done"
               @click="registerWorkout"
             />
@@ -479,65 +483,71 @@ const getProfile = async () => {
 
       <!-- When Foods tab is selected -->
       <main class="px-6 font-sans mt-3 pb-32 lg:flex lg:justify-center">
-        <div class="text-center">
-          <p class="font-medium text-base ml-3 text-left mb-2">Date</p>
+        <div class="text-center lg:w-screen">
+          <p class="font-medium text-base ml-3 lg:ml-80 text-left mb-2">Date</p>
           <RoundedInput
             type="date"
-            class="h-10 mb-2 rounded-lg"
+            class="h-10 mb-2 rounded-lg lg:w-4/12"
             :value="foodMenus.date"
             @inputContent="onSelectFoodDate"
           />
 
-          <p class="font-medium text-base ml-3 text-left mb-2">History</p>
+          <p class="font-medium text-base ml-3 lg:ml-80 text-left mb-2">
+            History
+          </p>
           <SelectBox
             placeholder="Select from the history"
             :options="foodOptions"
-            class="h-5/6 my-3"
+            class="h-5/6 my-3 lg:w-4/12"
             @input="onSelectFoodHistory($event.target.value)"
           />
 
-          <p class="font-medium text-base ml-3 text-left mb-2">Food</p>
+          <p class="font-medium text-base ml-3 lg:ml-80 text-left mb-2">Food</p>
           <RoundedInput
             placeholder="Enter the name of a food"
-            class="my-2"
+            class="my-2 lg:w-4/12"
             :value="foodMenus.title"
             @inputContent="inputFoodTitle"
           />
 
-          <p class="font-medium text-base ml-3 text-left mb-2">Protein</p>
+          <p class="font-medium text-base ml-3 lg:ml-80 text-left mb-2">
+            Protein
+          </p>
           <RoundedInput
             placeholder="Enter the amount of protein"
-            class="my-2"
+            class="my-2 lg:w-4/12"
             :value="foodMenus.protein"
             type="text"
             pattern="\d*"
             @inputContent="inputProtein"
           />
 
-          <p class="font-medium text-base ml-3 text-left mb-2">Fat</p>
+          <p class="font-medium text-base ml-3 lg:ml-80 text-left mb-2">Fat</p>
           <RoundedInput
             placeholder="Enter the amount of fat"
-            class="my-2"
+            class="my-2 lg:w-4/12"
             type="text"
             pattern="\d*"
             :value="foodMenus.fat"
             @inputContent="inputFat"
           />
 
-          <p class="font-medium text-base ml-3 text-left mb-2">Carbo</p>
+          <p class="font-medium text-base ml-3 lg:ml-80 text-left mb-2">
+            Carbo
+          </p>
           <RoundedInput
             placeholder="Enter the amount of carbohydrate"
-            class="my-2"
+            class="my-2 lg:w-4/12"
             type="text"
             pattern="\d*"
             :value="foodMenus.carbo"
             @inputContent="inputCarbo"
           />
 
-          <p class="font-medium text-base ml-3 text-left mb-2">Cost</p>
+          <p class="font-medium text-base ml-3 lg:ml-80 text-left mb-2">Cost</p>
           <RoundedInput
             placeholder="Enter the cost"
-            class="my-2 lg:block"
+            class="my-2 lg:w-4/12"
             type="text"
             pattern="\d*"
             :value="foodMenus.cost"
@@ -545,7 +555,7 @@ const getProfile = async () => {
           />
           <div class="flex justify-center">
             <Button
-              class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full lg:block"
+              class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full lg:block lg:w-2/12"
               label="Done"
               @click="registerFoods"
             />
@@ -562,28 +572,34 @@ const getProfile = async () => {
           <img src="/icons/pilates.svg" alt="" />
         </div>
         <main class="px-6 font-sans mt-3 pb-32 lg:flex lg:justify-center">
-          <div class="text-center">
-            <p class="font-medium text-base ml-3 text-left mb-2">Date</p>
+          <div class="text-center lg:w-screen">
+            <p class="font-medium text-base ml-3 lg:ml-80 text-left mb-2">
+              Date
+            </p>
             <RoundedInput
               type="date"
-              class="h-10 mb-2 rounded-lg"
+              class="h-10 mb-2 rounded-lg lg:w-4/12"
               :value="initialDate()"
               @inputContent="selectWeightAndFatDate"
             />
 
-            <h2 class="text-base mx-3 mt-2 text-left font-medium">Weight</h2>
+            <h2 class="text-base mx-3 mt-2 text-left font-medium lg:ml-80">
+              Weight
+            </h2>
             <RoundedInput
               placeholder="Enter your weight"
-              class="my-2"
+              class="my-2 lg:w-4/12"
               type="text"
               pattern="\d*"
               :value="weight.value"
               @inputContent="inputWeight"
             />
-            <h2 class="text-base mx-3 text-left mt-3 font-medium">Body Fat</h2>
+            <h2 class="text-base mx-3 text-left mt-3 font-medium lg:ml-80">
+              Body Fat
+            </h2>
             <RoundedInput
               placeholder="Enter your body fat"
-              class="my-2"
+              class="my-2 lg:w-4/12"
               type="text"
               pattern="\d*"
               :value="bodyFat.value"
@@ -591,7 +607,7 @@ const getProfile = async () => {
             />
             <div class="flex justify-center">
               <Button
-                class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full lg:block"
+                class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full lg:block lg:w-2/12"
                 label="Done"
                 @click="registerWeightAndFat"
               />
