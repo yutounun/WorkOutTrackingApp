@@ -28,7 +28,7 @@ const navigate = (to) => {
     class="bg-primary z-30 w-screen h-16 text-white text-xl items-center flex justify-center fixed"
   >
     <!-- burger menu -->
-    <div class="sm:hidden lg:block">
+    <div class="hidden lg:block">
       <svg
         for="my-drawer"
         @click="openDrawer"
