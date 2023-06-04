@@ -204,45 +204,46 @@ const inputImgPath = (e) => {
       <!-- Editing mode -->
       <div class="text-center" v-if="isEdited">
         <!-- user name -->
-        <p class="text-left mx-7">User Name</p>
+        <p class="text-left mx-7 lg:mx-96">User Name</p>
         <RoundedInput
           placeholder="Enter your name"
-          class="mb-4 mt-2"
+          class="mb-4 mt-2 lg:w-4/12"
           @inputContent="inputUserName"
           :value="profile.userName"
         />
 
         <!-- age -->
-        <p class="text-left mx-7">Age</p>
+        <p class="text-left mx-7 lg:mx-96">Age</p>
         <RoundedInput
           placeholder="Enter your age"
-          class="mb-4 mt-2"
+          class="mb-4 mt-2 lg:w-4/12"
           @inputContent="inputUserAge"
           :value="profile.age"
         />
 
         <!-- gender -->
-        <p class="text-left mx-7 mb-3">Gender</p>
+        <p class="text-left mx-7 lg:mx-96 mb-3">Gender</p>
         <SelectBox
+          class="mb-4 mt-2 lg:w-4/12"
           :options="genderOptions"
           :placeholder="profile.gender"
           @input="selectGender($event.target.value)"
         ></SelectBox>
 
         <!-- height -->
-        <p class="text-left mx-7 mt-3">Height</p>
+        <p class="text-left mx-7 lg:mx-96 mt-3">Height</p>
         <RoundedInput
           placeholder="Enter your height"
-          class="mb-4 mt-2"
+          class="mb-4 mt-2 lg:w-4/12"
           @inputContent="inputUserHeight"
           :value="profile.height"
         />
 
         <!-- current weight -->
-        <p class="text-left mx-7">Current Weight</p>
+        <p class="text-left mx-7 lg:mx-96">Current Weight</p>
         <RoundedInput
           placeholder="Enter your current weight"
-          class="mb-4 mt-2"
+          class="mb-4 mt-2 lg:w-4/12"
           @inputContent="inputCurrentWeight"
           type="text"
           pattern="\d*"
@@ -250,10 +251,10 @@ const inputImgPath = (e) => {
         />
 
         <!-- ideal weight -->
-        <p class="text-left mx-7">Ideal Weight</p>
+        <p class="text-left mx-7 lg:mx-96">Ideal Weight</p>
         <RoundedInput
           placeholder="Enter your ideal weight"
-          class="mb-4 mt-2"
+          class="mb-4 mt-2 lg:w-4/12"
           type="text"
           pattern="\d*"
           @inputContent="inputIdealWeight"
@@ -261,10 +262,10 @@ const inputImgPath = (e) => {
         />
 
         <!-- current body fat -->
-        <p class="text-left mx-7">Current Body Fat</p>
+        <p class="text-left mx-7 lg:mx-96">Current Body Fat</p>
         <RoundedInput
           placeholder="Enter your current body fat"
-          class="mb-4 mt-2"
+          class="mb-4 mt-2 lg:w-4/12"
           type="text"
           pattern="\d*"
           @inputContent="inputCurrentBodyFat"
@@ -272,31 +273,33 @@ const inputImgPath = (e) => {
         />
 
         <!-- ideal body weight -->
-        <p class="text-left mx-7">Ideal Body Fat</p>
+        <p class="text-left mx-7 lg:mx-96">Ideal Body Fat</p>
         <RoundedInput
           placeholder="Enter your ideal body fat"
-          class="mb-4 mt-2"
+          class="mb-4 mt-2 lg:w-4/12"
           type="text"
           pattern="\d*"
           @inputContent="inputIdealBodyFat"
           :value="profile.idealBodyFat"
         />
 
-        <Button
-          class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full"
-          label="Done"
-          @click="registerProfile"
-        />
+        <div class="text-center flex-col">
+          <Button
+            class="bg-primary w-52 text-white mt-5 hover:bg-primary rounded-full"
+            label="Done"
+            @click="registerProfile"
+          />
 
-        <Button
-          class="bg-white w-52 text-gray-3 mt-5 hover:bg-white rounded-full border-none"
-          label="Cancel"
-          @click="isEdited = false"
-        />
+          <Button
+            class="bg-white w-52 text-gray-3 mt-5 rounded-full border-none hover:bg-gray-1"
+            label="Cancel"
+            @click="isEdited = false"
+          />
+        </div>
       </div>
 
       <!-- Not editing mode -->
-      <div class="mx-7" v-else>
+      <div class="mx-7 lg:mx-96" v-else>
         <!-- user name -->
         <div>
           <p class="text-left mb-3 mt-5 font-semibold">User Name</p>
