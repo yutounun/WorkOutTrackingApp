@@ -18,7 +18,7 @@ const onSubmit = () => {
   <Teleport :to="props.to">
     <div
       v-if="showsModal"
-      class="w-screen border overflow-y-auto rounded-lg border-gray-2 h-2/3 fixed top-20 z-50 bg-white"
+      class="w-screen xl:w-2/3 border overflow-y-auto rounded-lg border-gray-2 h-2/3 fixed top-20 z-50 bg-white"
     >
       <div class="flex justify-between ml-10 mr-4 mt-3">
         <h1 class="font-bold text-lg mt-5">Edit Your Record</h1>

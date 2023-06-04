@@ -60,7 +60,7 @@ const successfulAlertEvent = () => {
 
 <template>
   <Header title="Food List" />
-  <div class="pb-32 mt-20 mx-96" id="food-list-body">
+  <div class="pb-32 mt-20 lg:mx-96" id="food-list-body">
     <main class="font-sans mt-20 pb-32">
       <!-- Shown only when any data hasn't been registered -->
       <div v-if="foodList.length === 0" class="mt-24">

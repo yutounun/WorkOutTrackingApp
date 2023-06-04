@@ -81,7 +81,7 @@ const inputPass = (e: string) => {
       <div class="text-accent">
         <span>Don't have an account?? </span>
         <a
-          class="mt-5 font-semibold text-accent"
+          class="mt-5 font-semibold text-accent hover:bg-white cursor-alias"
           @click="$router.push('/create-account')"
         >
           Create one here.

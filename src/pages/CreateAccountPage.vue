@@ -58,11 +58,15 @@ const inputPass = (e: string) => {
 <template>
   <main class="px-6 font-sans h-screen">
     <div class="flex justify-center items-center flex-col">
-      <h1 class="text-2xl pt-12 font-bold mt-3">Create your account</h1>
+      <h1 class="text-2xl pt-12 font-bold mt-3 lg:text-3xl">
+        Create your account
+      </h1>
 
       <!-- UserName -->
       <div>
-        <p class="text-xs font-bold text-left mb-2 mt-10">User Name</p>
+        <p class="text-xs font-bold text-left mb-2 mt-10 lg:text-base">
+          User Name
+        </p>
         <RoundedInput
           placeholder="Enter your name"
           class="w-full mb-5"
@@ -72,7 +76,7 @@ const inputPass = (e: string) => {
 
       <!-- Email -->
       <div>
-        <p class="text-xs font-bold text-left mb-2 mt-3">Email</p>
+        <p class="text-xs font-bold text-left mb-2 mt-3 lg:text-base">Email</p>
         <RoundedInput
           placeholder="Enter your email"
           class="w-full mb-5"
@@ -82,7 +86,9 @@ const inputPass = (e: string) => {
 
       <!-- Password -->
       <div>
-        <p class="text-xs font-bold text-left mb-2 mt-3">Password</p>
+        <p class="text-xs lg:text-base font-bold text-left mb-2 mt-3">
+          Password
+        </p>
         <RoundedInput
           placeholder="Enter password"
           type="password"
