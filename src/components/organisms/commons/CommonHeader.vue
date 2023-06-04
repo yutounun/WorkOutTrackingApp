@@ -25,7 +25,7 @@ const navigate = (to) => {
 
 <template>
   <div
-    class="bg-primary z-30 w-screen h-16 text-white text-xl items-center flex justify-center fixed"
+    class="bg-primary z-30 w-screen h-16 text-white text-xl lg:text-2xl items-center flex justify-center fixed"
   >
     <!-- burger menu -->
     <div class="hidden lg:block">
