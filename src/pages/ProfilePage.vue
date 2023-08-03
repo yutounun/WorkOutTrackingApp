@@ -154,7 +154,7 @@ const inputImgPath = (e) => {
   const imageRef = firebaseRef(storage, url);
   uploadBytes(imageRef, image)
     .then(() => {
-      console.log("Uploaded a file!");
+      console.log("Successfully Uploaded a file!");
 
       // Register profile image url on Profile table
       profile.value.imgUrl = image.name;
